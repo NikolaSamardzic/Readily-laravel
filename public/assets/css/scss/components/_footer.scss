@@ -1,0 +1,37 @@
+
+footer{
+    width: 100%;
+    padding: 1rem 0;
+
+    background-color: var(--background-color-header-const);
+
+}
+
+#footer{
+    //padding-top: 2rem;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: max-content max-content max-content;
+    justify-content: space-between;
+    align-items: center;
+
+    @include md{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        justify-content: center;
+        text-align: center;
+
+        gap: 1rem;
+
+    }
+
+    a{
+        font-size: size(size-body);
+        color: var(--text-color-heading-const);
+        font-weight: 600;
+
+        &:hover{
+            color: var(--text-color-regular-const);
+        }
+    }
+}

@@ -1,0 +1,304 @@
+
+#cart-items{
+
+
+    padding-top: 3rem;
+    //min-height: calc(100vh - 50px);
+
+
+    #table-container{
+        overflow-x: scroll;
+        margin-bottom: 2rem;
+    }
+
+    table{
+        border-collapse: collapse;
+        border-spacing: 0;
+
+
+        width: 100%;
+
+        @include xl{
+            width: 1200px;
+        }
+        thead{
+            height: 2rem ;
+            background-color: var(--background-color-header-const);
+            font-weight: 600;
+            font-size: size(size-body);
+            color: var(--text-color-heading-const);
+            width: 100%;
+
+            td{
+                padding-left: 0.5rem;
+            }
+
+
+
+        }
+
+        .td-image-checkout{
+            width: 200px ;
+
+        }
+
+        tbody{
+
+            .td-remove{
+                i{
+                    color: var(--text-color-heading);
+                    border: 1px solid var(--category-outline);
+                    background-color: var(--remove-button-bg);
+                    padding: 0.5rem;
+
+
+                    &:hover{
+                        cursor: pointer;
+                        background-color: var(--remove-button-bg-hover);
+                        box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
+                    }
+                }
+            }
+
+            tr{
+                &:hover{
+                    background-color: var(--table-tr-hover) !important;
+                }
+            }
+            .td-image{
+                display: grid;
+                justify-content: center;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+
+                img{
+                    height: 120px;
+                }
+
+
+            }
+
+            .td-unit-price, .td-price{
+                p{
+                    color: var(--text-color-heading);
+                    font-size: size(size-body);
+                    font-weight: 600;
+
+                }
+            }
+
+
+
+            .td-title{
+                position: relative;
+                div{
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    padding: 0.5rem;
+                    color: var(--text-color-regular);
+                    font-size: size(size-body);
+                }
+            }
+
+            .td-quantity{
+                div{
+                    display: grid;
+                    justify-content: center;
+                    input{
+                        width: 100px;
+                        text-align: center;
+                        height: 30px;
+                        font-size: size(size-body);
+                    }
+                }
+            }
+        }
+
+        .td-title{
+            width:400px;
+        }
+
+        .td-unit-price{
+            width: 150px;
+            text-align: center;
+        }
+
+        .td-quantity{
+            width: 150px;
+            text-align: center;
+        }
+
+        .td-price{
+            width: 150px;
+            text-align: center;
+        }
+        .td-remove{
+            width: 150px;
+            text-align: center;
+        }
+    }
+}
+
+#empty{
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: rgba(255, 0, 0, 0.217);
+
+    text-align: center;
+    font-size: size(size-h3);
+    color: var(--text-color-heading);
+    font-weight: 600;
+
+}
+
+#total-price-container{
+    text-align: end;
+    padding-right: 1rem;
+    font-size: size(size-h3);
+    font-weight: 600;
+    color: var(--text-color-heading);
+}
+
+#checkout-address-container{
+    grid-template-areas:
+    "address-line-title address-line-title address-line-title"
+    "address-line-input address-line-input address-line-input"
+    "address-line-error address-line-error address-line-error"
+
+    "number-title . delivery-title"
+    "number-input . delivery-input"
+    "number-error . delivery-error"
+
+    "city-title . state-title"
+    "city-input . state-input"
+    "city-error . state-error"
+
+    "zip-code-title . country-title"
+    "zip-code-input . country-input"
+    "zip-code-error . country-error";
+
+    @include xmd{
+        grid-template-rows: repeat(21,auto);
+        grid-template-areas:
+        "address-line-title"
+        "address-line-input"
+        "address-line-error"
+
+        "delivery-title"
+        "delivery-input"
+        "delivery-error"
+
+        "number-title"
+        "number-input"
+        "number-error"
+
+        "city-title"
+        "city-input"
+        "city-error"
+
+        "state-title"
+        "state-input"
+        "state-error"
+
+        "zip-code-title"
+        "zip-code-input"
+        "zip-code-error"
+
+        "country-title"
+        "country-input"
+        "country-error";
+
+    }
+
+    .delivery-title{
+        grid-area: delivery-title;
+    }
+    #delivery-input{
+        grid-area: delivery-input;
+    }
+    #delivery-error{
+        grid-area: delivery-error;
+    }
+
+}
+
+// #form{
+//     display: grid;
+//     justify-content: center;
+//     padding-top: 5rem;
+//     padding-bottom: 5rem;
+
+//     label{
+//         display: block;
+//     }
+
+//     .radio-container{
+//         label{
+//             display: inline-block;
+//         }
+//     }
+
+//     .error-msg{
+//         display: none;
+//         color: rgb(255, 31, 31);
+//         margin-top: 0.3rem;
+//     }
+
+//     form{
+//         padding-left: 1rem;
+//         padding-right: 1rem;
+//         padding-bottom: 1rem;
+//         border: 1px solid var(--category-outline);
+//         box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
+//         background-color: var(--gray-bg-color);
+//         border-radius: 3px;
+//     }
+
+//     input[type=text], input[type=email]{
+//         width: 300px;
+//         height: 30px;
+//         font-size: size(size-body);
+//         font-weight: 600;
+//     }
+
+//     .form-heading{
+//         font-size: size(size-body);
+//         font-weight: 600;
+//         margin-top: 1rem;
+//         margin-bottom: 0.3rem;
+//         color: var(--text-color-heading);
+//     }
+
+//     #agree-radio-container{
+//         margin-top: 1rem;
+//     }
+
+//     label{
+//         color: var(--text-color-regular);
+//     }
+// }
+
+// #button-container{
+//     width: 100%;
+//     display: grid;
+//     justify-content: center;
+//     margin-top: 1rem;
+
+//     button{
+//         padding: 0.2rem;
+//         font-size: size(size-body);
+//         background-color: var(--background-color-header-const);
+//         font-weight: 600;
+//         color: var(--text-color-heading-const);
+//         border: unset;
+
+//         &:hover{
+//             cursor: pointer;
+//             background-color: var(--background-color-hover-const);
+//         }
+//     }
+// }

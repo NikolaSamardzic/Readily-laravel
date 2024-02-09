@@ -1,0 +1,292 @@
+
+.insert-update-book-section{
+    min-height: calc(100vh - 50px);
+    max-height: fit-content;
+}
+
+.td-image{
+    padding: 1rem;
+    img{
+        height: 100px;
+    }
+}
+
+.book-form-container{
+    margin: 0 auto;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    width: 800px;
+    height: auto;
+    padding: 3rem 0.5rem;
+
+    border-radius: 5px;
+    border: 1px solid var(--border-book-shadow);
+    background-color: var(--gray-bg-color);
+
+    @include lg-940{
+        width: 100%;
+
+    }
+
+    h2{
+        text-align: center;
+        font-size: size(size-h2);
+        margin-bottom: 3rem;
+        color: var(--text-color-heading);
+
+
+    }
+
+    .book-image-container-form{
+        width: 180px;
+        height: 220px;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+        background-color: var(--bg-article-7);
+    }
+
+    .upload-book-image-text{
+        text-align: center;
+        margin-bottom: 0.5rem;
+        font-size: size(size-body);
+        height: auto;
+        color: var(--text-color-regular);
+
+    }
+
+    .book-image-form{
+        margin: 0 auto;
+        display: block;
+
+        font-size: unset;
+        font-weight: unset;
+        color: var(--text-color-regular);
+
+    }
+
+    #book-image-error{
+        margin: 0 auto;
+        width: 300px;
+        height: 100px;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .book-info-container-grid{
+
+        grid-template-rows: repeat(15,auto);
+        // grid-template-rows: max-content max-content;
+
+        grid-template-areas:
+        "book-title-title book-title-title book-title-title"
+        "book-title-input book-title-input book-title-input"
+        "book-title-error book-title-error book-title-error"
+
+        "page-count-title . price-title"
+        "page-count-input . price-input"
+        "page-count-error . price-error"
+
+        "release-date-title . publisher-title"
+        "release-date-input . publisher-input"
+        "release-date-error . publisher-error"
+
+        "book-description-title book-description-title book-description-title"
+        "book-description-input book-description-input book-description-input"
+        "book-description-error book-description-error book-description-error"
+
+        "book-category-title . ."
+        "book-category-input . ."
+        "book-category-error . ."
+    ;
+
+        @include xmd{
+
+            grid-template-rows: repeat(21,auto);
+            grid-template-areas:
+            "book-title-title"
+            "book-title-input"
+            "book-title-error"
+
+            "page-count-title"
+            "page-count-input"
+            "page-count-error"
+
+            "price-title"
+            "price-input"
+            "price-error"
+
+            "release-date-title"
+            "release-date-input"
+            "release-date-error"
+
+            "publisher-title"
+            "publisher-input"
+            "publisher-error"
+
+            "book-description-title"
+            "book-description-input"
+            "book-description-error"
+
+            "book-category-title "
+            "book-category-input "
+            "book-category-error "
+        ;
+        }
+
+        .book-description-title{
+            grid-area: book-description-title;
+        }
+
+        .book-description-input{
+            grid-area: book-description-input;
+        }
+
+        #book-description-error{
+            grid-area: book-description-error;
+        }
+
+        .book-title-title{
+            grid-area: book-title-title;
+        }
+
+        .book-title-input{
+            grid-area: book-title-input;
+        }
+
+        #book-title-error{
+            grid-area: book-title-error;
+        }
+
+
+        .page-count-title{
+            grid-area: page-count-title;
+        }
+
+        .page-count-input{
+            grid-area: page-count-input;
+        }
+
+        #page-count-error{
+            grid-area: page-count-error;
+        }
+
+
+        .price-title{
+            grid-area: price-title;
+        }
+
+        .price-input{
+            grid-area: price-input;
+        }
+
+        #price-error{
+            grid-area: price-error;
+        }
+
+
+        .release-date-title{
+            grid-area: release-date-title;
+        }
+
+        .release-date-input{
+            grid-area: release-date-input;
+        }
+
+        #release-date-error{
+            grid-area: release-date-error;
+        }
+
+
+
+        .publisher-title{
+            grid-area: publisher-title;
+        }
+
+        .publisher-input{
+            grid-area: publisher-input;
+        }
+
+        #publisher-error{
+            grid-area: publisher-error;
+        }
+
+
+
+        .book-category-title{
+            grid-area: book-category-title;
+        }
+
+        .book-category-input{
+            grid-area: book-category-input;
+        }
+
+        #book-category-error{
+            grid-area: book-category-error;
+        }
+    }
+
+    .book-category-input{
+
+        color: var(--text-color-regular);
+        p{
+            i{
+                margin-right: 0.5rem;
+            }
+
+            border: 1px solid var(--border-book-shadow);
+            background-color: var(--gray-bg-color);
+            padding: 0.3rem;
+            border-radius: 5px;
+
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        font-size: size(size-body);
+
+        .book-category-li{
+
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 20px 1fr;
+            gap: 5px;
+            grid-template-rows: 1fr;
+            align-items: center;
+
+            label{
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+
+
+    }
+
+    select{
+        height: 2rem;
+        font-size: size(size-body);
+
+        @include lg-940{
+            max-width: 300px;
+
+        }
+        option{
+            width: 220px;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+    }
+}
+
+.book-image-container-form{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    img{
+        height: 200px;
+    }
+}

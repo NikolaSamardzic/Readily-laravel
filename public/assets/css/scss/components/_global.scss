@@ -1,0 +1,192 @@
+
+:root{
+    //CONST
+    --text-color-heading-const:#f5f5f5;
+    --text-color-regular-const:#e0e0e0;
+
+    --background-color-const: #00293f;
+    --background-color-header-const: hsl(186, 59%, 30%);
+    --background-color-hover-const:hsl(186, 62%, 22%);
+
+    --text-shadow-const:rgb(0 0 0 / 70%);
+
+    //DEFAOULT LIGHT
+    --text-color-heading:#0e0e0e;
+    --text-color-regular:#1e1e1e;
+    --text-color-geen: hsl(186, 62%, 32%);
+
+    --background-color: #fafafa;
+
+    --star-orange: #e47b01;
+
+    --gray-text-color: #596280;
+    --gray-bg-color: rgba(255, 255, 255, 0);
+    --gray-bg-color-hover:rgba(13, 13, 13, 0);
+
+    --border-book-shadow: #e3e6ef;
+
+    --bg--button:#fafafa;
+    --bg-button-hover: hsl(184, 46%, 93%);
+    --button-angle: #fafafa;
+
+    --category-outline-hover:#b7bdc9;
+    --category-outline:#cfd6e0;
+
+
+    --remove-button-bg: rgba(255, 255, 255, 0);
+    --remove-button-bg-hover: rgb(224, 224, 224);
+
+    --table-tr-bg:rgb(239, 239, 239);
+    --table-tr-hover: #dfdfdfab;
+}
+
+.light-mode{
+    --text-color-heading:#0e0e0e;
+    --text-color-regular:#1e1e1e;
+    --text-color-geen: hsl(186, 62%, 32%);
+
+    --background-color: #fafafa;
+
+    --star-orange: #e47b01;
+
+    --gray-text-color: #596280;
+    --gray-bg-color: rgba(255, 255, 255, 0);
+    --gray-bg-color-hover:rgba(13, 13, 13, 0);
+
+    --border-book-shadow: #e3e6ef;
+
+    --bg--button:#fafafa;
+    --bg-button-hover: #e4f4f5;
+    --button-angle: #fafafa;
+
+    --category-outline-hover:#b7bdc9;
+    --category-outline:#cfd6e0;
+
+    --remove-button-bg: rgba(255, 255, 255, 0);
+    --remove-button-bg-hover: rgb(224, 224, 224);
+
+    --table-tr-bg:rgb(239, 239, 239);
+    --table-tr-hover: #dfdfdfab;
+}
+
+.dark-mode{
+    --text-color-heading:#f5f5f5;
+    --text-color-regular:#e0e0e0;
+    --text-color-geen: hsl(186, 62%, 42%);
+
+    --background-color: #121212;
+
+    --star-orange: #e38e2c;
+
+    --gray-text-color: hsl(226, 18%, 63%);
+    --gray-bg-color:#1b1b1b;
+    --gray-bg-color-hover:hsl(0, 0%, 9%);
+
+    --border-book-shadow: #e3e6ef00;
+
+    --bg--button:#1b1b1b;
+    --bg-button-hover: #052016;
+    --button-angle: #fafafa;
+
+    --category-outline-hover:hsla(186, 62%, 42%, 0);
+    --category-outline:hsla(186, 62%, 32%, 0);
+
+    --remove-button-bg: rgb(36, 36, 36);
+    --remove-button-bg-hover: rgb(12, 12, 12);
+
+    --table-tr-bg:rgb(28, 28, 28);
+    --table-tr-hover: #222222ab;
+    .svg{
+        filter:brightness(80%);
+    }
+
+    .set-brightness{
+        filter:brightness(85%);
+    }
+}
+
+.error-message{
+    color: red;
+}
+
+.success-message{
+    color: green;
+}
+
+.server-messages{
+    padding-bottom: 2rem;
+
+    li{
+        margin-bottom:0.5rem;
+    }
+}
+
+.text-bold{
+    font-weight: 600;
+}
+
+.text-italic{
+    font-style: italic;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+
+body{
+
+    min-height: 100vh;
+    max-height: fit-content;
+    background-color: var(--background-color);
+}
+
+.pre-loader{
+    overflow-y: hidden;
+}
+
+.wrapper{
+    width: 1300px;
+    margin: 0 auto;
+
+    @include xxl{
+        width: 1100px;
+    }
+
+    @include xl{
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.danger-option{
+    color: rgb(255, 77, 77) !important;
+    background-color: unset !important;
+
+
+
+    &:hover{
+        color: hwb(0 13% 0%) !important;
+        background-color: hsla(0, 100%, 70%, 0.267) !important;
+    }
+}
+
+.safe-option{
+
+
+    background-color: var(--background-color-header-const) !important;
+    color: var(--text-color-heading-const) !important;
+
+    &:hover{
+        cursor: pointer;
+        background-color: var(--background-color-hover-const) !important;
+    }
+}
+
+.add-buttons-container{
+    margin-bottom: 5rem;
+}

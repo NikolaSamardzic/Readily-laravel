@@ -1,0 +1,44 @@
+
+#user-profile-section{
+    width: 100%;
+    min-height: calc(100vh - 50px);
+
+    .user-information{
+        font-weight: 600;
+        font-size: 1.4rem;
+        color: var(--text-color-heading);
+
+    }
+
+    .input-title{
+        color: var(--text-color-regular);
+    }
+}
+
+
+#writter-option-wrapper{
+    width: 800px;
+    margin: 0 auto;
+    margin-bottom: 5rem;
+
+    @include lg-940{
+        width: 100%;
+        padding-left: 0.5rem;
+    }
+
+    .admin-option-container{
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+
+
+
+        @include xl{
+            grid-template-columns: 1fr 1fr;
+
+        }
+
+        @include xmd{
+            grid-template-columns: 1fr;
+        }
+    }
+}

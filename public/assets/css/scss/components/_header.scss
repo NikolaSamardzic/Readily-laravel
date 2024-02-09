@@ -1,0 +1,189 @@
+
+header{
+    position: sticky;
+    top: 0;
+    height: 50px;
+    background-color: var(--background-color-header-const);
+    width: 100%;
+
+    z-index: 10;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+#header{
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: auto 1fr auto auto;
+
+    grid-template-areas: "logo . links icons";
+
+
+    a{
+        color:  var(--text-color-heading-const);
+        align-self: center;
+        height: 50px;
+        grid-area: logo;
+
+        img{
+            height: 50px;
+        }
+    }
+
+    ul{
+        display: grid;
+        grid-auto-flow: column;
+        grid-area: links;
+        gap: 15px;
+
+        @include xmd{
+            display: none;
+        }
+
+        #active-link{
+            &::after{
+                width: 100%;
+            }
+        }
+
+        a{
+            display: grid;
+            align-items: center;
+
+            font-size: size(size-body);
+
+            position: relative;
+
+            &::after{
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 4px;
+                background-color: var(--text-color-heading-const);
+                transition: width 0.3s;
+            }
+
+            &:hover{
+                &::after{
+                    width: 100%;
+                }
+            }
+
+
+        }
+
+    }
+
+    #icons-container{
+        color:  var(--text-color-heading-const);
+        grid-area: icons;
+
+        display: grid;
+        align-items: center;
+        grid-auto-flow: column;
+        grid-auto-columns:30px;
+        gap: 15px;
+
+        padding-left: 30px;
+
+        font-size: size(size-body);
+
+        // styling profile pic of an user
+        div{
+
+            img{
+                height: 30px;
+                border-radius: 50%;
+            }
+
+            width: 30px;
+            height: 30px;
+            display: block;
+            //background-color: red;
+            border-radius: 50%;
+
+            a{
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+        }
+        // end of styling profile pic of an user
+
+        i{
+            font-size: size(size-body);
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        #menu-icon-open{
+            display: none;
+
+            @include xmd{
+                display: block;
+            }
+        }
+    }
+}
+
+.phone-nav{
+    display: none;
+    position: fixed;
+    z-index: 16;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--background-color-header-const);
+
+    i{
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        color: white;
+
+        font-size: size(size-h2);
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+
+
+}
+
+.display-phone-nav{
+    @include md{
+        display: grid;
+        width: 100%;
+
+        align-items: center;
+        justify-items: center;
+
+        a{
+            text-align: center;
+            font-size: size(size-h3);
+            color: var(--text-color-heading-const);
+        }
+
+        li{
+            display: grid;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.nav-entering{
+    right: 0;
+    animation: changing-position-entering 0.5s;
+
+}
+.nav-leaving{
+    right: -120%;
+    animation: changing-position-leaving 0.5s;
+}

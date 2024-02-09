@@ -1,0 +1,23 @@
+
+#admin-messages-section{
+    min-height: calc(100vh - 50px);
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    h2{
+        margin-bottom: 1rem;
+        color: var(--text-color-heading);
+        font-size: size(size-h2);
+    }
+
+    table{
+        @include xl{
+            width: 1200px;
+        }
+    }
+
+    .td-text{
+        width: 500px;
+        padding: 0.5rem;
+    }
+}

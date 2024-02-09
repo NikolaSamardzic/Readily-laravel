@@ -1,0 +1,52 @@
+
+#author-section{
+    min-height: 100vh;
+    margin-bottom: 3rem;
+    max-height: fit-content;
+
+    display: flex;
+    //justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h1{
+        color: var(--text-color-heading);
+        margin: 4rem 0;
+        font-size: size(size-big);
+    }
+
+    h2{
+        margin-bottom: 0.3rem;
+        color: var(--text-color-heading);
+        font-size: size(size-h3);
+    }
+
+    p{
+        color: var(--text-color-regular);
+        margin-bottom: 1rem;
+        font-size: size(size-body);
+    }
+
+    #img-container{
+        width: 250px;
+        margin-bottom: 2rem;
+    }
+
+    img{
+        width: 100%;
+    }
+}
+
+
+#four-o-four{
+    min-height: calc(100vh - 50px);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    h1{
+        font-size: 15rem;
+        color: var(--background-color-header-const);
+
+    }
+}

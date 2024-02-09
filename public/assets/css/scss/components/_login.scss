@@ -1,0 +1,100 @@
+#log-in-section{
+    width: 100%;
+    min-height: calc(100vh - 50px);
+    max-height: fit-content;
+}
+
+#log-in-section{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-form{
+    width: 300px;
+    padding: 3rem 0.5rem;
+
+    border-radius: 5px;
+    border: 1px solid var(--border-book-shadow);
+    background-color: var(--gray-bg-color);
+
+
+    h2{
+        text-align: center;
+        font-size: size(size-h2);
+        margin-bottom: 3rem;
+        color: var(--text-color-heading);
+    }
+
+    #log-in-container{
+        width: 100%;
+        padding-bottom: 1rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto auto;
+
+        grid-template-areas:
+        "username-title"
+        "username-input"
+        "username-error"
+        "password-title"
+        "password-input"
+        "password-error";
+
+        #username-title{
+            grid-area: username-title;
+        }
+
+        #sername-input-js{
+            grid-area: sername-input;
+        }
+
+        #username-error{
+            grid-area: username-error;
+        }
+
+        #password-title{
+            grid-area: password-title;
+        }
+
+        #password-input-js{
+            grid-area: password-input;
+        }
+
+        #password-error{
+            grid-area: password-error;
+        }
+    }
+
+    .input-title{
+        font-size: size(size-body);
+        margin-top: 1rem;
+        margin-bottom: 0.3rem;
+        font-weight: 500;
+
+        color: var(--text-color-heading);
+    }
+
+    input{
+        height: 2rem;
+        font-size: size(size-body);
+    }
+
+    #log-in-button{
+        display: block;
+        height: auto;
+        margin: 0 auto;
+        padding: 0.3rem 0.6rem;
+        border: unset;
+        border-radius: 3px;
+        outline: none;
+
+        background-color: var(--background-color-header-const);
+        color: var(--text-color-heading-const);
+
+        &:hover{
+            cursor: pointer;
+            background-color: var(--background-color-hover-const);
+        }
+    }
+}

@@ -1,0 +1,17 @@
+
+#admin-categories-section{
+    min-height: calc(100vh - 50px);
+    padding: 5rem 0;
+
+    h2{
+        margin-bottom: 1rem;
+        color: var(--text-color-heading);
+        font-size: size(size-h2);
+    }
+
+    table{
+        @include xl{
+            width: 1200px;
+        }
+    }
+}

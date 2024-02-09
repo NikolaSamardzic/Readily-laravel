@@ -1,0 +1,459 @@
+
+#sign-up-body{
+    min-height: 100vh;
+    max-height: fit-content;
+}
+
+.info-container-grid{
+    width: 100%;
+    height: auto;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+
+    @include xmd{
+        grid-template-columns: 1fr;
+    }
+}
+
+.input-title{
+    font-size: size(size-body);
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+
+    color: var(--text-color-heading);
+}
+
+
+input,.user-information{
+    height: 2rem;
+    font-size: size(size-body);
+}
+
+.button-option-container{
+    display: flex;
+    justify-content: end;
+
+    input{
+        height: unset;
+        margin-left: 1rem;
+
+        padding: 0.3rem 0.6rem;
+        border: unset;
+        border-radius: 3px;
+        outline: none;
+
+        background-color: unset;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+
+}
+
+textarea{
+    height: 100px;
+    resize: none;
+    font-size: size(size-body);
+}
+
+.sign-up-container{
+    margin: 5rem auto;
+    /*    margin-top: 5rem;
+        margin-bottom: 5rem;*/
+    width: 800px;
+    height: auto;
+    padding: 3rem 0.5rem;
+
+    border-radius: 5px;
+    border: 1px solid var(--border-book-shadow);
+    background-color: var(--gray-bg-color);
+
+    @include lg-940{
+        width: 100%;
+
+    }
+
+    h2{
+        text-align: center;
+        font-size: size(size-h2);
+        margin-bottom: 3rem;
+        color: var(--text-color-heading);
+
+        span{
+            font-size: size(size-body);
+            font-weight: 400;
+        }
+    }
+
+    .user-avatar-placeholder{
+        margin: 0 auto;
+        margin-bottom: 1rem;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img{
+            width: 100%;
+        }
+    }
+
+    .upload-avatar-text{
+        text-align: center;
+        margin-bottom: 0.5rem;
+        font-size: size(size-body);
+        height: auto;
+        color: var(--text-color-regular);
+
+    }
+
+    .user-avatar{
+        margin: 0 auto;
+        display: block;
+
+        font-size: unset;
+        font-weight: unset;
+        color: var(--text-color-regular);
+
+    }
+
+    #avatar-error{
+        margin: 0 auto;
+        width: 300px;
+        height: 100px;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+
+
+    .personal-info-container-grid{
+
+        grid-template-rows: repeat(15,auto);
+        // grid-template-rows: max-content max-content;
+
+        grid-template-areas:
+        "first-name-title . last-name-title"
+        "first-name-input . last-name-input"
+        "first-name-error . last-name-error"
+
+        "username-title . password-title"
+        "username-input . password-input"
+        "username-error . password-error"
+
+        "email-title email-title email-title"
+        "email-input email-input email-input"
+        "email-error email-error email-error"
+
+        "phone-title . role-title"
+        "phone-input . role-input"
+        "phone-error . role-error"
+
+        "biography-title biography-title biography-title"
+        "biography-input biography-input biography-input"
+        "biography-error biography-error biography-error"
+    ;
+
+        @include xmd{
+
+            grid-template-rows: repeat(24,auto);
+            grid-template-areas:
+            "first-name-title"
+            "first-name-input"
+            "first-name-error"
+
+            "last-name-title"
+            "last-name-input"
+            "last-name-error"
+
+            "username-title"
+            "username-input"
+            "username-error"
+
+            "password-title"
+            "password-input"
+            "password-error"
+
+            "email-title"
+            "email-input"
+            "email-error"
+
+            "phone-title"
+            "phone-input"
+            "phone-error"
+
+            "role-title"
+            "role-input"
+            "role-error"
+
+            "biography-title"
+            "biography-input"
+            "biography-error"
+        ;
+        }
+
+
+        .first-name-title{
+            grid-area: first-name-title;
+        }
+
+        .first-name-input{
+            grid-area: first-name-input;
+        }
+
+        #first-name-error{
+            grid-area: first-name-error;
+        }
+
+
+        .last-name-title{
+            grid-area: last-name-title;
+        }
+
+        .last-name-input{
+            grid-area: last-name-input;
+        }
+
+        #last-name-error{
+            grid-area: last-name-error;
+        }
+
+
+        .username-title{
+            grid-area: username-title;
+        }
+
+        .username-input{
+            grid-area: username-input;
+        }
+
+        #username-error{
+            grid-area: username-error;
+        }
+
+
+
+        .password-title{
+            grid-area: password-title;
+        }
+
+        .password-input{
+            grid-area: password-input;
+        }
+
+        #password-error{
+            grid-area: password-error;
+        }
+
+
+        .email-title{
+            grid-area: email-title;
+        }
+
+        .email-input{
+            grid-area: email-input;
+        }
+
+        #email-error{
+            grid-area: email-error;
+        }
+
+
+        .phone-title{
+            grid-area: phone-title;
+        }
+
+        .phone-input{
+            grid-area: phone-input;
+        }
+
+        #phone-error{
+            grid-area: phone-error;
+        }
+
+
+        .role-title{
+            grid-area: role-title;
+        }
+
+        .role-input{
+            grid-area: role-input;
+        }
+
+        #role-error{
+            grid-area: role-error;
+        }
+
+
+        .biography-title{
+            grid-area: biography-title;
+        }
+
+        .biography-input{
+            grid-area: biography-input;
+        }
+
+        #biography-error{
+            grid-area: biography-error;
+        }
+    }
+
+    .address-info-container-grid{
+        grid-template-rows: repeat(12,auto);
+        grid-template-areas:
+        "address-line-title address-line-title address-line-title"
+        "address-line-input address-line-input address-line-input"
+        "address-line-error address-line-error address-line-error"
+
+        "number-title . ."
+        "number-input . ."
+        "number-error . ."
+
+        "city-title . state-title"
+        "city-input . state-input"
+        "city-error . state-error"
+
+        "zip-code-title . country-title"
+        "zip-code-input . country-input"
+        "zip-code-error . country-error";
+
+        @include xmd{
+            grid-template-rows: repeat(18,auto);
+            grid-template-areas:
+            "address-line-title"
+            "address-line-input"
+            "address-line-error"
+
+            "number-title"
+            "number-input"
+            "number-error"
+
+            "city-title"
+            "city-input"
+            "city-error"
+
+            "state-title"
+            "state-input"
+            "state-error"
+
+            "zip-code-title"
+            "zip-code-input"
+            "zip-code-error"
+
+            "country-title"
+            "country-input"
+            "country-error";
+
+        }
+
+        .address-line-title{
+            grid-area: address-line-title;
+        }
+
+        .address-line-input{
+            grid-area: address-line-input;
+        }
+
+        #address-line-error{
+            grid-area: address-line-error;
+        }
+
+        .number-title{
+            grid-area: number-title;
+        }
+
+        .number-input{
+            grid-area: number-input;
+        }
+
+        #number-error{
+            grid-area: number-error;
+        }
+
+        .city-title{
+            grid-area: city-title;
+        }
+
+        .city-input{
+            grid-area: city-input;
+        }
+
+        #city-error{
+            grid-area: city-error;
+        }
+
+        .state-title{
+            grid-area: state-title;
+        }
+
+        .state-input{
+            grid-area: state-input;
+        }
+
+        #state-error{
+            grid-area: state-error;
+        }
+
+        .zip-code-title{
+            grid-area: zip-code-title;
+        }
+
+        .zip-code-input{
+            grid-area: zip-code-input;
+        }
+
+        #zip-code-error{
+            grid-area: zip-code-error;
+        }
+
+        .country-title{
+            grid-area: country-title;
+        }
+
+        .country-input{
+            grid-area: country-input;
+        }
+
+        #country-error{
+            grid-area: country-error;
+        }
+    }
+
+
+
+    select{
+        height: 2rem;
+        font-size: size(size-body);
+    }
+
+
+
+    #create-account-button{
+        display: block;
+        height: auto;
+        margin: 0 auto;
+        padding: 0.3rem 0.6rem;
+        border: unset;
+        border-radius: 3px;
+        outline: none;
+
+        background-color: var(--background-color-header-const);
+        color: var(--text-color-heading-const);
+
+        &:hover{
+            cursor: pointer;
+            background-color: var(--background-color-hover-const);
+        }
+    }
+
+
+
+    p{
+        height: auto !important;
+    }
+}

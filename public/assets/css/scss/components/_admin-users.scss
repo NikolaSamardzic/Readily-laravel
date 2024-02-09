@@ -1,0 +1,92 @@
+.table-container{
+    overflow-x: scroll;
+    margin-bottom: 5rem;
+
+    table{
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+
+    }
+
+    thead{
+        height: 2rem;
+        background-color: var(--background-color-header-const);
+
+        font-size: size(size-body);
+
+        width: 100%;
+
+        th{
+            padding-left: 0.5rem;
+            font-weight: 600;
+            text-align: left;
+            color: var(--text-color-heading-const);
+        }
+
+
+    }
+
+    tbody{
+        tr{
+            &:hover{
+                background-color: var(--table-tr-hover) !important;
+            }
+        }
+
+        td{
+            height: 3rem;
+            padding-left: 0.5rem;
+            font-size: size(size-body);
+            color: var(--text-color-regular);
+
+            input[type=button]{
+                padding: 0.2rem 0.4rem;
+
+                font-size: size(size-body);
+
+                border: unset;
+                border-radius: 3px;
+                outline: none;
+
+                background-color: unset;
+
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+
+            a{
+                padding: 0.2rem 0.4rem;
+                border-radius: 5px;
+            }
+        }
+    }
+}
+
+#admin-users-section{
+    min-height: calc(100vh - 50px);
+    padding: 5rem 0;
+    @include xl{
+        padding: 5rem 1rem;
+    }
+
+    h2{
+        margin-bottom: 1rem;
+        color: var(--text-color-heading);
+        font-size: size(size-h2);
+    }
+
+    table{
+        @include xl{
+            width: 1200px;
+        }
+
+    }
+}
+
+#admin-users-server-messages{
+    display: none;
+    padding-top: 5rem;
+    padding-bottom: 0;
+}

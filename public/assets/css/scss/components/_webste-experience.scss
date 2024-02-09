@@ -1,0 +1,61 @@
+
+#survey-website-experience-section{
+    position: relative;
+    margin-bottom: 5rem;
+
+    h2{
+        font-family: "Source Serif Pro", serif;
+        color: var(--text-color-heading);
+        margin-bottom: 2rem;
+    }
+
+    form{
+        display: flex;
+        justify-content: space-between;
+
+        flex-wrap: wrap;
+
+        overflow: hidden;
+
+        @include sm{
+            flex-direction: column;
+        }
+    }
+
+    article{
+
+        border: 1px solid var(--border-book-shadow);
+        background-color: var(--gray-bg-color);
+        padding: 0.5rem 0.8rem;
+        border-radius: 5px;
+
+        @include sm{
+            display: flex;
+            align-items: center;
+
+            margin-bottom: 1rem;
+
+            p{
+                margin-left: 2rem;
+            }
+        }
+
+        &:hover{
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--gray-bg-color-hover);
+        }
+
+        img{
+            height: 80px;
+        }
+
+        p{
+            text-align: center;
+            font-weight: 600;
+            font-size: size(size-body);
+            color: var(--text-color-heading);
+        }
+
+    }
+}
