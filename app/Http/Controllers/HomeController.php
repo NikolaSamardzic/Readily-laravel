@@ -13,7 +13,7 @@ class HomeController extends StandardController
         $this->data["bestSellingBooks"] =[
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -21,7 +21,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -29,7 +29,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -37,7 +37,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -45,7 +45,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -53,7 +53,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -61,7 +61,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -69,7 +69,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -77,7 +77,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -85,7 +85,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -93,7 +93,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -101,7 +101,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -109,7 +109,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -117,7 +117,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -125,7 +125,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -133,7 +133,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -141,7 +141,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -149,7 +149,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
@@ -157,7 +157,7 @@ class HomeController extends StandardController
             ],
             [
                 "id" => "10",
-                "src" => "30",
+                "src" => "30.jpg",
                 "title" => "Knjiga",
                 "idWriter" => "8",
                 "writer" => "Ime Prezime",
