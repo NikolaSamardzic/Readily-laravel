@@ -10,6 +10,59 @@ class HomeController extends StandardController
     public function __construct()
     {
         parent::__construct();
+        $this->data["popularCategories"] = [
+            [
+                "id" => "4",
+                "src" => "7.jpg",
+                "title" => "Kategorija",
+            ],
+            [
+                "id" => "4",
+                "src" => "7.jpg",
+                "title" => "Kategorija",
+            ],
+            [
+                "id" => "4",
+                "src" => "7.jpg",
+                "title" => "Kategorija",
+            ],
+            [
+                "id" => "4",
+                "src" => "7.jpg",
+                "title" => "Kategorija",
+            ],
+            [
+                "id" => "4",
+                "src" => "7.jpg",
+                "title" => "Kategorija",
+            ],
+            [
+                "id" => "4",
+                "src" => "7.jpg",
+                "title" => "Kategorija",
+            ],
+            [
+                "id" => "4",
+                "src" => "7.jpg",
+                "title" => "Kategorija",
+            ],
+            [
+                "id" => "4",
+                "src" => "7.jpg",
+                "title" => "Kategorija",
+            ],
+            [
+                "id" => "4",
+                "src" => "7.jpg",
+                "title" => "Kategorija",
+            ],
+            [
+                "id" => "4",
+                "src" => "7.jpg",
+                "title" => "Kategorija",
+            ],
+        ];
+
         $this->data["bestSellingBooks"] =[
             [
                 "id" => "10",

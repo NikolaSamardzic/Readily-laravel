@@ -67,7 +67,7 @@
         </article>
 
         <article id="article3">
-            <img src="{{asset('assets/images/introduction/help.svg')}}" alt="helping with chooseing book image" class="svg" />
+            <img src="{{asset('assets/images/introduction/help.svg')}}" alt="helping with choosing book image" class="svg" />
             <h3>Help finding your next great read</h3>
             <p>At Readily, we're here to help you find your next favorite book. Whether you're looking for a specific genre, author, or just need some inspiration, our knowledgeable staff are on hand to offer recommendations and advice. With our user-friendly website and personalized service, discovering your next great read has never been easier. Join us today and let us help you find your next literary obsession.</p>
         </article>
@@ -126,13 +126,13 @@
     >
         <x-slot name="heading">Popular Categories</x-slot>
 
-        @for($i=0;$i<20;$i++)
-            <article class="article-category">
-                <a href="index.php?page=shop&category-id=4"></a>
-                <p>Mystery</p>
-                <img src="assets/images/books/small/7.jpg" alt="Murder on the Orient Express" class="set-brightness">
-            </article>
-        @endfor
+        @foreach($data['popularCategories'] as $category)
+            <x-slider.category-article
+                :id="$category['id']"
+                :src="$category['src']"
+                :title="$category['title']"
+            />
+        @endforeach
 
     </x-slider.slider>
 
