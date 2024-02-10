@@ -583,40 +583,38 @@
 
 
 @section('footer')
-<footer>
-    <div id="footer" class="wrapper">
+    <x-fixed.footer>
 
-        <ul id="docements-links">
-            <li><a href="index.php?page=author"
-                   target="_self">Author</a></li>
-            <li><a href="views/pages/documentation.pdf"
-                   target="_blank">Documentation</a></li>
-            <li><a href="https://github.com/NikolaSamardzic/Readilyphp"
-                   target="_blank">GitHub</a></li>
-            <li><a href="views/pages/rss.xml"
-                   target="_blank">RSS</a></li>
-            <li><a href="views/pages/sitemap.xml"
-                   target="_blank">Sitemap</a></li>
-        </ul>
+        <x-slot name="documentLinks">
+            @foreach($data['footer']["documentLinks"] as $link)
+                <x-fixed.footer-link
+                    :href="$link['href']"
+                    :name="$link['name']"
+                    :target="$link['target']"
+                />
+            @endforeach
+        </x-slot>
 
-        <ul id="social-media-links">
-            <li><a href="https://www.facebook.com/"
-                   target="_blank">Facebook</a></li>
-            <li><a href="https://www.instagram.com/"
-                   target="_blank">Instagram</a></li>
-            <li><a href="https://twitter.com/"
-                   target="_blank">Twitter</a></li>
-        </ul>
+        <x-slot name="socialMediaLinks">
+            @foreach($data['footer']["socialMediaLinks"] as $link)
+                <x-fixed.footer-link
+                    :href="$link['href']"
+                    :name="$link['name']"
+                    :target="$link['target']"
+                />
+            @endforeach
+        </x-slot>
 
-        <ul id="pages-links">
-            <li><a href="index.php?page=home">Home</a></li>
-            <li><a href="index.php?page=shop">Shop</a></li>
-            <li><a href="index.php?page=signup">Sign up</a></li>
-            <li><a href="index.php?page=login">Log in</a></li>
-        </ul>
-    </div>
-</footer>
+        <x-slot name="pageLinks">
+            @foreach($data['footer']["pageLinks"] as $link)
+                <x-fixed.footer-link
+                    :href="$link['href']"
+                    :name="$link['name']"
+                />
+            @endforeach
+        </x-slot>
 
+    </x-fixed.footer>
 @endsection
 
 @section('scripts')
