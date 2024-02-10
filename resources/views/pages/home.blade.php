@@ -84,9 +84,6 @@
         </div>
     </section>
 
-    <section id="suggested-books" class="wrapper section-articles">
-    </section>
-
     <x-slider.slider
     idSection="suggested-books"
     idContainer="suggested-books-articles-container"
@@ -107,29 +104,16 @@
     >
         <x-slot name="heading">Bestselling Books</x-slot>
 
-
-            @for($i=0;$i<20;$i++)
-                <article class='article-book'>
-                    <div class='bg-article-color-6 article-div-img-container'>
-                        <img  class='set-brightness' src='{{asset('assets/images/books/small/51.jpg')}}' alt='Unshakeable: Your Financial Freedom Playbook'>
-                    </div>
-                    <div class='article-books-text-container'>
-                        <div class='title-and-author'>
-                            <h3>Unshakeable: Your Financial Freedom Playbook</h3>
-                            <a class='author-link' href='#'>Tony Robbins</a>
-                        </div>
-                        <div class='stars-and-cart-container'>
-                            <i class='fa-solid fa-cart-shopping shopping-cart' id='book-id-46'></i>
-                            <div class='stars-container'>
-                                <i class='fa-solid fa-star'></i><i class='fa-solid fa-star'></i><i class='fa-solid fa-star'></i><i class='fa-solid fa-star'></i><i class='fa-regular fa-star'></i>
-                            </div>
-                            <p class='rating-text'>4/5</p>
-                        </div>
-                    </div>
-                    <a class='link-to-single-a-book' href='#'>
-                    </a>
-                </article>
-            @endfor
+        @foreach($data['bestSellingBooks'] as $book)
+        <x-slider.book-article
+            :id="$book['id']"
+            :src="$book['src']"
+            :title="$book['title']"
+            :idWriter="$book['idWriter']"
+            :writer="$book['writer']"
+            :review="$book['review']"
+        />
+        @endforeach
 
     </x-slider.slider>
 
