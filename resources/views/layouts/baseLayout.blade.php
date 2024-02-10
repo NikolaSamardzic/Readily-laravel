@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@yield('head');
+<head>
+    @yield('head')
+</head>
+
 
 <body>
 
-@yield('content');
+@yield('content')
 
-@yield('scripts');
+@yield('scripts')
 </body>
 
 </html>

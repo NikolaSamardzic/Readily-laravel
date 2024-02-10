@@ -1,8 +1,8 @@
-@extends('layouts.baseLayout');
+@extends('layouts.baseLayout')
 
 @section('content')
 
-    @yield('header');
+    @yield('header')
 
     @yield('mainContent')
 

@@ -1,72 +1,41 @@
+@extends('layouts.userLayout')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@section('head')
 
-    <meta name="author" content="mailto:nikola.samardzic.54.21@ict.edu.rs"/>
-    <meta name="keywords" content="Readily, books, online bookstore, fiction, non-fiction, mystery, romance, travel, children's books, self-improvement, business and economics, technology and science, history, cooking"/>
-    <meta name="copyright" content="Readily 2022"/>
-    <meta name="language" content="english"/>
+    <x-fixed.head
+        description="test description"
+        keywords="test keywords"
+        title="Home"
+    />
 
-    <!--Favicon-->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" sizes="16x16" />
+@endsection
 
-    <!--Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+@section('header')
+    <x-fixed.header>
+        <x-fixed.navigation>
+            @foreach($data['links'] as $link)
+                <x-fixed.navigation-link
+                    :href="$link['href']"
+                    :name="$link['name']" />
+            @endforeach
+        </x-fixed.navigation>
+    </x-fixed.header>
+@endsection
 
-    <!--Icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" />
-
-    <header>
-        <div id="header" class="wrapper">
-            <a href="#">
-                <img src="assets/images/logo.png" alt="logo" />
-            </a>
-            <ul id="header-navigation">
-                <li><a href="#"
-                       id="active-link">Home</a></li>
-                <li><a href="#"
-                    >Shop</a></li>
-                <li><a href="#"
-                    >Sign up</a></li>
-                <li><a href="#"
-                    >Log in</a></li>
-            </ul>
-            <div id="icons-container">
-
-
-                <i class="fa-solid fa-moon" id="dark-mode-icon" style="display: none;"></i>
-                <i class="fa-solid fa-sun" id="light-mode-icon" style="display: block;"></i>
-                <i class="fa-solid fa-bars" id="menu-icon-open"></i>
-            </div>
-        </div>
-    </header>
-
-
-    <div class="phone-nav" id="phone-nav-id">
-        <ul id="phone-nav-ul">
-            <li><a href="#"
-                   id="active-link">Home</a></li>
-            <li><a href="#"
-                >Shop</a></li>
-            <li><a href="#"
-                >Sign up</a></li>
-            <li><a href="#"
-                >Log in</a></li>
-        </ul>
-        <i id="menu-icon-close" class="fa-solid fa-xmark"></i>
-    </div>
-    <title>Home | Readily</title>
-</head>
-<body>
-
+@section('mainContent')
+<div class="phone-nav" id="phone-nav-id">
+    <ul id="phone-nav-ul">
+        <li><a href="#"
+               id="active-link">Home</a></li>
+        <li><a href="#"
+            >Shop</a></li>
+        <li><a href="#"
+            >Sign up</a></li>
+        <li><a href="#"
+            >Log in</a></li>
+    </ul>
+    <i id="menu-icon-close" class="fa-solid fa-xmark"></i>
+</div>
 
 <section id="about-readily">
     <h1>What is Readily?</h1>
@@ -610,8 +579,10 @@
 </section>
 
 
+@endsection
 
 
+@section('footer')
 <footer>
     <div id="footer" class="wrapper">
 
@@ -646,6 +617,11 @@
     </div>
 </footer>
 
-<script  src="assets/js/main.js"></script>
+@endsection
+
+@section('scripts')
+
+<script  src="{{asset('assets/js/main.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-</body>
+@endsection
+
