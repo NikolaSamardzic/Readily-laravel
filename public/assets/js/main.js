@@ -27,17 +27,17 @@ const regExAndPage = [
     [/^\/admin\/visitors$/, 'pages/admin/visitors.js']
 ]
 
-for (let i=0;i<regExAndPage.length;i++){
-    let regEx = regExAndPage[i][0];
-    let page = regExAndPage[i][1];
-
-    if(regEx.test(url)){
-        loadScript(page);
-        break;
-    }
-}
-
 window.onload = function(){
+    for (let i=0;i<regExAndPage.length;i++){
+        let regEx = regExAndPage[i][0];
+        let page = regExAndPage[i][1];
+
+        if(regEx.test(url)){
+            loadScript(page);
+            break;
+        }
+    }
+
     setThemeClass();
     setHeader();
 
