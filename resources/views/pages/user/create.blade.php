@@ -33,8 +33,13 @@
         </div>
         <p class="upload-avatar-text">upload avatar</p>
 
-        <input type="file" id="user-avatar-js" name="user-avatar" class="user-avatar"/>
-        <p  id="avatar-error"  class="error-message " style="display:none">Please upload an image with a maximum size of 700KB and in one of the following formats: jpg, jpeg, or png for your avatar.</p>
+        <x-form.file-upload
+            inputName="user-avatar"
+            inputId="user-avatar-js"
+            inputClass="user-avatar"
+            idError="avatar-error"
+            error="Please upload an image with a maximum size of 700KB and in one of the following formats: jpg, jpeg, or png for your avatar."
+        />
 
         <div class="info-container-grid personal-info-container-grid">
 
