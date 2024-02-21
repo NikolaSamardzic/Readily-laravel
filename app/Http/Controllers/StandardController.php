@@ -22,7 +22,7 @@ class StandardController extends Controller
                 "name" => "Shop"
             ],
             [
-                "href" => "http://127.0.0.1:8000/signup",
+                "href" => "http://127.0.0.1:8000/users/create",
                 "name" => "Sing Up"
             ],
             [

@@ -66,7 +66,7 @@ function checkAvatar(){
 function checkBiography(){
     let biographyRegex = /(\s.*){4,}/;
 
-    let biography = document.getElementById('biography-input-js').value;
+    let biography = document.getElementById('biography-input').value;
     let errorMessage = document.getElementById('biography-error');
 
     if(!biographyRegex.test(biography)){

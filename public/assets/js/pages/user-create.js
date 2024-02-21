@@ -8,7 +8,7 @@ function setSignupForm(){
         checkRole();
         setBiography();
     });
-    $(document).on('blur','#biography-input-js',checkBiography);
+    $(document).on('blur','#biography-input',checkBiography);
 
     $(document).on('blur','#first-name-input-js',()=>{
         checkInputElementWithRegex(/^[A-ZŠĐĆČŽ][a-zšđčćž]{2,}( [A-ZŠĐĆČŽ][a-zšđčćž]{2,})*$/,'first-name-input-js','first-name-error');
@@ -53,8 +53,8 @@ function setSignupForm(){
 function setBiography(){
     let role = parseInt(document.getElementById('role-input-js').value);
 
-    let title = document.getElementById('biography-title-js');
-    let textarea = document.getElementById('biography-input-js');
+    let title = document.getElementById('biography-title');
+    let textarea = document.getElementById('biography-input');
     let errorMessage = document.getElementById('biography-error');
 
     if(role === 3){
