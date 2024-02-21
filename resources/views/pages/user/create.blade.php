@@ -116,13 +116,21 @@
                 error="Incorrect format (ex. 0611234567)"
             />
 
-
-            <label for="role-input-js"  class="input-title role-title">Role</label>
-            <select id="role-input-js" name="role-input" class="role-input">
+            <x-form.select
+                for="role-input-js"
+                idLabel="role-title"
+                classLabel="input-title"
+                label="Role"
+                selectName="role-input"
+                selectId="role-input-js"
+                selectClass="role-input"
+                idError="role-error"
+                error="Role doesn't exist"
+            >
                 <option value="2" selected>Customer</option>
                 <option value="3">Writer</option>
-            </select>
-            <p id="role-error"  class="error-message " style="display: none;">Role doesn't exist</p>
+            </x-form.select>
+
 
             <x-form.text-area
                 for="biography-input"

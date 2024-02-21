@@ -627,7 +627,7 @@ textarea {
 .sign-up-container .personal-info-container-grid #phone-error {
   grid-area: phone-error;
 }
-.sign-up-container .personal-info-container-grid .role-title {
+.sign-up-container .personal-info-container-grid #role-title {
   grid-area: role-title;
 }
 .sign-up-container .personal-info-container-grid .role-input {
