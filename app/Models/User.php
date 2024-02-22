@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Biography::class);
     }
+
+    public function avatar() : HasOne
+    {
+        return $this->hasOne(Avatar::class);
+    }
 }
