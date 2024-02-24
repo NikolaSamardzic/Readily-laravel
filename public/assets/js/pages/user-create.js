@@ -102,37 +102,7 @@ function sendSignupData(){
         errorCount += checkInputElementWithRegex(/^\d{5,15}$/,'zip-code-input-js','zip-code-error');
     }
 
-    if(errorCount){
-        return;
-    }
-
-
-    let form = document.getElementById('sign-up-form');
-    let formData = new FormData(form);
-
-    $.ajax({
-        url: 'models/signup/signup.php',
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            clearAllInputValues();
-            clearAllInputErrors();
-
-            displayServerMessages('server-messages',response,'success-message');
-        },
-        error: function(xhr, status, errorThrown) {
-            let messages = JSON.parse(xhr.responseText);
-            displayServerMessages('server-messages',messages,'error-message');
-
-            console.log(messages)
-            console.log(xhr);
-            console.log(status, errorThrown);
-        }
-    });
-
-
+    return errorCount;
 }
 
 function clearAllInputValues(){

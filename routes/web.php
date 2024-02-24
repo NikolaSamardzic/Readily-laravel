@@ -19,3 +19,4 @@ Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/login', [LoginController::class,'index'])->name('login.index');
 Route::post('/login', [LoginController::class,'login'])->name('login.submit');
 Route::get('/users/create', [UserController::class,'create'])->name('users.create');
+Route::post('/users', [UserController::class,'store'])->name('users.store');

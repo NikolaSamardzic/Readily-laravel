@@ -10,8 +10,25 @@ class Avatar extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'src',
+        'user_id',
+    ];
+
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public static function createAvatar(mixed $id, string $imgName)
+    {
+        try {
+            self::create([
+                'src' => $imgName,
+                'user_id' => $id,
+            ]);
+        }catch (\Exception $e){
+            throw $e;
+        }
     }
 }

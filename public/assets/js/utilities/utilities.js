@@ -44,7 +44,7 @@ function checkAvatar(){
 
         let file = imageUploadInput.files[0];
 
-        let validExtensions = ["jpg", "jpeg", "png"];
+        let validExtensions = ["jpg", "png"];
         let fileExtension = file.name.split(".").pop().toLowerCase();
 
         if (!validExtensions.includes(fileExtension)){

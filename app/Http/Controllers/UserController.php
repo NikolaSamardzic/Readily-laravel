@@ -2,7 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
+use App\Models\Address;
+use App\Models\Avatar;
+use App\Models\Biography;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use function PHPUnit\Framework\isNan;
+
 
 class UserController extends StandardController
 {
@@ -25,9 +34,43 @@ class UserController extends StandardController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        $userData = $request->only('first-name-input', 'last-name-input', 'username-input', 'password-input', 'email-input','phone-input','role-input');
+
+        try {
+            DB::beginTransaction();
+
+            $address['id'] = null;
+            if(!is_null($request->post('address-line-input'))){
+                $address = Address::insertAddress($request->post('address-line-input'), $request->post('number-input'), $request->post('city-input'), $request->post('state-input'), $request->post('zip-code-input'), $request->post('country-input'));
+            }
+
+            $user = User::createUser($userData, $address['id']);
+
+            if(!is_null($request->post('biography-input'))){
+                Biography::createBiography($user['id'],$request->post('biography-input'));
+            }
+
+            if(!is_null($request->file('user-avatar'))){
+                $imageName = time() . '.' . $request->file('user-avatar')->extension();
+                Avatar::createAvatar($user['id'],$imageName);
+                $request->file('user-avatar')->move(public_path('assets/images/avatars'), $imageName);
+            }
+
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            if(isset($imageName) && File::exists(public_path('/assets/img/products/' . $imageName))){
+                File::delete(public_path('/assets/img/products/' . $imageName));
+            }
+
+            return redirect()->back()->with('error-msg', 'An error has occurred, please try again later.');
+        }
+
+        return back()->with('success-msg', "Your account has been created successfully. Please check your email for activation instructions. Thank you!");
+
     }
 
     /**

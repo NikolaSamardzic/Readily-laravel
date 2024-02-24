@@ -3,14 +3,23 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+/**
+ * Post
+ *
+ * @mixin Eloquent
+ */
 
 class User extends Authenticatable
 {
@@ -22,9 +31,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'username',
         'email',
         'password',
+        'phone',
+        'token',
+        'address_id',
+        'role_id',
     ];
 
     /**
@@ -34,7 +49,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
@@ -46,6 +60,31 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function createUser($data, $addressId) : User
+    {
+        try {
+            $token = bin2hex(random_bytes(10));
+
+            $user = self::create([
+                'first_name' => $data['first-name-input'],
+                'last_name' => $data['last-name-input'],
+                'username' => $data['username-input'],
+                'email' => $data['email-input'],
+                'password' => Hash::make($data['password-input'], [
+                    'salt' => env('SALT_STRING'),
+                ]),
+                'phone' => $data['phone-input'],
+                'token' => $token,
+                'address_id' => $addressId,
+                'role_id' => $data['role-input']
+            ]);
+
+            return $user;
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
 
 
     public function biography() : HasOne

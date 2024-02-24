@@ -24,8 +24,8 @@
 @endsection
 
 @section('mainContent')
-    <form class="sign-up-container" id="sign-up-form" enctype="multipart/form-data" name="signup-form" action="{{route('users.create')}}" method="post">
-
+    <form class="sign-up-container" id="sign-up-form" enctype="multipart/form-data" name="signup-form" action="{{route('users.store')}}" onsubmit="return sendSignupData()" method="post">
+        @csrf
         <h2>Personal info</h2>
 
         <div id="user-avatar-placeholder-js" class="user-avatar-placeholder">
@@ -38,7 +38,7 @@
             inputId="user-avatar-js"
             inputClass="user-avatar"
             idError="avatar-error"
-            error="Please upload an image with a maximum size of 700KB and in one of the following formats: jpg, jpeg, or png for your avatar."
+            error="Please upload an image with a maximum size of 700KB and in one of the following formats: jpg or png for your avatar."
         />
 
         <div class="info-container-grid personal-info-container-grid">
@@ -237,9 +237,24 @@
         </div>
 
         <div class="server-messages">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li><p class="error-message">{{ $error }}</p></li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if(session('success-msg'))
+                <p class="success-message">
+                    {{ session('success-msg') }}
+                </p>
+            @endif
         </div>
 
-        <input type="button" id="create-account-button" value="Create Account">
+        <input type="submit" id="create-account-button" value="Create Account">
 
     </form>
 
