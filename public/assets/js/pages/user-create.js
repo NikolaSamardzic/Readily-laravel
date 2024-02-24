@@ -102,7 +102,7 @@ function sendSignupData(){
         errorCount += checkInputElementWithRegex(/^\d{5,15}$/,'zip-code-input-js','zip-code-error');
     }
 
-    return errorCount;
+    return !errorCount;
 }
 
 function clearAllInputValues(){

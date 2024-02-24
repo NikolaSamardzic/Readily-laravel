@@ -238,7 +238,7 @@
 
         <div class="server-messages">
             @if ($errors->any())
-                <div class="alert alert-danger">
+                <div>
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li><p class="error-message">{{ $error }}</p></li>

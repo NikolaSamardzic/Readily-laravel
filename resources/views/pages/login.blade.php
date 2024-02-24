@@ -25,7 +25,7 @@
 @section('mainContent')
 
     <section id="log-in-section">
-        <form name="login-form" id="login-form" action="{{route('login.submit')}}" method="POST">
+        <form name="login-form" id="login-form" action="{{route('login.submit')}}" onsubmit="return sendLoginData()" method="POST">
             @csrf
             <h2>LOG IN</h2>
 
@@ -56,7 +56,11 @@
 
             </div>
 
-            <div class="server-messages"></div>
+            <div class="server-messages">
+                @if (session('error-msg'))
+                    <p class="error-message">{{ session('error-msg') }}</p>
+                @endif
+            </div>
 
             <input type="submit" value="Submit" id="log-in-button">
 

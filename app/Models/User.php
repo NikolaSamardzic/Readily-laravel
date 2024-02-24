@@ -96,6 +96,11 @@ class User extends Authenticatable
         $user->save();
     }
 
+    public static function getUserByUsername(mixed $username)
+    {
+        return self::where('username', $username)->first();
+    }
+
 
     public function biography() : HasOne
     {
