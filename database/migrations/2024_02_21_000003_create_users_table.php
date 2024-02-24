@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone');
             $table->string('token');
-            $table->boolean('is_banned');
+            $table->boolean('is_banned')->default(0);
             $table->unsignedBigInteger('address_id')->nullable();
             $table->foreign('address_id')->references('id')->on('addresses');
             $table->unsignedBigInteger('role_id');
