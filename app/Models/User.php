@@ -86,6 +86,16 @@ class User extends Authenticatable
         }
     }
 
+    public static function activate(string $token)
+    {
+        $user = self::where('token', $token)->first();
+
+        if (!$user) return;
+
+        $user['email_verified_at'] = now();
+        $user->save();
+    }
+
 
     public function biography() : HasOne
     {

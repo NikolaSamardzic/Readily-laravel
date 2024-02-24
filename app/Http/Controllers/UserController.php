@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Mail\SignUp;
 use App\Models\Address;
 use App\Models\Avatar;
 use App\Models\Biography;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use function PHPUnit\Framework\isNan;
 
 
@@ -69,6 +71,8 @@ class UserController extends StandardController
             return redirect()->back()->with('error-msg', 'An error has occurred, please try again later.');
         }
 
+        $link = $user['token'];
+        Mail::to('pp5104133@gmail.com')->send(new SignUp($link));
         return back()->with('success-msg', "Your account has been created successfully. Please check your email for activation instructions. Thank you!");
 
     }
@@ -103,5 +107,19 @@ class UserController extends StandardController
     public function destroy(string $id)
     {
         //
+    }
+
+    public function activate(string $token){
+
+        try {
+            DB::beginTransaction();
+            User::activate($token);
+            DB::commit();
+            return redirect()->route('login.index');
+        }catch (\Exception $e){
+            DB::rollBack();
+        }
+
+        return view('pages.user.create', ['data' => $this->data]);
     }
 }

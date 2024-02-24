@@ -29,7 +29,7 @@ use Illuminate\Validation\Validator;
             'last-name-input' => 'required|string|regex:/^[A-ZŠĐĆČŽ][a-zšđčćž]{2,}( [A-ZŠĐĆČŽ][a-zšđčćž]{2,})*$/',
             'username-input' => 'required|string|regex:/^[a-zA-Z0-9.šđžćčČĆŠĐŽ()\/\-_]{5,}$/|unique:users,username',
             'password-input' => 'required|string|regex:/^(?=.*[a-zšđčćž])(?=.*[A-ZČĆŽŠĐ])(?=.*\d)(?=.*[._()\/\-])[A-ZŠĐĆŽČa-zšđčćž\d._()\/\-]{5,}$/',
-            'email-input' => 'required|email:rfc|unique:users,email',
+            'email-input' => 'required|email:rfc',
             'phone-input' => 'required|string|regex:/^\d{5,15}$/',
             'role-input' =>  ['required', Rule::in(['2', '3']),],
             'biography-input' =>  'nullable|regex:/(\s.*){4,}/',
