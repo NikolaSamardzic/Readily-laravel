@@ -22,4 +22,4 @@ Route::post('/login', [LoginController::class,'login'])->name('login.submit');
 Route::get('/users/{token}/activate', [UserController::class,'activate'])->where('token', '[a-zA-Z0-9]+')->name('users.activate');
 Route::get('/users/create', [UserController::class,'create'])->name('users.create');
 Route::post('/users', [UserController::class,'store'])->name('users.store');
-
+Route::get('/users/{id}', [UserController::class,'show'])->name('users.show');

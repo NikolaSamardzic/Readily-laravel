@@ -82,7 +82,7 @@ class UserController extends StandardController
      */
     public function show(string $id)
     {
-        //
+        dd('user profile');
     }
 
     /**

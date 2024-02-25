@@ -8,6 +8,13 @@
 
         <div id="icons-container">
 
+            @auth()
+                <div>
+                    <a href="{{route('users.show',['id'=>auth()->id()])}}">
+                        <img src="{{asset('assets/images/avatars')}}/@if(auth()->user()->avatar) {{auth()->user()->avatar['src']}} @else{{'default-avatar.jpg'}}@endif" alt="user avatar">
+                    </a>
+                </div>
+            @endauth
 
             <i class="fa-solid fa-moon" id="dark-mode-icon" style="display: none;"></i>
             <i class="fa-solid fa-sun" id="light-mode-icon" style="display: block;"></i>
