@@ -17,7 +17,7 @@ class LinkPositionsTableSeeder extends Seeder
     {
         $now = now();
         foreach ($this->positions as $position) {
-            DB::table('link_targets')->insert([
+            DB::table('link_positions')->insert([
                 'name' => $position,
                 'created_at' => $now,
                 'updated_at' => $now

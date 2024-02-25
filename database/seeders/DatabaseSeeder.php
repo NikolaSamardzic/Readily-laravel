@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
 
-        //$this->call(::class);
+        $this->call(UserTableSeeder::class);
+
+        $this->call(LinksTableSeeder::class);
+        $this->call(LinkLinkPositionSeeder::class);
+        $this->call(LinkRoleSeeder::class);
     }
 }

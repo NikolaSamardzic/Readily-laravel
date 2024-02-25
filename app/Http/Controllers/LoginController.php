@@ -15,7 +15,6 @@ class LoginController extends StandardController
 
 
     public function login(Request $request){
-        //dd($request->all());
         $username = $request['username-input'];
         $password = $request['password-input'];
 
@@ -29,7 +28,6 @@ class LoginController extends StandardController
         }
         Auth::login($user);
 
-        //dd(Auth::user()['role_id']);
         return redirect()->route('home');
     }
 }

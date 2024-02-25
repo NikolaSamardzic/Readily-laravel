@@ -2,34 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Link;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StandardController extends Controller
 {
     public array $data;
 
-
+    protected $links;
+    private $roleId;
     public function __construct()
     {
+        $this->roleId = Auth::user() ? Auth::user()['role_id'] : 4;
+        $this->links = Link::headerLinksForUserRole($this->roleId);
 
-        $this->data['links'] = [
-            [
-                "href" => "http://127.0.0.1:8000",
-                "name" => "Home"
-            ],
-            [
-                "href" => "http://127.0.0.1:8000/shop",
-                "name" => "Shop"
-            ],
-            [
-                "href" => "http://127.0.0.1:8000/users/create",
-                "name" => "Sing Up"
-            ],
-            [
-                "href" => "http://127.0.0.1:8000/login",
-                "name" => "Log in"
-            ]
-        ];
+        $this->data['links'] = $this->links;
 
 
         $this->data['footer'] = [
