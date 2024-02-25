@@ -30,4 +30,9 @@ class LoginController extends StandardController
 
         return redirect()->route('home');
     }
+
+    public function logout(Request $request){
+        Auth::logout();
+        return redirect()->route('home');
+    }
 }
