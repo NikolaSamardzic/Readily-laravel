@@ -23,3 +23,13 @@ Route::get('/users/{token}/activate', [UserController::class,'activate'])->where
 Route::get('/users/create', [UserController::class,'create'])->name('users.create');
 Route::post('/users', [UserController::class,'store'])->name('users.store');
 Route::get('/users/{id}', [UserController::class,'show'])->name('users.show');
+
+Route::get('/sitemap',function (){
+    return redirect(asset('assets/sitemap.xml'));
+})->name('sitemap.show');
+Route::get('/documentation',function (){
+    return redirect(asset('assets/documentation.pdf'));
+} )->name('documentation');
+Route::get('/rss',function (){
+    return redirect(asset('assets/rss.xml'));
+} )->name('rss');

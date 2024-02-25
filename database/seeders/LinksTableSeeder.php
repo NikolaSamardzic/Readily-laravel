@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Route;
 class LinksTableSeeder extends Seeder
 {
     /**
@@ -20,13 +20,13 @@ class LinksTableSeeder extends Seeder
         ['name'=>'Log out', 'href'=>'login.logout', 'appearance_order'=>6, 'link_target_id' =>1, 'link_type_id'=>1],
         ['name'=>'Home', 'href'=>'home', 'appearance_order'=>2, 'link_target_id' =>1, 'link_type_id'=>1],
         ['name'=>'Author', 'href'=>'home', 'appearance_order'=>8, 'link_target_id' =>1, 'link_type_id'=>3],
-        ['name'=>'Documentation', 'href'=>'home', 'appearance_order'=>9, 'link_target_id' =>2, 'link_type_id'=>3],
-        ['name'=>'RSS', 'href'=>'home', 'appearance_order'=>11, 'link_target_id' =>2, 'link_type_id'=>3],
-        ['name'=>'Sitemap', 'href'=>'home', 'appearance_order'=>12, 'link_target_id' =>2, 'link_type_id'=>3],
-        ['name'=>'Facebook', 'href'=>'home', 'appearance_order'=>13, 'link_target_id' =>2, 'link_type_id'=>2],
-        ['name'=>'Instagram', 'href'=>'home', 'appearance_order'=>14, 'link_target_id' =>2, 'link_type_id'=>2],
-        ['name'=>'Twitter', 'href'=>'home', 'appearance_order'=>15, 'link_target_id' =>2, 'link_type_id'=>2],
-        ['name'=>'Github', 'href'=>'home', 'appearance_order'=>10, 'link_target_id' =>2, 'link_type_id'=>3],
+        ['name'=>'Documentation', 'href'=>'documentation', 'appearance_order'=>9, 'link_target_id' =>2, 'link_type_id'=>3],
+        ['name'=>'RSS', 'href'=>'rss', 'appearance_order'=>11, 'link_target_id' =>2, 'link_type_id'=>3],
+        ['name'=>'Sitemap', 'href'=>'sitemap', 'appearance_order'=>12, 'link_target_id' =>2, 'link_type_id'=>3],
+        ['name'=>'Facebook', 'href'=>'https://www.facebook.com/', 'appearance_order'=>13, 'link_target_id' =>2, 'link_type_id'=>2],
+        ['name'=>'Instagram', 'href'=>'https://www.instagram.com/', 'appearance_order'=>14, 'link_target_id' =>2, 'link_type_id'=>2],
+        ['name'=>'Twitter', 'href'=>'https://twitter.com/', 'appearance_order'=>15, 'link_target_id' =>2, 'link_type_id'=>2],
+        ['name'=>'Github', 'href'=>'https://github.com/NikolaSamardzic/Readilyph', 'appearance_order'=>10, 'link_target_id' =>2, 'link_type_id'=>3],
     ];
 
     public function run(): void
@@ -35,7 +35,7 @@ class LinksTableSeeder extends Seeder
         foreach ($this->links as $link) {
             DB::table('links')->insert([
                 'name' => $link['name'],
-                'href' => $link['href'],
+                'href' =>  Route::has($link['href']) ? route($link['href'],[],false) : $link['href'],
                 'appearance_order' => $link['appearance_order'],
                 'link_target_id' => $link['link_target_id'],
                 'link_type_id' => $link['link_type_id'],
