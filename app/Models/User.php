@@ -99,7 +99,9 @@ class User extends Authenticatable
 
     public static function getUserByUsername(mixed $username)
     {
-        return self::where('username', $username)->first();
+        return self::where('username', $username)
+            ->whereNotNull('email_verified_at')
+            ->first();
     }
 
 
