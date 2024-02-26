@@ -450,6 +450,123 @@ footer {
   color: var(--text-color-regular-const);
 }
 
+#log-in-section {
+  width: 100%;
+  min-height: calc(100vh - 50px);
+  max-height: fit-content;
+}
+
+#log-in-section {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+#login-form {
+  width: 300px;
+  padding: 3rem 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-book-shadow);
+  background-color: var(--gray-bg-color);
+}
+#login-form h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: var(--text-color-heading);
+}
+#login-form #log-in-container {
+  width: 100%;
+  padding-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto auto auto auto;
+  grid-template-areas: "username-title" "username-input" "username-error" "password-title" "password-input" "password-error";
+}
+#login-form #log-in-container #username-title {
+  grid-area: username-title;
+}
+#login-form #log-in-container #sername-input-js {
+  grid-area: sername-input;
+}
+#login-form #log-in-container #username-error {
+  grid-area: username-error;
+}
+#login-form #log-in-container #password-title {
+  grid-area: password-title;
+}
+#login-form #log-in-container #password-input-js {
+  grid-area: password-input;
+}
+#login-form #log-in-container #password-error {
+  grid-area: password-error;
+}
+#login-form .input-title {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+  color: var(--text-color-heading);
+}
+#login-form input {
+  height: 2rem;
+  font-size: 1.25rem;
+}
+#login-form #log-in-button {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  padding: 0.3rem 0.6rem;
+  border: unset;
+  border-radius: 3px;
+  outline: none;
+  background-color: var(--background-color-header-const);
+  color: var(--text-color-heading-const);
+}
+#login-form #log-in-button:hover {
+  cursor: pointer;
+  background-color: var(--background-color-hover-const);
+}
+
+#user-profile-section {
+  width: 100%;
+  min-height: calc(100vh - 50px);
+}
+#user-profile-section .user-information {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: var(--text-color-heading);
+}
+#user-profile-section .input-title {
+  color: var(--text-color-regular);
+}
+
+#writter-option-wrapper {
+  width: 800px;
+  margin: 0 auto;
+  margin-bottom: 5rem;
+}
+@media (max-width: 940px) {
+  #writter-option-wrapper {
+    width: 100%;
+    padding-left: 0.5rem;
+  }
+}
+#writter-option-wrapper .admin-option-container {
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 1200px) {
+  #writter-option-wrapper .admin-option-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 650px) {
+  #writter-option-wrapper .admin-option-container {
+    grid-template-columns: 1fr;
+  }
+}
+
 #sign-up-body {
   min-height: 100vh;
   max-height: fit-content;
@@ -477,7 +594,7 @@ footer {
   color: var(--text-color-heading);
 }
 
-input, .user-information {
+input, .user-information, a {
   height: 2rem;
   font-size: 1.25rem;
 }
@@ -486,7 +603,7 @@ input, .user-information {
   display: flex;
   justify-content: end;
 }
-.button-option-container input {
+.button-option-container input, .button-option-container a {
   height: unset;
   margin-left: 1rem;
   padding: 0.3rem 0.6rem;
@@ -495,7 +612,7 @@ input, .user-information {
   outline: none;
   background-color: unset;
 }
-.button-option-container input:hover {
+.button-option-container input:hover, .button-option-container a:hover {
   cursor: pointer;
 }
 
@@ -730,123 +847,6 @@ textarea {
 }
 .sign-up-container p {
   height: auto !important;
-}
-
-#log-in-section {
-  width: 100%;
-  min-height: calc(100vh - 50px);
-  max-height: fit-content;
-}
-
-#log-in-section {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-}
-
-#login-form {
-  width: 300px;
-  padding: 3rem 0.5rem;
-  border-radius: 5px;
-  border: 1px solid var(--border-book-shadow);
-  background-color: var(--gray-bg-color);
-}
-#login-form h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 3rem;
-  color: var(--text-color-heading);
-}
-#login-form #log-in-container {
-  width: 100%;
-  padding-bottom: 1rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto auto auto auto;
-  grid-template-areas: "username-title" "username-input" "username-error" "password-title" "password-input" "password-error";
-}
-#login-form #log-in-container #username-title {
-  grid-area: username-title;
-}
-#login-form #log-in-container #sername-input-js {
-  grid-area: sername-input;
-}
-#login-form #log-in-container #username-error {
-  grid-area: username-error;
-}
-#login-form #log-in-container #password-title {
-  grid-area: password-title;
-}
-#login-form #log-in-container #password-input-js {
-  grid-area: password-input;
-}
-#login-form #log-in-container #password-error {
-  grid-area: password-error;
-}
-#login-form .input-title {
-  font-size: 1.25rem;
-  margin-top: 1rem;
-  margin-bottom: 0.3rem;
-  font-weight: 500;
-  color: var(--text-color-heading);
-}
-#login-form input {
-  height: 2rem;
-  font-size: 1.25rem;
-}
-#login-form #log-in-button {
-  display: block;
-  height: auto;
-  margin: 0 auto;
-  padding: 0.3rem 0.6rem;
-  border: unset;
-  border-radius: 3px;
-  outline: none;
-  background-color: var(--background-color-header-const);
-  color: var(--text-color-heading-const);
-}
-#login-form #log-in-button:hover {
-  cursor: pointer;
-  background-color: var(--background-color-hover-const);
-}
-
-#user-profile-section {
-  width: 100%;
-  min-height: calc(100vh - 50px);
-}
-#user-profile-section .user-information {
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: var(--text-color-heading);
-}
-#user-profile-section .input-title {
-  color: var(--text-color-regular);
-}
-
-#writter-option-wrapper {
-  width: 800px;
-  margin: 0 auto;
-  margin-bottom: 5rem;
-}
-@media (max-width: 940px) {
-  #writter-option-wrapper {
-    width: 100%;
-    padding-left: 0.5rem;
-  }
-}
-#writter-option-wrapper .admin-option-container {
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-@media (max-width: 1200px) {
-  #writter-option-wrapper .admin-option-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media (max-width: 650px) {
-  #writter-option-wrapper .admin-option-container {
-    grid-template-columns: 1fr;
-  }
 }
 
 #admin-section {

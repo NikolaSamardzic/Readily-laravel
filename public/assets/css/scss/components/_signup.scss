@@ -27,7 +27,7 @@
 }
 
 
-input,.user-information{
+input,.user-information, a{
     height: 2rem;
     font-size: size(size-body);
 }
@@ -36,7 +36,7 @@ input,.user-information{
     display: flex;
     justify-content: end;
 
-    input{
+    input, a{
         height: unset;
         margin-left: 1rem;
 

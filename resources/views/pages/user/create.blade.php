@@ -24,6 +24,14 @@
 @endsection
 
 @section('mainContent')
+    <x-fixed.phone-navigation>
+        @foreach($data['links'] as $link)
+            <x-fixed.navigation-link
+                :href="$link['href']"
+                :name="$link['name']" />
+        @endforeach
+    </x-fixed.phone-navigation>
+
     <form class="sign-up-container" id="sign-up-form" enctype="multipart/form-data" name="signup-form" action="{{route('users.store')}}" onsubmit="return sendSignupData()" method="post">
         @csrf
         <h2>Personal info</h2>

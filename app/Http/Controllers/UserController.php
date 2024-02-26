@@ -80,9 +80,11 @@ class UserController extends StandardController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        dd('user profile');
+        $this->data['user'] = $user;
+        return view('pages.user.show', ['data' => $this->data]);
+
     }
 
     /**
@@ -90,7 +92,7 @@ class UserController extends StandardController
      */
     public function edit(string $id)
     {
-        //
+        dd('edit');
     }
 
     /**
@@ -106,7 +108,7 @@ class UserController extends StandardController
      */
     public function destroy(string $id)
     {
-        //
+        dd('radi');
     }
 
     public function activate(string $token){

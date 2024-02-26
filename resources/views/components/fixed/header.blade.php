@@ -10,7 +10,7 @@
 
             @auth()
                 <div>
-                    <a href="{{route('users.show',['id'=>auth()->id()])}}">
+                    <a href="{{route('users.show',['user'=>auth()->id()])}}">
                         <img src="{{asset('assets/images/avatars')}}/@if(auth()->user()->avatar){{auth()->user()->avatar['src']}}@else{{'default-avatar.jpg'}}@endif" alt="user avatar">
                     </a>
                 </div>
