@@ -106,9 +106,10 @@ class UserController extends StandardController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        dd('radi');
+        $user->delete();
+        return redirect()->route('home');
     }
 
     public function activate(string $token){

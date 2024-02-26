@@ -1,35 +1,6 @@
 console.log("readily.com/users/{id}")
 
-setUserAccount();
 setUpdateUserForm();
-
-function setUserAccount(){
-    $(document).on('click','#update-account-button',()=>{
-        document.getElementById('user-data').style.display = 'none';
-        document.getElementById('update-user-form').style.display = 'block';
-
-        clearAllServerMessages('success-server-messages');
-
-
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    $(document).on('click','#cancel-account-button',()=>{
-        setUserData();
-
-        document.getElementById('user-data').style.display = 'block';
-        document.getElementById('update-user-form').style.display = 'none';
-
-
-        clearAllServerMessages('error-server-messages');
-        clearAllInputErrors();
-    });
-
-    $(document).on('click','#delete-account-button',deleteUser)
-}
 
 function setUpdateUserForm(){
     $(document).on('change','#user-avatar-js',uploadAvatar);
@@ -144,29 +115,7 @@ function setUserData(){
 
 
 function deleteUser(){
-    if(window.confirm("This account will be permanently deleted.")){
-        let userId = document.getElementById('user-id').value;
-        let data = {
-            userId : userId
-        }
-        $.ajax({
-            url: 'models/user/delete-user.php',
-            type: 'POST',
-            dataType:'json',
-            data: data,
-            success: function() {
-                window.location.href = 'index.php?page=home';
-            },
-            error: function(xhr, status, errorThrown) {
-                let messages = JSON.parse(xhr.responseText);
-                displayServerMessages('server-messages',messages,'error-message');
-
-                console.log(messages)
-                console.log(xhr);
-                console.log(status, errorThrown);
-            }
-        });
-    }
+    return window.confirm("This account will be permanently deleted.")
 }
 
 function saveUpdatedUserData(){

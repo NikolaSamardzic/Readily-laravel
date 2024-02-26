@@ -97,7 +97,7 @@
             </div>
 
             <div class="button-option-container">
-                <form action="{{route('users.destroy',['id'=>$data['user']->id])}}" method="POST">
+                <form action="{{route('users.destroy',['user'=>$data['user']->id])}}" onsubmit="return deleteUser()" method="POST">
                     @csrf
                     @method('DELETE')
                     <input type="submit" class="danger-option" id="delete-account-button" value="Delete">

@@ -45,6 +45,13 @@ class UserTableSeeder extends Seeder
             'address_id' => null,
             'role_id' => 3,
         ],
+        [
+        'first_name' => 'Test',
+        'last_name' => 'Test',
+        'username' => 'Test123',
+        'address_id' => null,
+        'role_id' => 2,
+        ],
     ];
 
     public function run(): void
