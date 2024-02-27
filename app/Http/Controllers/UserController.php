@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UserRequest;
 use App\Mail\SignUp;
 use App\Models\Address;
 use App\Models\Avatar;
@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use function PHPUnit\Framework\isNan;
-
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Link;
 class UserController extends StandardController
 {
     /**
@@ -22,7 +22,7 @@ class UserController extends StandardController
      */
     public function index()
     {
-        //
+        $this->getLinks();
     }
 
     /**
@@ -30,13 +30,14 @@ class UserController extends StandardController
      */
     public function create()
     {
+        $this->getLinks();
         return view('pages.user.create', ['data' => $this->data]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateUserRequest $request)
+    public function store(UserRequest $request)
     {
         $userData = $request->only('first-name-input', 'last-name-input', 'username-input', 'password-input', 'email-input','phone-input','role-input');
 
@@ -82,6 +83,7 @@ class UserController extends StandardController
      */
     public function show(User $user)
     {
+        $this->getLinks();
         $this->data['user'] = $user;
         return view('pages.user.show', ['data' => $this->data]);
 
@@ -90,9 +92,11 @@ class UserController extends StandardController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        dd('edit');
+        $this->getLinks();
+        $this->data['user'] = $user;
+        return view('pages.user.edit', ['data' => $this->data]);
     }
 
     /**

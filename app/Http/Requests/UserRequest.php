@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
-    class CreateUserRequest extends FormRequest
+    class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -94,7 +94,7 @@ use Illuminate\Validation\Validator;
             'password-input' => 'Your password must be at least 5 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character from the set of periods, parentheses, forward slashes, hyphens, and underscores (' . ',  \'_\', \'-\',  \'/\', \'()\').',
             'email-input' => 'Incorrect format for email (ex. jhonsmith@gmail.com)',
             'phone-input' => 'Incorrect format for phone (ex. 0611234567)',
-            'role-input' => 'Role doesn\'t exist',
+            'role-input' => "Role doesn't exist",
             'biography-input' => 'There must be at least 5 words for your biography',
             'address-line-input' => 'Please enter a valid address name.',
             'number-input' => 'Please enter a valid address number.',

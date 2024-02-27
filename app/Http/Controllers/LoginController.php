@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends StandardController
 {
     public function index(){
+        $this->getLinks();
         return view('pages.login', ['data' => $this->data]);
     }
 

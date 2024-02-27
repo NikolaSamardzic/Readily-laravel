@@ -221,6 +221,8 @@ class HomeController extends StandardController
 
     public function index()
     {
+        $this->getLinks();
+
         return view('pages.home', ['data' => $this->data]);
     }
 }

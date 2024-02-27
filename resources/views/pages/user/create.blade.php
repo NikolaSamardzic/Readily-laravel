@@ -62,6 +62,7 @@
                 classInput="first-name-input"
                 idError="first-name-error"
                 error="Incorrect format (ex. Joe)"
+                inputValue="{{old('first-name-input')}}"
             />
 
             <x-form.input
@@ -71,6 +72,7 @@
                 label="Last Name"
                 inputType="text"
                 inputName="last-name-input"
+                inputValue="{{old('last-name-input')}}"
                 idInput="last-name-input-js"
                 classInput="last-name-input"
                 idError="last-name-error"
@@ -84,6 +86,7 @@
                 label="Username"
                 inputType="text"
                 inputName="username-input"
+                inputValue="{{old('username-input')}}"
                 idInput="username-input-js"
                 classInput="username-input"
                 idError="username-error"
@@ -97,6 +100,7 @@
                 label="Password"
                 inputType="password"
                 inputName="password-input"
+                inputValue="{{old('password-input')}}"
                 idInput="password-input-js"
                 classInput="password-input"
                 idError="password-error"
@@ -110,6 +114,7 @@
                 label="Email"
                 inputType="email"
                 inputName="email-input"
+                inputValue="{{old('email-input')}}"
                 idInput="email-input-js"
                 classInput="email-input"
                 idError="email-error"
@@ -123,6 +128,7 @@
                 label="Phone"
                 inputType="number"
                 inputName="phone-input"
+                inputValue="{{old('phone-input')}}"
                 idInput="phone-input-js"
                 classInput="phone-input"
                 idError="phone-error"
@@ -140,8 +146,8 @@
                 idError="role-error"
                 error="Role doesn't exist"
             >
-                <option value="2" selected>Customer</option>
-                <option value="3">Writer</option>
+                <option value="2" @if(old('role-input')==2){{'selected'}}@endif>Customer</option>
+                <option value="3" @if(old('role-input')==3){{'selected'}}@endif>Writer</option>
             </x-form.select>
 
 
@@ -170,6 +176,7 @@
                 label="Address line"
                 inputType="text"
                 inputName="address-line-input"
+                inputValue="{{old('address-line-input')}}"
                 idInput="address-line-input-js"
                 classInput="address-line-input"
                 idError="address-line-error"
@@ -183,6 +190,7 @@
                 label="Number"
                 inputType="text"
                 inputName="number-input"
+                inputValue="{{old('number-input')}}"
                 idInput="number-input-js"
                 classInput="number-input"
                 idError="number-error"
@@ -196,6 +204,7 @@
                 label="City"
                 inputType="text"
                 inputName="city-input"
+                inputValue="{{old('city-input')}}"
                 idInput="city-input-js"
                 classInput="city-input"
                 idError="city-error"
@@ -209,6 +218,7 @@
                 label="State"
                 inputType="text"
                 inputName="state-input"
+                inputValue="{{old('state-input')}}"
                 idInput="state-input-js"
                 classInput="state-input"
                 idError="state-error"
@@ -222,6 +232,7 @@
                 label="Zip-code"
                 inputType="text"
                 inputName="zip-code-input"
+                inputValue="{{old('zip-code-input')}}"
                 idInput="zip-code-input-js"
                 classInput="zip-code-input"
                 idError="zip-code-error"
@@ -235,6 +246,7 @@
                 label="Country"
                 inputType="text"
                 inputName="country-input"
+                inputValue="{{old('country-input')}}"
                 idInput="country-input-js"
                 classInput="country-input"
                 idError="country-error"
@@ -245,7 +257,7 @@
         </div>
 
         <div class="server-messages">
-            @if ($errors->any())
+            @if($errors->any())
                 <div>
                     <ul>
                         @foreach ($errors->all() as $error)
