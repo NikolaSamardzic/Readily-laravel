@@ -32,12 +32,19 @@
         @endforeach
     </x-fixed.phone-navigation>
 
-    <form class="sign-up-container" id="sign-up-form" enctype="multipart/form-data" name="signup-form" action="{{route('users.store')}}" onsubmit="return sendSignupData()" method="post">
-        @csrf
+
+<section id="user-profile-section">
+    <form onsubmit="return saveUpdatedUserData()"  class="sign-up-container" id="update-user-form" enctype="multipart/form-data" name="signup-form" action="{{route('users.update',['user' => $data['user']])}}" method="post" >
+    @csrf
+    @method('PUT')
+
+        <input type="text" name="user-id" value="{{$data['user']['id']}}" hidden/>
+        <input type="text" name="user-role" id="role-input" value="{{$data['user']['role_id']}}" hidden/>
+
         <h2>Personal info</h2>
 
         <div id="user-avatar-placeholder-js" class="user-avatar-placeholder">
-            <img src="{{asset('assets/images/avatars/default-avatar.jpg')}}" id="user-avatar-img" alt="user avatar">
+            <img src="{{asset('assets/images/avatars')}}/@if($data['user']->avatar['src']){{$data['user']->avatar['src']}}@else{{'default-avatar.jpg'}}@endif" id="user-avatar-img" alt="user avatar">
         </div>
         <p class="upload-avatar-text">upload avatar</p>
 
@@ -48,6 +55,7 @@
             idError="avatar-error"
             error="Please upload an image with a maximum size of 700KB and in one of the following formats: jpg or png for your avatar."
         />
+
 
         <div class="info-container-grid personal-info-container-grid">
 
@@ -62,7 +70,7 @@
                 classInput="first-name-input"
                 idError="first-name-error"
                 error="Incorrect format (ex. Joe)"
-                inputValue="{{old('first-name-input')}}"
+                inputValue="{{old('first-name-input') != null ? old('first-name-input') : $data['user']['first_name']}}"
             />
 
             <x-form.input
@@ -72,12 +80,14 @@
                 label="Last Name"
                 inputType="text"
                 inputName="last-name-input"
-                inputValue="{{old('last-name-input')}}"
+                inputValue="{{old('last-name-input') != null ? old('last-name-input') : $data['user']['last_name']}}"
                 idInput="last-name-input-js"
                 classInput="last-name-input"
                 idError="last-name-error"
                 error="Incorrect format (ex. Smith)"
             />
+
+
 
             <x-form.input
                 for="username-input-js"
@@ -86,25 +96,11 @@
                 label="Username"
                 inputType="text"
                 inputName="username-input"
-                inputValue="{{old('username-input')}}"
+                inputValue="{{old('username-input') != null ? old('username-input') : $data['user']['username']}}"
                 idInput="username-input-js"
                 classInput="username-input"
                 idError="username-error"
                 error="Your username must be at least 5 characters long and can only contain letters, numbers, periods, parentheses, forward slashes, hyphens, and underscores."
-            />
-
-            <x-form.input
-                for="password-input-js"
-                idLabel="password-title"
-                classLabel="input-title"
-                label="Password"
-                inputType="password"
-                inputName="password-input"
-                inputValue="{{old('password-input')}}"
-                idInput="password-input-js"
-                classInput="password-input"
-                idError="password-error"
-                error="Your password must be at least 5 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character from the set of periods, parentheses, forward slashes, hyphens, and underscores (' . ',  '_', '-',  '/', '()')."
             />
 
             <x-form.input
@@ -114,7 +110,7 @@
                 label="Email"
                 inputType="email"
                 inputName="email-input"
-                inputValue="{{old('email-input')}}"
+                inputValue="{{old('email-input') != null ? old('email-input') : $data['user']['email']}}"
                 idInput="email-input-js"
                 classInput="email-input"
                 idError="email-error"
@@ -128,28 +124,15 @@
                 label="Phone"
                 inputType="number"
                 inputName="phone-input"
-                inputValue="{{old('phone-input')}}"
+                inputValue="{{old('phone-input') != null ? old('phone-input') : $data['user']['phone']}}"
                 idInput="phone-input-js"
                 classInput="phone-input"
                 idError="phone-error"
                 error="Incorrect format (ex. 0611234567)"
             />
 
-            <x-form.select
-                for="role-input-js"
-                idLabel="role-title"
-                classLabel="input-title"
-                label="Role"
-                selectName="role-input"
-                selectId="role-input-js"
-                selectClass="role-input"
-                idError="role-error"
-                error="Role doesn't exist"
-            >
-                <option value="2" @if(old('role-input')==2){{'selected'}}@endif>Customer</option>
-                <option value="3" @if(old('role-input')==3){{'selected'}}@endif>Writer</option>
-            </x-form.select>
-
+            <p id="role-title" class="input-title ">Role</p>
+            <p id="role-input-js"  class="role-input user-information">{{ucfirst($data['user']->role['name'])}}</p>
 
             <x-form.text-area
                 for="biography-input"
@@ -161,9 +144,8 @@
                 textAreaClass="biography-input"
                 idError="biography-error"
                 error="There must be at least 5 words."
-                textValue="{{old('biography-input')}}"
+                textValue="{{old('biography-input') != null ? old('biography-input') : $data['biography']}}"
             />
-
         </div>
 
         <h2>Address info <br /><span>(optional)</span></h2>
@@ -177,7 +159,7 @@
                 label="Address line"
                 inputType="text"
                 inputName="address-line-input"
-                inputValue="{{old('address-line-input')}}"
+                inputValue="{{old('address-line-input') != null ? old('address-line-input') : $data['addressInformation']['address_name']}}"
                 idInput="address-line-input-js"
                 classInput="address-line-input"
                 idError="address-line-error"
@@ -191,7 +173,7 @@
                 label="Number"
                 inputType="text"
                 inputName="number-input"
-                inputValue="{{old('number-input')}}"
+                inputValue="{{old('number-input') != null ? old('address-number-input') : $data['addressInformation']['address_number']}}"
                 idInput="number-input-js"
                 classInput="number-input"
                 idError="number-error"
@@ -205,7 +187,7 @@
                 label="City"
                 inputType="text"
                 inputName="city-input"
-                inputValue="{{old('city-input')}}"
+                inputValue="{{old('city-input') != null ? old('city-input') : $data['addressInformation']['city']}}"
                 idInput="city-input-js"
                 classInput="city-input"
                 idError="city-error"
@@ -219,7 +201,7 @@
                 label="State"
                 inputType="text"
                 inputName="state-input"
-                inputValue="{{old('state-input')}}"
+                inputValue="{{old('state-input') != null ? old('state-input') : $data['addressInformation']['state']}}"
                 idInput="state-input-js"
                 classInput="state-input"
                 idError="state-error"
@@ -233,7 +215,7 @@
                 label="Zip-code"
                 inputType="text"
                 inputName="zip-code-input"
-                inputValue="{{old('zip-code-input')}}"
+                inputValue="{{old('zip-code-input') != null ? old('zip-code-input') : $data['addressInformation']['zip_code']}}"
                 idInput="zip-code-input-js"
                 classInput="zip-code-input"
                 idError="zip-code-error"
@@ -247,17 +229,15 @@
                 label="Country"
                 inputType="text"
                 inputName="country-input"
-                inputValue="{{old('country-input')}}"
+                inputValue="{{old('country-input') != null ? old('country-input') : $data['addressInformation']['country']}}"
                 idInput="country-input-js"
                 classInput="country-input"
                 idError="country-error"
                 error="Incorrect format (ex.  United States)"
             />
-
-
         </div>
 
-        <div class="server-messages">
+        <div class="server-messages error-server-messages">
             @if($errors->any())
                 <div>
                     <ul>
@@ -275,9 +255,13 @@
             @endif
         </div>
 
-        <input type="submit" id="create-account-button" value="Create Account">
+        <div class="button-option-container">
+            <a href="{{url()->previous()}}" class="danger-option" id="cancel-account-button">Cancel</a>
+            <input type="submit" class="safe-option" id="save-account-button" value="Save">
+        </div>
 
     </form>
+</section>
 
 @endsection
 

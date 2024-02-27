@@ -14,7 +14,7 @@
 @section('header')
     <x-fixed.header>
         <x-fixed.navigation>
-            @foreach($data['links'] as $link)
+            @foreach($headerLinks as $link)
                 <x-fixed.navigation-link
                     :href="$link['href']"
                     :name="$link['name']" />
@@ -25,7 +25,7 @@
 
 @section('mainContent')
     <x-fixed.phone-navigation>
-        @foreach($data['links'] as $link)
+        @foreach($headerLinks as $link)
             <x-fixed.navigation-link
                 :href="$link['href']"
                 :name="$link['name']" />
@@ -70,27 +70,27 @@
             <div  class="info-container-grid address-info-container-grid">
 
                 <p id="address-line-title"  class="input-title">Address line</p>
-                <p  class="address-line-input user-information" >Test</p>
+                <p  class="address-line-input user-information" >@if(isset($data['user']->address)){{$data['user']->address['address_name']}}@else/@endif</p>
 
 
                 <p id="number-title"  class="input-title">Number</p>
-                <p  class="number-input user-information">Test</p>
+                <p  class="number-input user-information">@if(isset($data['user']->address)){{$data['user']->address['address_number']}}@else/@endif</p>
 
 
                 <p id="city-title" class="input-title">City</p>
-                <p  class="city-input user-information" >Test</p>
+                <p  class="city-input user-information" >@if(isset($data['user']->address)){{$data['user']->address['city']}}@else/@endif</p>
 
 
                 <p id="state-title" class="input-title">State</p>
-                <p  class="state-input user-information" >Test</p>
+                <p  class="state-input user-information" >@if(isset($data['user']->address)){{$data['user']->address['state']}}@else/@endif</p>
 
 
                 <p id="zip-code-title" class="input-title ">Zip-code</p>
-                <p  class="zip-code-input user-information">Test</p>
+                <p  class="zip-code-input user-information">@if(isset($data['user']->address)){{$data['user']->address['zip_code']}}@else/@endif</p>
 
 
                 <p id="country-title" class="input-title">Country</p>
-                <p class="user-information country-input" >Test</p>
+                <p class="user-information country-input" >@if(isset($data['user']->address)){{$data['user']->address['country']}}@else/@endif</p>
             </div>
 
             <div class="server-messages success-server-messages">
@@ -114,7 +114,7 @@
     <x-fixed.footer>
 
         <x-slot name="documentLinks">
-            @foreach($data['footer']["documentLinks"] as $link)
+            @foreach($footerLinks["documentLinks"] as $link)
                 <x-fixed.footer-link
                     :href="$link['href']"
                     :name="$link['name']"
@@ -124,7 +124,7 @@
         </x-slot>
 
         <x-slot name="socialMediaLinks">
-            @foreach($data['footer']["socialMediaLinks"] as $link)
+            @foreach($footerLinks["socialMediaLinks"] as $link)
                 <x-fixed.footer-link
                     :href="$link['href']"
                     :name="$link['name']"
@@ -134,7 +134,7 @@
         </x-slot>
 
         <x-slot name="pageLinks">
-            @foreach($data['footer']["pageLinks"] as $link)
+            @foreach($footerLinks["pageLinks"] as $link)
                 <x-fixed.footer-link
                     :href="$link['href']"
                     :name="$link['name']"

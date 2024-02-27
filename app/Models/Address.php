@@ -27,7 +27,7 @@ class Address extends Model
         'country'
     ];
 
-    public static function insertAddress($addressName, $addressNumber, $city, $state, $zipCode, $country) : Address
+    public static function firstOrCreateAddress($addressName, $addressNumber, $city, $state, $zipCode, $country) : Address
     {
         try {
             return self::firstOrCreate([

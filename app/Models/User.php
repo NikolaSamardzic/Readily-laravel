@@ -62,6 +62,38 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public static function updateUser($data, $addressId, $user)
+    {
+        try {
+
+           // dd($user);
+            $user['first_name'] = $data['first-name-input'];
+            $user['last_name'] = $data['last-name-input'];
+            $user['username'] = $data['username-input'];
+            $user['email'] = $data['email-input'];
+            $user['phone'] = $data['phone-input'];
+
+            $user->save();
+//            $user = self::create([
+//                'first_name' => $data['first-name-input'],
+//                'last_name' => $data['last-name-input'],
+//                'username' => $data['username-input'],
+//                'email' => $data['email-input'],
+//                'password' => Hash::make($data['password-input'], [
+//                    'salt' => env('SALT_STRING'),
+//                ]),
+//                'phone' => $data['phone-input'],
+//                'token' => $token,
+//                'address_id' => $addressId,
+//                'role_id' => $data['role-input']
+//            ]);
+
+            return $user;
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
     public static function createUser($data, $addressId) : User
     {
         try {

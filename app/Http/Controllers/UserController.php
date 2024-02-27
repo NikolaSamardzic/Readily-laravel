@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Mail\SignUp;
 use App\Models\Address;
 use App\Models\Avatar;
@@ -22,7 +23,6 @@ class UserController extends StandardController
      */
     public function index()
     {
-        $this->getLinks();
     }
 
     /**
@@ -30,14 +30,13 @@ class UserController extends StandardController
      */
     public function create()
     {
-        $this->getLinks();
-        return view('pages.user.create', ['data' => $this->data]);
+        return view('pages.user.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request)
+    public function store(CreateUserRequest $request)
     {
         $userData = $request->only('first-name-input', 'last-name-input', 'username-input', 'password-input', 'email-input','phone-input','role-input');
 
@@ -83,7 +82,6 @@ class UserController extends StandardController
      */
     public function show(User $user)
     {
-        $this->getLinks();
         $this->data['user'] = $user;
         return view('pages.user.show', ['data' => $this->data]);
 
@@ -94,7 +92,26 @@ class UserController extends StandardController
      */
     public function edit(User $user)
     {
-        $this->getLinks();
+        $biography = "";
+        if(isset($user->biography)) $biography = $user->biography['text'];
+        $this->data['biography'] = $biography;
+
+        $addressName = "";
+        $addressNumber = "";
+        $city = "";
+        $state = "";
+        $zipCode = "";
+        $country = "";
+        if(isset($user->address)){
+            $addressName = $user->address['address_name'];
+            $addressNumber = $user->address['address_number'];
+            $city = $user->address['city'];
+            $state = $user->address['state'];
+            $zipCode = $user->address['zip_code'];
+            $country = $user->address['country'];
+        }
+
+        $this->data['addressInformation'] = ['address_name' => $addressName, 'address_number' => $addressNumber, 'city' => $city, 'state' => $state, 'zip_code'=>$zipCode,'country'=>$country];
         $this->data['user'] = $user;
         return view('pages.user.edit', ['data' => $this->data]);
     }
@@ -102,9 +119,50 @@ class UserController extends StandardController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $userData = $request->only('first-name-input', 'last-name-input', 'username-input', 'email-input','phone-input',);
+
+        try {
+            DB::beginTransaction();
+
+            $address['id'] = null;
+            if(!is_null($request->post('address-line-input'))){
+                $address = Address::firstOrCreateAddress($request->post('address-line-input'), $request->post('number-input'), $request->post('city-input'), $request->post('state-input'), $request->post('zip-code-input'), $request->post('country-input'));
+            }
+
+            $user = User::updateUser($userData, $address['id'], $user);
+
+            if(!is_null($request->post('biography-input'))){
+                Biography::updateBiography($user,$request->post('biography-input'));
+            }
+
+            if(!is_null($request->file('user-avatar'))){
+                if(isset($user->avatar)){
+                    $oldAvatarName = $user->avatar['src'];
+                    $imageName = time() . '.' . $request->file('user-avatar')->extension();
+                    Avatar::updateAvatar($user,$imageName);
+                    $request->file('user-avatar')->move(public_path('assets/images/avatars'), $imageName);
+                    File::delete(public_path('/assets/images/avatars/' . $oldAvatarName));
+                }else{
+                    $imageName = time() . '.' . $request->file('user-avatar')->extension();
+                    Avatar::createAvatar($user['id'],$imageName);
+                    $request->file('user-avatar')->move(public_path('assets/images/avatars'), $imageName);
+                }
+            }
+
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            if(isset($imageName) && File::exists(public_path('/assets/images/avatars/' . $imageName))){
+                File::delete(public_path('/assets/images/avatars/' . $imageName));
+            }
+
+            return redirect()->back()->with('error-msg', 'An error has occurred, please try again later.');
+        }
+
+        return back()->with('success-msg', "Your account has been updated successfully!");
     }
 
     /**

@@ -15,6 +15,16 @@ class Biography extends Model
         'user_id',
     ];
 
+    public static function updateBiography($user, string $biographyText)
+    {
+        try {
+            $user->biography['biography_text'] = $biographyText;
+            $user->biography()->save();
+        }catch (\Exception $e){
+            throw $e;
+        }
+    }
+
     public static function createBiography(mixed $id, string $biographyText)
     {
         try {

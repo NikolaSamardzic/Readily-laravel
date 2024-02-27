@@ -20,6 +20,15 @@ class Avatar extends Model
         return $this->belongsTo(User::class);
     }
 
+    public static function updateAvatar($user, string $imgName)
+    {
+        try {
+            $user->avatar()->update(['src' => $imgName]);
+        }catch (\Exception $e){
+            throw $e;
+        }
+    }
+
     public static function createAvatar(mixed $id, string $imgName)
     {
         try {

@@ -13,7 +13,7 @@
 @section('header')
     <x-fixed.header>
         <x-fixed.navigation>
-            @foreach($data['links'] as $link)
+            @foreach($headerLinks as $link)
                 <x-fixed.navigation-link
                     :href="$link['href']"
                     :name="$link['name']" />
@@ -72,7 +72,7 @@
     <x-fixed.footer>
 
         <x-slot name="documentLinks">
-            @foreach($data['footer']["documentLinks"] as $link)
+            @foreach($footerLinks["documentLinks"] as $link)
                 <x-fixed.footer-link
                     :href="$link['href']"
                     :name="$link['name']"
@@ -82,7 +82,7 @@
         </x-slot>
 
         <x-slot name="socialMediaLinks">
-            @foreach($data['footer']["socialMediaLinks"] as $link)
+            @foreach($footerLinks["socialMediaLinks"] as $link)
                 <x-fixed.footer-link
                     :href="$link['href']"
                     :name="$link['name']"
@@ -92,7 +92,7 @@
         </x-slot>
 
         <x-slot name="pageLinks">
-            @foreach($data['footer']["pageLinks"] as $link)
+            @foreach($footerLinks["pageLinks"] as $link)
                 <x-fixed.footer-link
                     :href="$link['href']"
                     :name="$link['name']"
