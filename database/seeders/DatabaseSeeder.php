@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(LinkPositionsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
+        $this->call(PublishersTableSeeder::class);
 
         $this->call(UserTableSeeder::class);
         $this->call(AvatarTableSeeder::class);
