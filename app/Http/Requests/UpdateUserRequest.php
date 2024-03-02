@@ -35,7 +35,7 @@ class UpdateUserRequest extends FormRequest
             'number-input' => 'nullable|alpha_num:ascii|regex:/^\d+[a-zA-Z]?$/',
             'city-input' => 'nullable|string|regex:/^([A-ZŠĐŽĆČ][a-zšđžćč]{2,}\s?)+$/',
             'state-input' => 'nullable|string|regex:/^([A-ZŠĐČĆŽ][a-zšđčćž]{2,}\s?)+$/',
-            'zip-code-input' => 'nullable|alpha_num:ascii|regex:/^\d{5,15}$/',
+            'zip-code-input' => 'nullable|alpha_num:ascii|min:5|max:15',
             'country-input' => 'nullable|string|regex:/^([A-ZŠĐČĆŽ][a-zšđčćž]{2,}\s?)+$/',
             'user-avatar' => 'nullable|file|mimes:jpg,png|max:700'
         ];
