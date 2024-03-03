@@ -21,8 +21,8 @@ class Book extends Model
         'description',
     ];
 
-    public static function insertBook($data) : void{
-        self::create([
+    public static function insertBook($data){
+        return self::create([
             'name' => $data['book-title-input'],
             'page_count' => $data['page-count-input'],
             'price' => $data['price-input'],

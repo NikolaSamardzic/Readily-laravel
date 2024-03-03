@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBookRequest;
 use App\Models\Book;
+use App\Models\BookCategory;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Publisher;
@@ -60,11 +61,17 @@ class BookController extends StandardController
 
             $bookData['image_id'] = $image['id'];
 
-            Book::insertBook($bookData);
+            $book = Book::insertBook($bookData);
+
+            BookCategory::insertBookCategories($book['id'],$request->input('book-category-cb'));
 
             DB::commit();
+
+            //dd('da');
         }catch (\Exception $e){
             DB::rollBack();
+
+            dd($e);
 
             if(isset($imageName) && File::exists(public_path('/assets/img/books/large/' . $imageName))){
                 File::delete(public_path('/assets/img/books/large/' . $imageName));
