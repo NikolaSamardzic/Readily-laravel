@@ -1,4 +1,4 @@
-console.log("readily.com/books/create")
+console.log("readily.com/writer/{writer}/books/create")
 
 setInsertBookForm();
 
@@ -12,10 +12,12 @@ function setInsertBookForm(){
 
     $(document).on('blur','#page-count-input-js',()=>{
         checkInputElementIfEmpty('page-count-input-js','page-count-error')
+        checkIfLessThanZero('page-count-input-js','page-count-error')
     })
 
     $(document).on('blur','#price-input-js',()=>{
         checkInputElementIfEmpty('price-input-js','price-error')
+        checkIfLessThanZero('price-input-js','price-error')
     })
 
     $(document).on('blur','#book-description-input-js',()=>{
@@ -45,9 +47,6 @@ function setInsertBookForm(){
     $('.book-category-li label').on('click', function(event) {
         event.stopPropagation();
     });
-
-
-    $(document).on('click','#insert-new-book',sendInsertBookData);
 }
 
 
@@ -57,41 +56,14 @@ function sendInsertBookData(){
     errorCount += checkBookImg();
     errorCount += checkInputElementIfEmpty('book-title-title-js','book-title-error')
     errorCount += checkInputElementIfEmpty('page-count-input-js','page-count-error')
+    errorCount += checkIfLessThanZero('page-count-input-js','page-count-error')
+    errorCount += checkIfLessThanZero('price-input-js','price-error')
     errorCount += checkInputElementIfEmpty('book-description-input-js','book-description-error')
     errorCount += checkInputElementIfEmpty('price-input-js','price-error')
     errorCount += checkInputDate();
     errorCount += checkCategoriesCheckBoxes();
 
-
-    if(errorCount){
-        return;
-    }
-
-    let form = document.getElementById('insert-book-form');
-    let formData = new FormData(form);
-
-    $.ajax({
-        url: 'models/book/add-book.php',
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            clearAllInputBookValues();
-            clearAllInputBookErrors();
-
-            displayServerMessages('server-messages',response,'success-message');
-        },
-        error: function(xhr, status, errorThrown) {
-            let messages = JSON.parse(xhr.responseText);
-            displayServerMessages('server-messages',messages,'error-message');
-
-            console.log(messages)
-            console.log(xhr);
-            console.log(status, errorThrown);
-        }
-    });
-
+    return !errorCount;
 }
 
 function clearAllInputBookErrors(){

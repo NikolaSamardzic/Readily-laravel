@@ -133,7 +133,7 @@
         ;
         }
 
-        .book-description-title{
+        #book-description-title{
             grid-area: book-description-title;
         }
 
@@ -145,7 +145,7 @@
             grid-area: book-description-error;
         }
 
-        .book-title-title{
+        #book-title-title{
             grid-area: book-title-title;
         }
 
@@ -158,7 +158,7 @@
         }
 
 
-        .page-count-title{
+        #page-count-title{
             grid-area: page-count-title;
         }
 
@@ -171,7 +171,7 @@
         }
 
 
-        .price-title{
+        #price-title{
             grid-area: price-title;
         }
 
@@ -184,7 +184,7 @@
         }
 
 
-        .release-date-title{
+        #release-date-title{
             grid-area: release-date-title;
         }
 
@@ -198,7 +198,7 @@
 
 
 
-        .publisher-title{
+        #publisher-title{
             grid-area: publisher-title;
         }
 

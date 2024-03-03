@@ -1218,7 +1218,7 @@ textarea {
     grid-template-areas: "book-title-title" "book-title-input" "book-title-error" "page-count-title" "page-count-input" "page-count-error" "price-title" "price-input" "price-error" "release-date-title" "release-date-input" "release-date-error" "publisher-title" "publisher-input" "publisher-error" "book-description-title" "book-description-input" "book-description-error" "book-category-title " "book-category-input " "book-category-error ";
   }
 }
-.book-form-container .book-info-container-grid .book-description-title {
+.book-form-container .book-info-container-grid #book-description-title {
   grid-area: book-description-title;
 }
 .book-form-container .book-info-container-grid .book-description-input {
@@ -1227,7 +1227,7 @@ textarea {
 .book-form-container .book-info-container-grid #book-description-error {
   grid-area: book-description-error;
 }
-.book-form-container .book-info-container-grid .book-title-title {
+.book-form-container .book-info-container-grid #book-title-title {
   grid-area: book-title-title;
 }
 .book-form-container .book-info-container-grid .book-title-input {
@@ -1236,7 +1236,7 @@ textarea {
 .book-form-container .book-info-container-grid #book-title-error {
   grid-area: book-title-error;
 }
-.book-form-container .book-info-container-grid .page-count-title {
+.book-form-container .book-info-container-grid #page-count-title {
   grid-area: page-count-title;
 }
 .book-form-container .book-info-container-grid .page-count-input {
@@ -1245,7 +1245,7 @@ textarea {
 .book-form-container .book-info-container-grid #page-count-error {
   grid-area: page-count-error;
 }
-.book-form-container .book-info-container-grid .price-title {
+.book-form-container .book-info-container-grid #price-title {
   grid-area: price-title;
 }
 .book-form-container .book-info-container-grid .price-input {
@@ -1254,7 +1254,7 @@ textarea {
 .book-form-container .book-info-container-grid #price-error {
   grid-area: price-error;
 }
-.book-form-container .book-info-container-grid .release-date-title {
+.book-form-container .book-info-container-grid #release-date-title {
   grid-area: release-date-title;
 }
 .book-form-container .book-info-container-grid .release-date-input {
@@ -1263,7 +1263,7 @@ textarea {
 .book-form-container .book-info-container-grid #release-date-error {
   grid-area: release-date-error;
 }
-.book-form-container .book-info-container-grid .publisher-title {
+.book-form-container .book-info-container-grid #publisher-title {
   grid-area: publisher-title;
 }
 .book-form-container .book-info-container-grid .publisher-input {

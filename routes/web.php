@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\LoginController;
@@ -26,6 +27,10 @@ Route::get('/users/{user}', [UserController::class,'show'])->name('users.show');
 Route::delete('/users/{user}', [UserController::class,'destroy'])->name('users.destroy');
 Route::get('/users/{user}/edit', [UserController::class,'edit'])->name('users.edit');
 Route::put('/users/{user}', [UserController::class,'update'])->name('users.update');
+
+Route::get('/writer/{user}/books/create', [BookController::class,'create'])->name('books.create');
+Route::post('/books', [BookController::class,'store'])->name('books.store');
+
 
 Route::get('/sitemap',function (){
     return redirect(asset('assets/sitemap.xml'));

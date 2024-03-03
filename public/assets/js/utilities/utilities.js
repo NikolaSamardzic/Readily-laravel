@@ -193,6 +193,19 @@ function sendDeleteUserForm(form){
     });
 }
 
+function checkIfLessThanZero(idElement,idError){
+    let element = document.getElementById(idElement);
+    let error = document.getElementById(idError);
+
+    if(element.value < 0){
+        error.style.display = "block";
+        return 1;
+    }
+
+    error.style.display = "none";
+    return 0;
+}
+
 function checkInputElementIfEmpty(idElement,idError){
     let element = document.getElementById(idElement);
     let error = document.getElementById(idError);
@@ -318,6 +331,8 @@ function uploadBookImage(){
         while(bookImgContainer.firstChild)bookImgContainer.removeChild(bookImgContainer.firstChild);
     }
 }
+
+
 
 function checkCategoriesCheckBoxes(){
     let checkboxes = document.querySelectorAll('.book-category-cb');

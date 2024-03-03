@@ -108,6 +108,22 @@
         </div>
     </section>
 
+
+    @if($data['user']['role_id'] == 3)
+        <div id="writter-option-wrapper">
+            <div class="admin-option-container">
+                <div class="admin-option">
+                    <a href="#"></a>
+                    <div class="option-name-container">
+                        <p>Books</p>
+                    </div>
+                    <div class="option-icon-container">
+                        <img src="{{asset('assets/images/admin/books.svg')}}" alt="book icon" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
 
 @section('footer')

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('page_count');
             $table->decimal('price',10,2);
             $table->date('release_date');
+            $table->string('description');
             $table->foreignId('publisher_id');
             $table->foreignId('user_id');
             $table->foreignId('image_id');
