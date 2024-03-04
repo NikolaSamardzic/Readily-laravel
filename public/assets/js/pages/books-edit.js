@@ -1,38 +1,6 @@
 console.log("readily.com/books/{id}/edit")
 
-selectBookCategories();
 setUpdateBookForm();
-
-function selectBookCategories(){
-    let allCategories = document.querySelectorAll(".book-category-cb");
-    let bookId = document.getElementById('book-id-js').value;
-
-    $.ajax({
-        url: `models/book/get-book-active-categories.php?book-id=${bookId}`,
-        type: 'GET',
-        contentType: 'json',
-        success: function(response) {
-            console.log(response);
-            for(let i=0; i<allCategories.length;i++){
-
-                for(let j=0; j<response.length;j++){
-                    if(allCategories[i].value === response[j].category_id){
-                        allCategories[i].checked = true;
-                        break;
-                    }
-                }
-            }
-        },
-        error: function(xhr, status, errorThrown) {
-            let messages = JSON.parse(xhr.responseText);
-            displayServerMessages('server-messages',messages,'error-message');
-
-            console.log(messages)
-            console.log(xhr);
-            console.log(status, errorThrown);
-        }
-    });
-}
 
 function setUpdateBookForm(){
 
@@ -78,8 +46,6 @@ function setUpdateBookForm(){
         event.stopPropagation();
     });
 
-
-
     $(document).on('click','#update-book',sendUpdateBookData);
 }
 
@@ -98,31 +64,6 @@ function sendUpdateBookData(){
     errorCount += checkInputDate();
     errorCount += checkCategoriesCheckBoxes();
 
+    return !errorCount;
 
-    if(errorCount){
-        return;
-    }
-
-    let form = document.getElementById('update-book-form');
-    let formData = new FormData(form);
-
-    $.ajax({
-        url: 'models/book/update-book.php',
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-
-            window.location.href = `index.php?page=writer-books&writer-id=${response[0]}`;
-        },
-        error: function(xhr, status, errorThrown) {
-            let messages = JSON.parse(xhr.responseText);
-            displayServerMessages('server-messages',messages,'error-message');
-
-            console.log(messages)
-            console.log(xhr);
-            console.log(status, errorThrown);
-        }
-    });
 }

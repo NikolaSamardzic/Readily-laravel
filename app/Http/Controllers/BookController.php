@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\BookCategory;
 use App\Models\Category;
@@ -71,8 +72,6 @@ class BookController extends StandardController
         }catch (\Exception $e){
             DB::rollBack();
 
-            dd($e);
-
             if(isset($imageName) && File::exists(public_path('/assets/img/books/large/' . $imageName))){
                 File::delete(public_path('/assets/img/books/large/' . $imageName));
                 File::delete(public_path('/assets/img/books/small/' . $imageName));
@@ -95,17 +94,26 @@ class BookController extends StandardController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user, Book $book)
     {
-        //
+        $this->data['user'] = $user;
+        $this->data['book'] = $book;
+        $this->data['publishers'] = Publisher::getAllActivePublishers();
+        $this->data['categories'] = Category::getAllActiveCategories();
+
+        $this->data['selected_categories'] = [];
+        foreach ($this->data['book']->categories as $category)
+            $this->data['selected_categories'][] = $category['id'];
+
+        return view('pages.book.edit', ['data' => $this->data]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        dd('stigao');
     }
 
     /**

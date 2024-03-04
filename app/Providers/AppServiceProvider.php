@@ -6,6 +6,7 @@ use App\Models\Link;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Blade::withoutDoubleEncoding();
         View::composer('*',function ($view){
             $roleId = Auth::user() ? Auth::user()['role_id'] : 4;
             $headerLinks = Link::headerLinksForUserRole($roleId);

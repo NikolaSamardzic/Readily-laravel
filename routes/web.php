@@ -28,8 +28,10 @@ Route::delete('/users/{user}', [UserController::class,'destroy'])->name('users.d
 Route::get('/users/{user}/edit', [UserController::class,'edit'])->name('users.edit');
 Route::put('/users/{user}', [UserController::class,'update'])->name('users.update');
 
-Route::get('/writer/{user}/books/create', [BookController::class,'create'])->name('books.create');
+Route::get('/writers/{user}/books/create', [BookController::class,'create'])->name('books.create');
+Route::get('/writers/{user}/books/{book}/edit', [BookController::class,'edit'])->name('books.edit');
 Route::post('/books', [BookController::class,'store'])->name('books.store');
+Route::put('/books/{book}', [BookController::class,'update'])->name('books.update');
 
 
 Route::get('/sitemap',function (){

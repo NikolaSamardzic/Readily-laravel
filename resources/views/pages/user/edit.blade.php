@@ -44,7 +44,7 @@
         <h2>Personal info</h2>
 
         <div id="user-avatar-placeholder-js" class="user-avatar-placeholder">
-            <img src="{{asset('assets/images/avatars')}}/@if($data['user']->avatar['src']){{$data['user']->avatar['src']}}@else{{'default-avatar.jpg'}}@endif" id="user-avatar-img" alt="user avatar">
+            <img src="{{asset('assets/images/avatars')}}/@if(isset($data['user']->avatar['src'])){{$data['user']->avatar['src']}}@else{{'default-avatar.jpg'}}@endif" id="user-avatar-img" alt="user avatar">
         </div>
         <p class="upload-avatar-text">upload avatar</p>
 
