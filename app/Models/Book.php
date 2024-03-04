@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Book extends Model
@@ -34,6 +35,21 @@ class Book extends Model
             'publisher_id' => $data['publisher-input'],
             'image_id' => $data['image_id'],
         ]);
+    }
+
+    public static function updateBook(array $bookData)
+    {
+        $book = self::find($bookData['book-id']);
+        $book['name'] = $bookData['book-title-input'];
+        $book['page_count'] = $bookData['page-count-input'];
+        $book['price'] = $bookData['price-input'];
+        $book['description'] = $bookData['book-description-input'];
+        $book['release_date'] = $bookData['release-date-input'];
+        $book['publisher_id'] = $bookData['publisher-input'];
+        $book['image_id'] = $bookData['image_id'];
+
+
+        $book->save();
     }
 
     public function categories() : BelongsToMany

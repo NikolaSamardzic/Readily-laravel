@@ -24,4 +24,9 @@ class BookCategory extends Model
             ]);
         }
     }
+
+    public static function deleteBookCategories($bookId, $categories)
+    {
+        self::where('book_id', $bookId)->whereIn('category_id', $categories)->delete();
+    }
 }

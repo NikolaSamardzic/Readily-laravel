@@ -24,6 +24,14 @@ class Image extends Model
         ]);
     }
 
+    public static function updateImage(mixed $id, string $imageName)
+    {
+        $image = self::find($id);
+        $image['src'] = $imageName;
+        $image->save();
+        return $image;
+    }
+
     public function image() : HasOne
     {
         return $this->hasOne(Book::class);

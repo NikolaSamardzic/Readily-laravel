@@ -38,6 +38,7 @@
             @csrf
             @method('PUT')
             <input type="number" name="writer-id" value="{{$data['user']['id']}}" hidden>
+            <input type="number" name="book-id" value="{{$data['book']['id']}}" hidden>
             <h2>Book Info</h2>
 
             <div class="book-image-container-form">

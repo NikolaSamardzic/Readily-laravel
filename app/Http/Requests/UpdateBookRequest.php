@@ -26,6 +26,7 @@ class UpdateBookRequest extends FormRequest
     {
         return [
             'writer-id' => ['required',Rule::exists('users', 'id')->where('role_id',3)],
+            'book-id' => ['required',Rule::exists('books', 'id')],
             'book-title-input' => 'required|string',
             'page-count-input' => 'required|numeric|min:1',
             'price-input' => 'required|numeric|min:1',
@@ -71,6 +72,21 @@ class UpdateBookRequest extends FormRequest
                     $validator->errors()->add('book-image', 'Please upload an image with a maximum size of 700KB and in one of the following formats: jpg, jpeg, or png. Image width needs to be smaller than its height');
                 }
             }
+        ];
+    }
+
+    public function messages() : array
+    {
+        return [
+            'writer-id' => 'Only writer can insert a book',
+            'book-id' => 'Book doesn\'t exist',
+            'book-image' => 'Please upload an image with a maximum size of 700KB and in one of the following formats: jpg, jpeg, or png. Image width needs to be smaller than its height',
+            'book-title-input' => 'Book title can\'t be empty',
+            'page-count-input' => 'Page count can\'t be empty or less than 0',
+            'price-input' => 'Price can\'t be empty or less than 0',
+            'release-date-input' => 'Release date can\'t be empty and can\'t be in future',
+            'publisher-input' => 'Publisher can\'t be empty',
+            'book-description-input' => "Book description can't be empty",
         ];
     }
 }

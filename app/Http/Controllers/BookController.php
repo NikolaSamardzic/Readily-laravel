@@ -68,7 +68,6 @@ class BookController extends StandardController
 
             DB::commit();
 
-            //dd('da');
         }catch (\Exception $e){
             DB::rollBack();
 
@@ -113,7 +112,53 @@ class BookController extends StandardController
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        dd('stigao');
+        $bookData = $request->only('writer-id','book-id', 'book-title-input', 'page-count-input', 'price-input', 'release-date-input','publisher-input','book-description-input',);
+        $bookData['image_id'] = $book['image_id'];
+        try {
+            if(!is_null($request->file('book-image'))){
+
+                $oldImageName = $book->image['src'];
+                $imageName = time() . '.' . $request->file('book-image')->extension();
+                $image = Image::updateImage($book->image['id'],$imageName);
+
+                $manager = new ImageManager(new Driver());
+
+                $largeImage = $manager->read($request->file('book-image')->get());
+                $smallImage = $manager->read($request->file('book-image')->get());
+
+                $largeImage->scale(height: 400)->encode(new AutoEncoder(quality: 100))->save('assets/images/books/large/' . $image['src']);
+                $smallImage->scale(height: 200)->encode(new AutoEncoder(quality: 75))->save('assets/images/books/small/' . $image['src']);
+
+                File::delete(public_path('assets/images/books/large/' . $oldImageName));
+                File::delete(public_path('assets/images/books/small/' . $oldImageName));
+
+                $bookData['image_id'] = $image['id'];
+            }
+            Book::updateBook($bookData);
+
+
+            $oldBookCategories = $book->categories()->pluck('category_id')->toArray();
+            $newBookCategories = $request->input('book-category-cb');
+
+            $addedCategories = array_diff($newBookCategories, $oldBookCategories);
+            $deletedCategories = array_diff($oldBookCategories, $newBookCategories);
+
+            BookCategory::insertBookCategories($book['id'],$addedCategories);
+            BookCategory::deleteBookCategories($book['id'],$deletedCategories);
+
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            if(isset($imageName) && File::exists(public_path('/assets/img/books/large/' . $imageName))){
+                File::delete(public_path('/assets/img/books/large/' . $imageName));
+                File::delete(public_path('/assets/img/books/small/' . $imageName));
+            }
+
+            return redirect()->back()->with('error-msg', 'An error has occurred, please try again later.');
+        }
+
+        return redirect()->route('books.edit', ['book' => $book['id'], 'user' => $request->input('writer-id')]);
     }
 
     /**
