@@ -17,10 +17,13 @@ return new class extends Migration
             $table->integer('page_count');
             $table->decimal('price',10,2);
             $table->date('release_date');
-            $table->string('description');
-            $table->foreignId('publisher_id');
-            $table->foreignId('user_id');
-            $table->foreignId('image_id');
+            $table->text('description');
+            $table->unsignedBigInteger('publisher_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('image_id');
+            $table->foreign('publisher_id')->references('id')->on('publishers');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('image_id')->references('id')->on('images');
             $table->softDeletes();
             $table->timestamps();
         });
