@@ -182,4 +182,18 @@ class BookController extends StandardController
 
         return response()->json(['success' => true,'message' => 'Book deleted successfully', 'book' => $book]);
     }
+
+    public function activate(string $id){
+        try {
+            DB::beginTransaction();
+            $book = Book::activateBook($id);
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+            return response()->json(['success' => false, 'message' => $e->getMessage()], $e->getCode());
+        }
+
+        return response()->json(['success' => true,'message' => 'Book activated successfully', 'book' => $book]);
+
+    }
 }

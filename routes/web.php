@@ -34,6 +34,7 @@ Route::get('/writers/{user}/books/{book}/edit', [BookController::class,'edit'])-
 Route::post('/books', [BookController::class,'store'])->name('books.store');
 Route::put('/books/{book}', [BookController::class,'update'])->name('books.update');
 Route::delete('/books/{book}',[BookController::class,'destroy'])->name('books.destroy');
+Route::put('/books/{book}/activate',[BookController::class,'activate'])->name('books.activate');
 
 Route::get('/sitemap',function (){
     return redirect(asset('assets/sitemap.xml'));

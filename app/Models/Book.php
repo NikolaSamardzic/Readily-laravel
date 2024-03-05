@@ -68,14 +68,26 @@ class Book extends Model
     }
     public static function deleteBook(string $id)
     {
-        throw new \Exception('Book doesn\'t exists!',404);
         $book = self::find($id);
 
         if ($book) {
             return $book->delete();
         }
 
+        throw new \Exception('Book doesn\'t exists!',404);
+    }
 
+    public static function activateBook(string $id)
+    {
+        $book = self::where('id',$id)->withTrashed()->first();
+
+        if ($book) {
+            $book['deleted_at'] = null;
+            $book->save();
+            return $book;
+        }
+
+        throw new \Exception('Book doesn\'t exists!',404);
     }
 
     public function categories() : BelongsToMany

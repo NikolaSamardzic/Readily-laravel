@@ -7,7 +7,7 @@ async  function activateBookRow(button){
     let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     let response =await fetch(  `/books/${bookId}/activate`, {
-        method: 'DELETE',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': csrfToken
