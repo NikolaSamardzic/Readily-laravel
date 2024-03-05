@@ -8,6 +8,7 @@ use App\Mail\SignUp;
 use App\Models\Address;
 use App\Models\Avatar;
 use App\Models\Biography;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -186,5 +187,33 @@ class UserController extends StandardController
         }
 
         return view('pages.user.create', ['data' => $this->data]);
+    }
+
+    public function writer(User $user){
+
+        $this->data['writer'] = $user;
+
+        $words = explode(' ',$user->biography['biography_text']);
+        $shortBiography = array_slice($words,0,25);
+        $shortBiography = implode(' ',$shortBiography);
+        $shortBiography .= "... ";
+
+        $this->data['shortBiography'] = $shortBiography;
+        $this->data['writers'] = User::getAllWriters();
+
+        $relatedCategoriesIDs = [];
+        foreach ($user->books as $book){
+            foreach ($book->categories as $category){
+                if (!in_array($category['id'],$relatedCategoriesIDs))
+                    $relatedCategoriesIDs[] = $category['id'];
+            }
+        }
+
+        $this->data['relatedCategories'] = Category::getRelatedCategories($relatedCategoriesIDs);
+
+        $this->data['books'] = $user->books;
+
+
+        return view('pages.user.writer', ['data' => $this->data]);
     }
 }
