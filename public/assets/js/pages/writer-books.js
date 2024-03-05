@@ -30,6 +30,8 @@ async  function activateBookRow(button){
         row.cells[5].firstChild.classList.add('danger-option');
 
         activeBooksTable.insertBefore(row, activeBooksTable.firstChild);
+        removeTableZebra();
+        setTableZebra();
     }else{
         console.log(result)
         toastr.error(result.message);
@@ -62,6 +64,8 @@ async function deleteBookRow(button){
         row.cells[5].firstChild.classList.add('safe-option');
 
         deletedBooksTable.insertBefore(row, deletedBooksTable.firstChild);
+        removeTableZebra();
+        setTableZebra();
     }else{
         console.log(result)
         toastr.error(result.message);

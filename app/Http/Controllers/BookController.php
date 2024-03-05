@@ -97,10 +97,10 @@ class BookController extends StandardController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user, Book $book)
+    public function edit(User $user, $bookId)
     {
         $this->data['user'] = $user;
-        $this->data['book'] = $book;
+        $this->data['book'] = Book::getBook($bookId);
         $this->data['publishers'] = Publisher::getAllActivePublishers();
         $this->data['categories'] = Category::getAllActiveCategories();
 

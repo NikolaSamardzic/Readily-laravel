@@ -41,7 +41,7 @@ class Book extends Model
 
     public static function updateBook(array $bookData)
     {
-        $book = self::find($bookData['book-id']);
+        $book = self::where('id',$bookData['book-id'])->withTrashed()->first();
         $book['name'] = $bookData['book-title-input'];
         $book['page_count'] = $bookData['page-count-input'];
         $book['price'] = $bookData['price-input'];
@@ -89,6 +89,11 @@ class Book extends Model
         }
 
         throw new \Exception('Book doesn\'t exists!',404);
+    }
+
+    public static function getBook($bookId)
+    {
+        return self::where('id',$bookId)->withTrashed()->first();
     }
 
     public function categories() : BelongsToMany

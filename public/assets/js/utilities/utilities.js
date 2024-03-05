@@ -128,6 +128,15 @@ function setTableZebra(){
     $("tbody tr:odd").css("background-color","var(--table-tr-bg)")
 }
 
+function removeTableZebra(){
+    let rows = document.querySelectorAll("tbody tr");
+    rows.forEach(function(row) {
+        if (row.style.backgroundColor === "var(--table-tr-bg)") {
+            row.style.backgroundColor = "";
+        }
+    });
+}
+
 function setEventsForUserTable(){
     let deleteUsers = document.querySelectorAll('.delete-user');
     deleteUsers.forEach(deleteUser => {
