@@ -1,76 +1,99 @@
 console.log("readily.com/writer/{id}/books")
 
-setEventsForWriterBooksPage();
+//setEventsForWriterBooksPage();
 setTableZebra();
+async  function activateBookRow(button){
+    let bookId = button.getAttribute('data-id');
+    let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-function setEventsForWriterBooksPage(){
-    let deleteBooks = document.querySelectorAll('.delete-book');
-    deleteBooks.forEach(book => {
-        book.addEventListener('click', () => {
-            let form = book.closest('form');
-            sendDeleteBookFormWriter(form);
-        });
-    });
-
-    let activateBooks = document.querySelectorAll('.activate-book');
-    activateBooks.forEach(book => {
-        book.addEventListener('click', () => {
-            let form = book.closest('form');
-            sendActivateBookFormWriter(form);
-        });
-    });
-
-}
-
-function sendDeleteBookFormWriter(form){
-    let formData = new FormData(form);
-
-    $.ajax({
-        url: 'models/book/delete-book.php',
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            populateWriterBooksTables(response);
-        },
-        error: function(xhr, status, errorThrown) {
-            let messages = JSON.parse(xhr.responseText);
-            let element = document.querySelector('.server-messages');
-            element.style.display = 'block';
-            displayServerMessages('server-messages',messages,'error-message');
-
-            console.log(messages)
-            console.log(xhr);
-            console.log(status, errorThrown);
+    let response =await fetch(  `/books/${bookId}/activate`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
         }
-    });
+    })
+
+    let result = await response.json()
+    if (response.ok) {
+        toastr.success(result.message);
+    }else{
+        console.log(result)
+        toastr.error(result.message);
+    }
 }
+async function deleteBookRow(button){
 
-function sendActivateBookFormWriter(form){
-    let formData = new FormData(form);
+    let bookId = button.getAttribute('data-id');
+    let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    $.ajax({
-        url: 'models/book/activate-book.php',
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            populateWriterBooksTables(response);
-        },
-        error: function(xhr, status, errorThrown) {
-            let messages = JSON.parse(xhr.responseText);
-            let element = document.querySelector('.server-messages');
-            element.style.display = 'block';
-            displayServerMessages('server-messages',messages,'error-message');
-
-            console.log(messages)
-            console.log(xhr);
-            console.log(status, errorThrown);
+    let response =await fetch('/books/' + bookId, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
         }
-    });
+    })
+
+    let result = await response.json()
+    if (response.ok) {
+        toastr.success(result.message);
+    }else{
+        console.log(result)
+        toastr.error(result.message);
+    }
 }
+
+//
+// function sendDeleteBookFormWriter(form){
+//     let formData = new FormData(form);
+//
+//     $.ajax({
+//         url: 'models/book/delete-book.php',
+//         type: 'POST',
+//         data: formData,
+//         contentType: false,
+//         processData: false,
+//         success: function(response) {
+//             populateWriterBooksTables(response);
+//         },
+//         error: function(xhr, status, errorThrown) {
+//             let messages = JSON.parse(xhr.responseText);
+//             let element = document.querySelector('.server-messages');
+//             element.style.display = 'block';
+//             displayServerMessages('server-messages',messages,'error-message');
+//
+//             console.log(messages)
+//             console.log(xhr);
+//             console.log(status, errorThrown);
+//         }
+//     });
+// }
+//
+// function sendActivateBookFormWriter(form){
+//     let formData = new FormData(form);
+//
+//     $.ajax({
+//         url: 'models/book/activate-book.php',
+//         type: 'POST',
+//         data: formData,
+//         contentType: false,
+//         processData: false,
+//         success: function(response) {
+//             populateWriterBooksTables(response);
+//         },
+//         error: function(xhr, status, errorThrown) {
+//             let messages = JSON.parse(xhr.responseText);
+//             let element = document.querySelector('.server-messages');
+//             element.style.display = 'block';
+//             displayServerMessages('server-messages',messages,'error-message');
+//
+//             console.log(messages)
+//             console.log(xhr);
+//             console.log(status, errorThrown);
+//         }
+//     });
+// }
 
 function populateWriterBooksTables(books){
     console.log(books);

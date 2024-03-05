@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Book extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -50,6 +52,30 @@ class Book extends Model
 
 
         $book->save();
+    }
+
+    public static function activeBooks($userId)
+    {
+        return self::whereNull('deleted_at')->where('user_id',$userId)->get();
+    }
+
+    public static function deletedBooks($userId)
+    {
+        return self::where([
+            ['user_id','=',$userId],
+            ['deleted_at','!=',null]
+        ])->withTrashed()->get();
+    }
+    public static function deleteBook(string $id)
+    {
+        throw new \Exception('Book doesn\'t exists!',404);
+        $book = self::find($id);
+
+        if ($book) {
+            return $book->delete();
+        }
+
+
     }
 
     public function categories() : BelongsToMany

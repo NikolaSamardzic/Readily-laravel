@@ -958,7 +958,7 @@ textarea {
   font-size: 1.25rem;
   color: var(--text-color-regular);
 }
-.table-container tbody td input[type=button] {
+.table-container tbody td button {
   padding: 0.2rem 0.4rem;
   font-size: 1.25rem;
   border: unset;
@@ -966,7 +966,7 @@ textarea {
   outline: none;
   background-color: unset;
 }
-.table-container tbody td input[type=button]:hover {
+.table-container tbody td button:hover {
   cursor: pointer;
 }
 .table-container tbody td a {

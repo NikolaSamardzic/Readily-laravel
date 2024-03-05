@@ -23,9 +23,13 @@ class BookController extends StandardController
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(User $user)
     {
-        //
+        $this->data['user'] = $user;
+        $this->data['activeBooks'] = Book::activeBooks($user['id']);
+        $this->data['deletedBooks'] = Book::deletedBooks($user['id']);
+
+        return view('pages.book.index', ['data' => $this->data]);
     }
 
     /**
@@ -115,6 +119,7 @@ class BookController extends StandardController
         $bookData = $request->only('writer-id','book-id', 'book-title-input', 'page-count-input', 'price-input', 'release-date-input','publisher-input','book-description-input',);
         $bookData['image_id'] = $book['image_id'];
         try {
+            DB::beginTransaction();
             if(!is_null($request->file('book-image'))){
 
                 $oldImageName = $book->image['src'];
@@ -166,6 +171,15 @@ class BookController extends StandardController
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $book = Book::deleteBook($id);
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+            return response()->json(['success' => false, 'message' => $e->getMessage()], $e->getCode());
+        }
+
+        return response()->json(['success' => true,'message' => 'Book deleted successfully', 'book' => $book]);
     }
 }

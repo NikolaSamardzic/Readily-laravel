@@ -28,11 +28,12 @@ Route::delete('/users/{user}', [UserController::class,'destroy'])->name('users.d
 Route::get('/users/{user}/edit', [UserController::class,'edit'])->name('users.edit');
 Route::put('/users/{user}', [UserController::class,'update'])->name('users.update');
 
+Route::get('/writers/{user}/books', [BookController::class,'index'])->name('books.index');
 Route::get('/writers/{user}/books/create', [BookController::class,'create'])->name('books.create');
 Route::get('/writers/{user}/books/{book}/edit', [BookController::class,'edit'])->name('books.edit');
 Route::post('/books', [BookController::class,'store'])->name('books.store');
 Route::put('/books/{book}', [BookController::class,'update'])->name('books.update');
-
+Route::delete('/books/{book}',[BookController::class,'destroy'])->name('books.destroy');
 
 Route::get('/sitemap',function (){
     return redirect(asset('assets/sitemap.xml'));
