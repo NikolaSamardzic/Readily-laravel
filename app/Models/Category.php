@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\DB;
 
 class Category extends Model
 {
@@ -32,6 +33,20 @@ class Category extends Model
 
         return $sortedCategories;
     }
+
+    public static function getRelatedCategories(array $relatedCategoriesIDs)
+    {
+        return self::select('parent.id', 'parent.name')
+            ->distinct()
+            ->from('categories as parent')
+            ->join('categories as child', 'child.parent_id', '=', 'parent.id')
+            ->whereNull('parent.deleted_at')
+            ->whereIn('child.id', $relatedCategoriesIDs )
+            ->get();
+
+//        return self::whereIn('id', $relatedCategoriesIDs)->get();
+    }
+
 
     public function books() : BelongsToMany
     {

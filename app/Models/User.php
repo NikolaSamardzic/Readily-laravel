@@ -136,6 +136,12 @@ class User extends Authenticatable
             ->first();
     }
 
+    public static function getAllWriters()
+    {
+        return self::where('role_id',3)->get();
+    }
+
+
 
     public function biography() : HasOne
     {
@@ -155,5 +161,10 @@ class User extends Authenticatable
     public function address() : BelongsTo
     {
         return $this->belongsTo(Address::class);
+    }
+
+    public function books() : HasMany
+    {
+        return $this->hasMany(Book::class);
     }
 }

@@ -1,6 +1,6 @@
 <article class='article-book'>
     <div class='bg-article-color-".$lastDigit." article-div-img-container'>
-        <img  class='set-brightness' src='assets/images/books/small/{{$src}}' alt='{{$title}}'>
+        <img  class='set-brightness' src='{{asset('assets/images/books/small')}}/{{$src}}' alt='{{$title}}'>
     </div>
     <div class='article-books-text-container'>
         <div class='title-and-author'>
