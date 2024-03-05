@@ -36,7 +36,7 @@
 
     <section id="writer-books-section" class="wrapper">
 
-        <x-table.table tableTitle="Active Books" :columnTitles="['Image', 'Title', 'Price', 'Release Date', 'Update', 'Delete']" >
+        <x-table.table tableTitle="Active Books" tableBodyId="active-books-table" :columnTitles="['Image', 'Title', 'Price', 'Release Date', 'Update', 'Delete']" >
             @foreach($data['activeBooks'] as $book)
                 <x-table.writer-active-book-row
                     :book="$book"
@@ -50,7 +50,7 @@
         </div>
 
 
-        <x-table.table tableTitle="Deleted Books" :columnTitles="['Image', 'Title', 'Price', 'Deleted At', 'Update', 'Delete']" >
+        <x-table.table tableTitle="Deleted Books" tableBodyId="deleted-books-table" :columnTitles="['Image', 'Title', 'Price', 'Deleted At', 'Update', 'Delete']" >
             @foreach($data['deletedBooks'] as $book)
                 <x-table.writer-deleted-book-row
                     :book="$book"

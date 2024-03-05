@@ -1,5 +1,6 @@
 @props([
-    'tableTitle' => ''
+    'tableTitle' => '',
+    'tableBodyId' => ''
 ])
 
 <h2>{{$tableTitle}}</h2>
@@ -13,7 +14,7 @@
             @endforeach
         </tr>
         </thead>
-        <tbody>
+        <tbody id="{{$tableBodyId}}">
         {{$slot}}
         </tbody>
     </table>

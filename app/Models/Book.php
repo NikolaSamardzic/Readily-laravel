@@ -71,7 +71,8 @@ class Book extends Model
         $book = self::find($id);
 
         if ($book) {
-            return $book->delete();
+            $book->delete();
+            return $book;
         }
 
         throw new \Exception('Book doesn\'t exists!',404);
