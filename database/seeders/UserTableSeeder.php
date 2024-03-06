@@ -13,16 +13,6 @@ class UserTableSeeder extends Seeder
      * Run the database seeds.
      */
 
-//'first_name',
-//'last_name',
-//'username',
-//'email',
-//'password',
-//'phone',
-//'token',
-//'address_id',
-//'role_id',
-
     private $users = [
         [
             'first_name' => 'Admin',
