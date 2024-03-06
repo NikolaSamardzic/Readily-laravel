@@ -211,6 +211,9 @@ class UserController extends StandardController
 
         $this->data['relatedCategories'] = Category::getRelatedCategories($relatedCategoriesIDs);
 
+        foreach ($this->data['relatedCategories'] as $key => $category)
+            $category['src'] = $key + 1 . '.jpg';
+
         $this->data['books'] = $user->books;
 
 

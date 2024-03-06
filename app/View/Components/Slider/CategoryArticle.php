@@ -12,9 +12,7 @@ class CategoryArticle extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public string $id,
-        public string $src,
-        public string $title
+        public $category,
     )
     {
         //

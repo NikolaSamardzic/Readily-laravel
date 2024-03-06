@@ -10,27 +10,7 @@
 
 @endsection
 
-
-@section('header')
-    <x-fixed.header>
-        <x-fixed.navigation>
-            @foreach($headerLinks as $link)
-                <x-fixed.navigation-link
-                    :href="$link['href']"
-                    :name="$link['name']" />
-            @endforeach
-        </x-fixed.navigation>
-    </x-fixed.header>
-@endsection
-
 @section('mainContent')
-    <x-fixed.phone-navigation>
-        @foreach($headerLinks as $link)
-            <x-fixed.navigation-link
-                :href="$link['href']"
-                :name="$link['name']" />
-        @endforeach
-    </x-fixed.phone-navigation>
 
     <form class="sign-up-container" id="sign-up-form" enctype="multipart/form-data" name="signup-form" action="{{route('users.store')}}" onsubmit="return sendSignupData()" method="post">
         @csrf
@@ -279,43 +259,4 @@
 
     </form>
 
-@endsection
-
-@section('footer')
-    <x-fixed.footer>
-
-        <x-slot name="documentLinks">
-            @foreach($footerLinks["documentLinks"] as $link)
-                <x-fixed.footer-link
-                    :href="$link['href']"
-                    :name="$link['name']"
-                    :target="$link['target']"
-                />
-            @endforeach
-        </x-slot>
-
-        <x-slot name="socialMediaLinks">
-            @foreach($footerLinks["socialMediaLinks"] as $link)
-                <x-fixed.footer-link
-                    :href="$link['href']"
-                    :name="$link['name']"
-                    :target="$link['target']"
-                />
-            @endforeach
-        </x-slot>
-
-        <x-slot name="pageLinks">
-            @foreach($footerLinks["pageLinks"] as $link)
-                <x-fixed.footer-link
-                    :href="$link['href']"
-                    :name="$link['name']"
-                />
-            @endforeach
-        </x-slot>
-
-    </x-fixed.footer>
-@endsection
-
-@section('scripts')
-    <x-fixed.scripts></x-fixed.scripts>
 @endsection

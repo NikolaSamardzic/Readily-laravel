@@ -594,7 +594,7 @@ footer {
   color: var(--text-color-heading);
 }
 
-input, .user-information, a {
+input, .user-information {
   height: 2rem;
   font-size: 1.25rem;
 }
@@ -1613,11 +1613,11 @@ textarea {
   border: 1px solid var(--border-book-shadow);
   background-color: var(--gray-bg-color);
 }
-.article-book:hover > .link-to-single-a-book {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
 .article-book:hover {
   background-color: var(--gray-bg-color-hover);
+}
+.article-book:hover .link-to-single-a-book {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 .article-book h3 {
   font-weight: 600;

@@ -47,6 +47,11 @@ class Category extends Model
 //        return self::whereIn('id', $relatedCategoriesIDs)->get();
     }
 
+    public static function getAllActiveParentCategories()
+    {
+        return self::whereNull('parent_id')->get();
+    }
+
 
     public function books() : BelongsToMany
     {

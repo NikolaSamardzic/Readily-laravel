@@ -96,6 +96,11 @@ class Book extends Model
         return self::where('id',$bookId)->withTrashed()->first();
     }
 
+    public static function getBestSellingBooks()
+    {
+        return self::get()->take(20);
+    }
+
     public function categories() : BelongsToMany
     {
         return $this->belongsToMany(Category::class);

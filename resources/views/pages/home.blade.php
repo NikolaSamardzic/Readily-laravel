@@ -1,36 +1,14 @@
 @extends('layouts.userLayout')
 
 @section('head')
-
     <x-fixed.head
         description="test description"
         keywords="test keywords"
         title="Home"
     />
-
-@endsection
-
-@section('header')
-    <x-fixed.header>
-        <x-fixed.navigation>
-            @foreach($headerLinks as $link)
-                <x-fixed.navigation-link
-                    :href="$link['href']"
-                    :name="$link['name']" />
-            @endforeach
-        </x-fixed.navigation>
-    </x-fixed.header>
 @endsection
 
 @section('mainContent')
-    <x-fixed.phone-navigation>
-        @foreach($headerLinks as $link)
-            <x-fixed.navigation-link
-                :href="$link['href']"
-                :name="$link['name']" />
-        @endforeach
-    </x-fixed.phone-navigation>
-
     <section id="about-readily">
         <h1>What is Readily?</h1>
         <div id="about-container">
@@ -103,18 +81,9 @@
     classContainer="article-book-container"
     >
         <x-slot name="heading">Bestselling Books</x-slot>
-
         @foreach($data['bestSellingBooks'] as $book)
-        <x-slider.book-article
-            :id="$book['id']"
-            :src="$book['src']"
-            :title="$book['title']"
-            :idWriter="$book['idWriter']"
-            :writer="$book['writer']"
-            :review="$book['review']"
-        />
+            <x-slider.book-article :book="$book" />
         @endforeach
-
     </x-slider.slider>
 
 
@@ -125,56 +94,9 @@
         classContainer="article-category-container"
     >
         <x-slot name="heading">Popular Categories</x-slot>
-
-        @foreach($data['popularCategories'] as $category)
-            <x-slider.category-article
-                :id="$category['id']"
-                :src="$category['src']"
-                :title="$category['title']"
-            />
+        @foreach($data['categories'] as $category)
+            <x-slider.category-article :category="$category" />
         @endforeach
-
     </x-slider.slider>
 
 @endsection
-
-
-@section('footer')
-    <x-fixed.footer>
-
-        <x-slot name="documentLinks">
-            @foreach($footerLinks["documentLinks"] as $link)
-                <x-fixed.footer-link
-                    :href="$link['href']"
-                    :name="$link['name']"
-                    :target="$link['target']"
-                />
-            @endforeach
-        </x-slot>
-
-        <x-slot name="socialMediaLinks">
-            @foreach($footerLinks["socialMediaLinks"] as $link)
-                <x-fixed.footer-link
-                    :href="$link['href']"
-                    :name="$link['name']"
-                    :target="$link['target']"
-                />
-            @endforeach
-        </x-slot>
-
-        <x-slot name="pageLinks">
-            @foreach($footerLinks["pageLinks"] as $link)
-                <x-fixed.footer-link
-                    :href="$link['href']"
-                    :name="$link['name']"
-                />
-            @endforeach
-        </x-slot>
-
-    </x-fixed.footer>
-@endsection
-
-@section('scripts')
-    <x-fixed.scripts></x-fixed.scripts>
-@endsection
-

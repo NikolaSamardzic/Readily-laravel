@@ -1,1 +1,1 @@
-<li><a href="{{ $href }}" @isset($target) target="{{$target}}" @endisset >{{$name}}</a></li>
+<li><a href="{{ $link['href'] }}" target="{{$link['target']}}" >{{$link['name']}}</a></li>

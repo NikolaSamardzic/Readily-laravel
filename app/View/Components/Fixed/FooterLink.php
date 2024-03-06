@@ -9,15 +9,9 @@ use Illuminate\View\Component;
 class FooterLink extends Component
 {
 
-    public string $href;
-    public string $name;
-    public string $target;
-    public function __construct($name,$href,$target="")
-    {
-        $this->name=$name;
-        $this->href=$href;
-        $this->target=$target;
-    }
+    public function __construct(
+        public $link
+    ){}
 
     /**
      * Get the view / contents that represent the component.

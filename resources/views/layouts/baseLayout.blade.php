@@ -10,7 +10,10 @@
 
 @yield('content')
 
-@yield('scripts')
+<x-fixed.scripts>
+    @yield('scripts')
+</x-fixed.scripts>
+
 </body>
 
 </html>

@@ -12,12 +12,7 @@ class BookArticle extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public string $id,
-        public string $src,
-        public string $title,
-        public string $idWriter,
-        public string $writer,
-        public string $review
+        public $book,
     )
     {
         //

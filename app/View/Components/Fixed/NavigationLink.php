@@ -11,14 +11,10 @@ class NavigationLink extends Component
     /**
      * Create a new component instance.
      */
-    public string $href;
-    public string $name;
-
-    public function __construct($href="#", $name="Test")
-    {
-        $this->name=$name;
-        $this->href=$href;
-    }
+    public function __construct(
+        public $link
+    )
+    {}
 
     /**
      * Get the view / contents that represent the component.
