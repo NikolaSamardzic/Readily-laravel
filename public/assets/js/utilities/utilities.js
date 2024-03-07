@@ -975,22 +975,13 @@ function checkAngleVisibility(idElement,idLeft,idRight){
     }
 }
 
-function addToCart(id){
+async function addToCart(icon){
 
     let cookieValue = document.cookie.replace(/(?:^|.*;\s*)cart\s*=\s*([^;]*).*$|^.*$/, "$1");
     cookieValue = decodeURIComponent(cookieValue.replace(/\+/g, ' '));
+    let cart = JSON.parse(cookieValue)
 
-    if(!cookieValue){
-        window.location.href = `index.php?page=login`;
-        return;
-    }
-
-    let cart = JSON.parse(cookieValue);
-    console.log(" ");
-    console.log("JS:");
-    cart.forEach(car=>{
-        console.log(car);
-    })
+    let id = parseInt(icon.getAttribute('data-id')) ;
 
     let item = cart.find(x=>x.id === id);
 
@@ -1004,28 +995,26 @@ function addToCart(id){
         item.quantity++;
     }
 
+    console.log(cart);
     let jsonString = JSON.stringify(cart);
     document.cookie = `cart=${jsonString};path=/;`;
 
-    $.ajax({
-        url: 'models/cart/cart-logic.php',
-        type: 'POST',
-        data: {},
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            console.log(" ")
-            console.log("PHP:")
-            console.log(response);
-        },
-        error: function(xhr, status, errorThrown) {
-            let messages = JSON.parse(xhr.responseText);
-
-            console.log(messages)
-            console.log(xhr);
-            console.log(status, errorThrown);
+    let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    let response =await fetch(  `/cart`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
         }
-    });
+    })
+
+    let result = await response.json()
+    if (response.ok) {
+        toastr.success(result.message);
+    }else{
+        console.log(result)
+        toastr.error(result.message);
+    }
 }
 
 function setHeader(){

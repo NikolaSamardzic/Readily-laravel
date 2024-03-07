@@ -7,7 +7,6 @@
         keywords="test keywords"
         title="Sign up"
     >
-        <meta name="csrf-token" content="{{ csrf_token() }}"/>
     </x-fixed.head>
 
 @endsection

@@ -14,7 +14,7 @@ class HomeController extends StandardController
         parent::__construct();
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $this->data['categories'] = Category::getAllActiveParentCategories();
         $this->data['bestSellingBooks'] = Book::getBestSellingBooks();

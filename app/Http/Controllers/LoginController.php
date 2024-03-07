@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Cookie;
+use function Symfony\Component\String\b;
 
 class LoginController extends StandardController
 {
+
     public function index(){
         return view('pages.login');
     }
@@ -28,7 +33,19 @@ class LoginController extends StandardController
         }
         Auth::login($user);
 
-        return redirect()->route('home');
+
+        if(!$user->unfinishedOrder()){
+            Order::createOrderForAUser($user);
+        }
+
+        $userCart = $user->unfinishedOrder()->bookOrders;
+        $cartData = [];
+        foreach ($userCart as $item)
+            $cartData[] = ['id'=>$item['id'], 'quantity' => $item['quantity']];
+
+        $cookie = cookie('cart', json_encode($cartData), 120,null,null,null,false,);
+
+        return redirect()->route('home')->cookie($cookie);
     }
 
     public function logout(Request $request){

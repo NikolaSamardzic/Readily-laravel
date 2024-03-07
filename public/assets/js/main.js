@@ -40,16 +40,6 @@ window.onload = function(){
 
     setThemeClass();
     setHeader();
-
-    let cartTag = document.querySelectorAll('.fa-cart-shopping');
-
-    cartTag.forEach(element=>{
-        element.addEventListener('click',()=>{
-            let string = element.getAttribute('id');
-            let id = parseInt(string.match(/\d+$/)[0]);
-            addToCart(id);
-        })
-    })
 }
 
 function loadScript(src){

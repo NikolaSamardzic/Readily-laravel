@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\LoginController;
 use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\Cart;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,10 @@ Route::delete('/books/{book}',[BookController::class,'destroy'])->name('books.de
 Route::put('/books/{book}/activate',[BookController::class,'activate'])->name('books.activate');
 
 Route::get('/writers/{user}', [UserController::class,'writer'])->name('user.writer');
+
+Route::patch('/cart', [Cart::class,'add'])->name('cart.add');
+Route::get('/checkout', [Cart::class,'checkout'])->name('cart.checkout');
+Route::put('/cart/submit',[Cart::class,'submit'])->name('cart.submit');
 
 Route::get('/sitemap',function (){
     return redirect(asset('assets/sitemap.xml'));

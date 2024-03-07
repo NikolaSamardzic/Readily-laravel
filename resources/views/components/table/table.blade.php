@@ -1,11 +1,13 @@
 @props([
     'tableTitle' => '',
-    'tableBodyId' => ''
+    'tableBodyId' => '',
+    'tableClass' => "",
+    'tableId' => ""
 ])
 
 <h2>{{$tableTitle}}</h2>
 
-<div class="table-container">
+<div class="{{$tableClass}}" id="{{$tableId}}">
     <table id="X">
         <thead>
         <tr>

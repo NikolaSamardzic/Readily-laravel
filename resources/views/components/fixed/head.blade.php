@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 {{--<link  href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js">--}}
-
+<meta name="csrf-token" content="{{ csrf_token() }}"/>
 
 {{--<link href="toastr.css" rel="stylesheet"/>--}}
 {{$slot}}
