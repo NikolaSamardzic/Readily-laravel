@@ -89,9 +89,25 @@ class BookController extends StandardController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Book $book)
     {
-        //
+        $this->data['book'] = $book;
+
+        $relatedCategoriesIDs = [];
+        foreach ($book->categories as $category){
+            if (!in_array($category['id'],$relatedCategoriesIDs))
+                $relatedCategoriesIDs[] = $category['id'];
+        }
+        $this->data['relatedCategories'] = Category::getRelatedCategories($relatedCategoriesIDs);
+        foreach ($this->data['relatedCategories'] as $key => $category)
+            $category['src'] = $key + 1 . '.jpg';
+
+        $parentCategoriesIds = array_column(iterator_to_array($this->data['relatedCategories']), "id");
+
+        $this->data['relatedBooks'] = Book::relatedBooksToACategories($parentCategoriesIds);
+        $this->data['writesBooks'] = Book::relatedToAWriter([$book->user['id']]);
+
+        return view('pages.book.show', ['data' => $this->data]);
     }
 
     /**

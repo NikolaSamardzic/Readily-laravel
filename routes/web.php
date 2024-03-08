@@ -6,6 +6,7 @@ use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\LoginController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\Cart;
+use \App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +43,11 @@ Route::get('/writers/{user}', [UserController::class,'writer'])->name('user.writ
 Route::patch('/cart', [Cart::class,'add'])->name('cart.add');
 Route::get('/checkout', [Cart::class,'checkout'])->name('cart.checkout');
 Route::put('/cart/submit',[Cart::class,'submit'])->name('cart.submit');
+
+Route::get('/books/{book}', [BookController::class,'show'])->name('book.show');
+
+Route::post('/comments',[CommentController::class,'store'])->name('comment.store');
+
 
 Route::get('/sitemap',function (){
     return redirect(asset('assets/sitemap.xml'));

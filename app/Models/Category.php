@@ -43,8 +43,6 @@ class Category extends Model
             ->whereNull('parent.deleted_at')
             ->whereIn('child.id', $relatedCategoriesIDs )
             ->get();
-
-//        return self::whereIn('id', $relatedCategoriesIDs)->get();
     }
 
     public static function getAllActiveParentCategories()

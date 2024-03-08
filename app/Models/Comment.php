@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'text',
+        'user_id',
+        'book_id'
+    ];
+
+    public static function insertComment(mixed $input, mixed $getAuthIdentifier, $bookId)
+    {
+        return self::create([
+            'text' => $input,
+            'user_id' => $getAuthIdentifier,
+            'book_id' => $bookId
+        ]);
+    }
 }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Book extends Model
 {
@@ -91,6 +92,35 @@ class Book extends Model
         throw new \Exception('Book doesn\'t exists!',404);
     }
 
+    public static function relatedBooksToACategories($relatedCategories)
+    {
+        $bookIDs = self::select('books.id')->join('book_category as bc','bc.book_id','=','books.id')
+            ->join('categories as child','bc.category_id','=','child.id')
+            ->join('categories as parent','child.parent_id','=','parent.id')
+            ->whereIn('parent.id',$relatedCategories)->groupBy('books.id')->inRandomOrder()->limit(20)->get();
+
+        return self::whereIn('id',$bookIDs)->inRandomOrder()->get();
+    }
+
+    public static function relatedToAWriter(mixed $id)
+    {
+        return self::whereIn('user_id',$id)->inRandomOrder()->limit(20)->get();
+    }
+
+    public function reviewStars()
+    {
+        $review = Review::select(DB::raw('avg(stars) as stars'))->groupBy('book_id')->where('book_id','=',$this['id'])->first();
+
+        if($review)
+            return intval($review['stars']);
+
+        return 0;
+    }
+
+    public function reviews() : HasMany{
+        return $this->hasMany(Review::class);
+    }
+
     public static function getBook($bookId)
     {
         return self::where('id',$bookId)->withTrashed()->first();
@@ -109,6 +139,10 @@ class Book extends Model
     public function image() : BelongsTo
     {
         return $this->belongsTo(Image::class);
+    }
+
+    public function publisher(){
+        return $this->belongsTo(Publisher::class);
     }
 
     public function user() : BelongsTo

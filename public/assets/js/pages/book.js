@@ -59,14 +59,12 @@ let formComment = document.getElementById('form-comment');
 
 if(formComment){
 
-    $(document).on('blur','#biography-input-js',checkBiography);
+    $(document).on('blur','#biography-input',checkBiography);
 
     let inputTag = document.querySelector('.comment-image');
     commentImageInput(inputTag);
 
     $(document).on('click','#comment-button',sendCommentForm);
-
-
 }
 function sendCommentForm(){
     let errorCount = 0;
@@ -82,14 +80,14 @@ function sendCommentForm(){
     let formData = new FormData(form);
 
     $.ajax({
-        url: 'models/book/insert-comment.php',
+        url: '/comments',
         type: 'POST',
         data: formData,
         contentType: false,
         processData: false,
         success: function(response) {
-
-            document.getElementById('biography-input-js').value = "";
+            toastr.success(response.message)
+            document.getElementById('biography-input').value = "";
 
             let commentImages = document.querySelectorAll('.comment-image');
             let commentImagesArray = Array.prototype.slice.call(commentImages, 1);
@@ -101,9 +99,6 @@ function sendCommentForm(){
             commentImagesArray.forEach((elem) => {
                 elem.remove();
             });
-
-
-            displayServerMessages('comment-server-error',response,'success-message');
         },
         error: function(xhr, status, errorThrown) {
             let messages = JSON.parse(xhr.responseText);

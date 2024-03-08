@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call(BookCategoryTableSeeder::class);
         $this->call(OrderSeeder::class);
         $this->call(BookOrderSeeder::class);
+        $this->call(CommentSeeder::class);
+        $this->call(CommentImageSeeder::class);
 
         $this->call(LinksTableSeeder::class);
         $this->call(LinkLinkPositionSeeder::class);

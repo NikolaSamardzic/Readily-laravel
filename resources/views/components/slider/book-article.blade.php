@@ -1,5 +1,5 @@
 <article class='article-book'>
-    <div class='bg-article-color-".$lastDigit." article-div-img-container'>
+    <div class='bg-article-color-{{substr($book['id'],-1)}} article-div-img-container'>
         <img  class='set-brightness' src='{{asset('assets/images/books/small')}}/{{$book['image']['src']}}' alt='{{$book['name']}}'>
     </div>
     <div class='article-books-text-container'>
@@ -12,17 +12,21 @@
             <i onclick="addToCart(this)" data-id="{{$book['id']}}" class='fa-solid fa-cart-shopping shopping-cart' ></i>
             <div class='stars-container'>
                 @for($i=0;$i<5;$i++)
-                    @if(intval(3)>$i)
-                        <i class='fa-solid fa-star'></i>
+                    @if($book->reviewStars() > $i)
+                        <i class="fa-solid fa-star"></i>
                     @else
-                        <i class='fa-regular fa-star'></i>
+                        <i class="fa-regular fa-star"></i>
                     @endif
                 @endfor
 
-            </div>
-            <p class='rating-text'>0 ratings</p>
-            </div>
+                    @if(count($book->reviews))
+                        <p class="rating-text">{{$book->reviewStars()}}//5 (<span class='text-bold'>{{count($book->reviews)}} ratings</span>)</p>
+                    @else
+                        <p class="rating-text">no ratings</p>
+                    @endif
 
+            </div>
         </div>
-        <a class='link-to-single-a-book' href='#{{$book['id']}}'></a>
+        <a class='link-to-single-a-book' href='{{route('book.show',['book'=>$book['id']])}}'></a>
+    </div>
 </article>
