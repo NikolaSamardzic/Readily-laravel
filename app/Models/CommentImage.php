@@ -24,4 +24,8 @@ class CommentImage extends Model
             'comment_id' => $commentId
         ]);
     }
+
+    public function image(){
+        return $this->belongsTo(Image::class);
+    }
 }

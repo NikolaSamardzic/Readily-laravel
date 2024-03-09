@@ -128,7 +128,7 @@
             </div>
             <div id="review-info">
                 <p>{{count($data['book']->reviews)}} ratings</p>
-                <p>0 reviews</p>
+                <p>{{count($data['book']->comments)}} reviews</p>
             </div>
         </div>
 
@@ -200,6 +200,8 @@
         </form>
 
     @endauth
+
+    <x-book.comment :book="$data['book']"></x-book.comment>
 
 </section>
 @endsection

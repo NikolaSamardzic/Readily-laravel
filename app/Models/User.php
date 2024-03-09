@@ -80,6 +80,13 @@ class User extends Authenticatable
         }
     }
 
+    public function userReview($bookId){
+        return Review::where([
+            ['user_id','=',$this['id']],
+            ['book_id','=',$bookId]
+        ])->first();
+    }
+
     public static function createUser($data, $addressId) : User
     {
         try {

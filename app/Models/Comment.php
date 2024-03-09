@@ -17,10 +17,19 @@ class Comment extends Model
 
     public static function insertComment(mixed $input, mixed $getAuthIdentifier, $bookId)
     {
+
         return self::create([
             'text' => $input,
             'user_id' => $getAuthIdentifier,
             'book_id' => $bookId
         ]);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function commentImages(){
+        return $this->hasMany(CommentImage::class);
     }
 }

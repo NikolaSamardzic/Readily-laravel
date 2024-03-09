@@ -10,18 +10,16 @@ let formReview = document.getElementById('star-rating-form');
 if(formReview){
     let starsContainer = document.querySelectorAll('.star-icon-container');
     let idBook = formReview.getAttribute('data-book-id');
-    let idReview = formReview.getAttribute('data-review-id');
+
 
     starsContainer.forEach(star=>{
         star.addEventListener('click',()=>{
+            let idReview = formReview.getAttribute('data-review-id');
             let radioBtn = star.querySelector('input[type="radio"]');
             radioBtn.checked = true;
             let rating = radioBtn.value;
 
             let stars = document.querySelectorAll('.book-rating-star');
-
-            //console.log(radioBtn);
-
 
             for(let i=0;i<stars.length;i++){
                 if(rating>=i){
@@ -39,9 +37,10 @@ if(formReview){
 
             let formData = new FormData(formReview);
 
-            if(formReview.getAttribute('data-is-set')) formData.append('_method', 'PUT');
+            if(parseInt(formReview.getAttribute('data-is-set'))) formData.append('_method', 'PUT');
 
-            path = parseInt(formReview.getAttribute('data-is-set')) ? `/reviews/${idReview}` : `/reviews?_method=PUT`
+
+            path = parseInt(formReview.getAttribute('data-is-set')) ? `/reviews/${idReview}` : `/reviews`
 
             $.ajax({
                 url: path,
@@ -53,6 +52,11 @@ if(formReview){
                 contentType: false,
                 processData: false,
                 success: function(response) {
+                    if(!parseInt(formReview.getAttribute('data-is-set'))){
+                        formReview.setAttribute('data-is-set',1);
+                        formReview.setAttribute('data-review-id',response.review);
+                    }
+
                     toastr.success(response.message)
                 },
                 error: function(xhr, status, errorThrown) {

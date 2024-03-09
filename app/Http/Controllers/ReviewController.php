@@ -17,7 +17,7 @@ class ReviewController extends Controller
         try {
            DB::beginTransaction();
 
-           Review::insertReview($request->input('book-stars') + 1,$request->input('book-id'), auth()->user()->getAuthIdentifier());
+           $review = Review::insertReview($request->input('book-stars') + 1,$request->input('book-id'), auth()->user()->getAuthIdentifier());
 
            DB::commit();
         }catch (\Exception $e){
@@ -25,7 +25,7 @@ class ReviewController extends Controller
             return response()->json(['success' => false, 'message' => [$e->getMessage()]], $e->getCode());
         }
 
-        return response()->json(['success' => true,'message' => ['Your rating has been successfully saved.']]);
+        return response()->json(['success' => true,'message' => ['Your rating has been successfully saved.'], 'review' => $review['id']]);
     }
 
     public function update(Request $request, Review $review){
