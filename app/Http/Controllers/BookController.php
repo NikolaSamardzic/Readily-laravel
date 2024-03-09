@@ -9,6 +9,7 @@ use App\Models\BookCategory;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Publisher;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -92,6 +93,11 @@ class BookController extends StandardController
     public function show(Book $book)
     {
         $this->data['book'] = $book;
+
+        $this->data['reviewId'] = 0;
+        if(auth()->user()){
+            $this->data['reviewId'] = Review::getReviewForBookAndUser($book['id'],auth()->user()->getAuthIdentifier());
+        }
 
         $relatedCategoriesIDs = [];
         foreach ($book->categories as $category){

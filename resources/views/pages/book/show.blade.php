@@ -116,7 +116,7 @@
 
 
                 @for($i=0;$i<5;$i++)
-                    @if($book->reviewStars() > $i)
+                    @if($data['book']->reviewStars() > $i)
                         <i class="fa-solid fa-star"></i>
                     @else
                         <i class="fa-regular fa-star"></i>
@@ -135,7 +135,9 @@
 
 
     @auth()
-        <form id="star-rating-form" class="wrapper">
+        <form data-is-set="{{$data['book']->reviewStars()}}" data-book-id="{{$data['book']['id']}}" data-review-id="{{$data['reviewId']}}" id="star-rating-form" class="wrapper">
+            @csrf
+            <input type="text" hidden name="book-id" value="{{$data['book']['id']}}">
 
             <h2>Rate this Book</h2>
 
@@ -145,7 +147,7 @@
                     @for($i=0;$i<5;$i++)
                         <div class='star-icon-container'>
                             <i  class="fa-star book-rating-star @if($data['book']->reviewStars() > $i){{'fa-solid'}} @else {{'fa-regular'}}@endif"></i>
-                            <input type='radio' value='{{$i}}' hidden name='book-stars' />
+                            <input type='radio' value='{{$i}}'   hidden name='book-stars' />
                         </div>
                     @endfor
                 @endfor

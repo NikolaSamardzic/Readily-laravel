@@ -9,6 +9,8 @@ let formReview = document.getElementById('star-rating-form');
 
 if(formReview){
     let starsContainer = document.querySelectorAll('.star-icon-container');
+    let idBook = formReview.getAttribute('data-book-id');
+    let idReview = formReview.getAttribute('data-review-id');
 
     starsContainer.forEach(star=>{
         star.addEventListener('click',()=>{
@@ -17,6 +19,9 @@ if(formReview){
             let rating = radioBtn.value;
 
             let stars = document.querySelectorAll('.book-rating-star');
+
+            //console.log(radioBtn);
+
 
             for(let i=0;i<stars.length;i++){
                 if(rating>=i){
@@ -30,20 +35,29 @@ if(formReview){
                 }
             }
 
+            console.log(formReview.getAttribute('data-is-set'))
+
             let formData = new FormData(formReview);
 
+            if(formReview.getAttribute('data-is-set')) formData.append('_method', 'PUT');
+
+            path = parseInt(formReview.getAttribute('data-is-set')) ? `/reviews/${idReview}` : `/reviews?_method=PUT`
+
             $.ajax({
-                url: 'models/book/book-rating.php',
+                url: path,
                 type: 'POST',
                 data: formData,
+                headers: {
+                    Accept: "application/json; charset=utf-8",
+                },
                 contentType: false,
                 processData: false,
                 success: function(response) {
-
-                    displayServerMessages('server-messages',response,'success-message');
+                    toastr.success(response.message)
                 },
                 error: function(xhr, status, errorThrown) {
                     let messages = JSON.parse(xhr.responseText);
+
                     displayServerMessages('server-messages',messages,'error-message');
 
                     console.log(messages)
@@ -152,8 +166,6 @@ function checkCommentImages(){
             let file = image.files[0];
             let fileType = file.type.split('/')[1];
             let fileSize = file.size / (1024 * 1024);
-
-
 
             if (fileType !== 'jpg' && fileType !== 'jpeg' && fileType !== 'png') {
                 isValid = false
