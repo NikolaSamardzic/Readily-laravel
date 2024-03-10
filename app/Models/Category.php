@@ -34,6 +34,17 @@ class Category extends Model
         return $sortedCategories;
     }
 
+    public function childrenIds(){
+        $children = self::where('parent_id','=',$this['id'])->get();
+
+        $ids = [];
+        foreach ($children as $child){
+            $ids[] = $child['id'];
+        }
+
+        return $ids;
+    }
+
     public static function getRelatedCategories(array $relatedCategoriesIDs)
     {
         return self::select('parent.id', 'parent.name')
