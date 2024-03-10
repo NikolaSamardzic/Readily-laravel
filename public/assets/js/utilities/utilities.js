@@ -565,7 +565,7 @@ function categoryArticleGenerator(category){
 
 function bookArticleGenerator(book,label,image){
 
-    let writer_id = book.writer_id;
+    let writerId = book.user_id;
 
     let article = document.createElement("article");
     article.classList.add("article-book");
@@ -583,7 +583,7 @@ function bookArticleGenerator(book,label,image){
     if(image){
         bookImg.src = `assets/images/books/small/${book.src}`;
     }
-    bookImg.alt = book.title;
+    bookImg.alt = book.alt;
 
     let divTextConatiner = document.createElement("div");
     divTextConatiner.classList.add("article-books-text-container");
@@ -594,13 +594,13 @@ function bookArticleGenerator(book,label,image){
     let titleTag = document.createElement("h3");
     let authorTag = document.createElement("a");
     authorTag.classList.add("author-link");
-    authorTag.href =`index.php?page=writer&id=${writer_id}`;
-    authorTag.innerText = book.writer;
+    authorTag.href =`/writers/${book.user_id}`;
+    authorTag.innerText = `${book.first_name} ${book.last_name}`;
 
-    if(book.title.length >33){
-        titleTag.innerText = book.title.substring(0,30) + " ...";
+    if(book.name.length >33){
+        titleTag.innerText = book.name.substring(0,30) + " ...";
     }else{
-        titleTag.innerText = book.title;
+        titleTag.innerText = book.name;
     }
 
     divTitleAndAuthor.appendChild(titleTag);
@@ -611,12 +611,8 @@ function bookArticleGenerator(book,label,image){
 
     let cartTag = document.createElement("i");
     cartTag.classList.add('fa-solid','fa-cart-shopping','shopping-cart');
-    cartTag.setAttribute("id",'book-id-'+book.id);
-
-    cartTag.addEventListener("click",()=>{
-        addToCart(book.id);
-    })
-
+    cartTag.setAttribute("data-id",book.id);
+    cartTag.setAttribute('onclick','addToCart(this)')
 
     let divStarsContainer = document.createElement("div");
     divStarsContainer.classList.add("stars-container");
@@ -645,7 +641,7 @@ function bookArticleGenerator(book,label,image){
 
     let linkToABookTag = document.createElement("a");
     linkToABookTag.classList.add("link-to-single-a-book");
-    linkToABookTag.href =`index.php?page=book&id=${book.id}`;
+    linkToABookTag.href =`/books/${book.id}`;
 
     divImgContainer.appendChild(bookImg);
     article.appendChild(divImgContainer);

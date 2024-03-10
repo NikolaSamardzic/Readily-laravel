@@ -8,6 +8,7 @@ use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\Cart;
 use \App\Http\Controllers\CommentController;
 use \App\Http\Controllers\ReviewController;
+use \App\Http\Controllers\ShopController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +52,9 @@ Route::post('/comments',[CommentController::class,'store'])->name('comment.store
 
 Route::post("/reviews",[ReviewController::class,'store']);
 Route::put("/reviews/{review}",[ReviewController::class,'update']);
+
+
+Route::get("/shop",[ShopController::class,'index'])->name('shop.index');
 
 Route::get('/sitemap',function (){
     return redirect(asset('assets/sitemap.xml'));

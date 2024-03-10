@@ -2407,6 +2407,13 @@ textarea {
   font-size: 1.25rem;
 }
 
+.shop-heading {
+  color: var(--text-color-heading);
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
 #heading-sort {
   color: var(--text-color-heading);
   margin-bottom: 0.5rem;
