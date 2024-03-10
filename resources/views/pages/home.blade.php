@@ -99,4 +99,49 @@
         @endforeach
     </x-slider.slider>
 
+    @auth()
+        <form class="sign-up-container" id="message-form" >
+
+            <h2>Get in Touch with Us</h2>
+
+            <div class="info-container-grid personal-info-container-grid">
+
+                <x-form.input
+                    for="subject-input-js"
+                    idLabel="first-name-title"
+                    classLabel="input-title"
+                    label="Subject"
+                    inputType="text"
+                    inputName="subject"
+                    idInput="subject-input-js"
+                    classInput="first-name-input"
+                    idError="first-name-error"
+                    error="Can't be empty"
+                />
+
+                <x-form.text-area
+                    for="biography-input"
+                    idLabel="biography-title"
+                    classLabel="biography-title"
+                    label="Message"
+                    textAreaName="text"
+                    textAreaId="biography-input"
+                    textAreaClass="biography-input"
+                    idError="biography-error"
+                    error="There must be at least 5 words."
+                    displayed="1"
+                />
+
+            </div>
+
+            <div class="server-messages" style="display:none">
+            </div>
+
+            <div class="button-option-container">
+                <input type="button" class="safe-option" id="send-message-form" value="Send">
+            </div>
+        </form>
+    @endauth
+
+
 @endsection

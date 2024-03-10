@@ -226,7 +226,7 @@ function displaySuggestions(){
 
 
 function setMessageForm(){
-    $(document).on('blur','#biography-input-js',checkBiography);
+    $(document).on('blur','#biography-input',checkBiography);
 
     $(document).on('blur','#subject-input-js',()=>{
         let subject = document.getElementById('subject-input-js').value;
@@ -265,25 +265,18 @@ function sendMessageForm(){
     let formData = new FormData(form);
 
     $.ajax({
-        url: 'models/message/send-message.php',
+        url: '/messages',
         type: 'POST',
         data: formData,
         contentType: false,
         processData: false,
         success: function(response) {
-            console.log('uspeh')
+            toastr.success(response.message)
             clearAllInputValuesMessage();
-
-            displayServerMessages('server-messages',response,'success-message');
         },
         error: function(xhr, status, errorThrown) {
-            console.log('neuspeh')
             let messages = JSON.parse(xhr.responseText);
-            displayServerMessages('server-messages',messages,'error-message');
-
-            console.log(messages)
-            console.log(xhr);
-            console.log(status, errorThrown);
+            toastr.error(messages.message)
         }
     });
 }
@@ -291,5 +284,5 @@ function sendMessageForm(){
 function clearAllInputValuesMessage(){
     console.log('radi')
     document.getElementById('subject-input-js').value = "";
-    document.getElementById('biography-input-js').value = "";
+    document.getElementById('biography-input').value = "";
 }
