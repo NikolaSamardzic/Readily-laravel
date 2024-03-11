@@ -34,31 +34,92 @@ class Category extends Model
         return $sortedCategories;
     }
 
-    public function childrenIds(){
-        $children = self::where('parent_id','=',$this['id'])->get();
+    public static function childrenIds($id){
+        $children = self::query()->select('id')->where('parent_id','=',$id)->get();
+//
+//        $ids = [];
+//        foreach ($children as $child){
+//            $ids[] = $child['id'];
+//        }
 
-        $ids = [];
-        foreach ($children as $child){
-            $ids[] = $child['id'];
-        }
-
-        return $ids;
+        return $children->toArray();
     }
 
     public static function getRelatedCategories(array $relatedCategoriesIDs)
     {
-        return self::select('parent.id', 'parent.name')
+
+        $valuesNotIn[] = 0;
+        $resultsArray = [];
+
+        $parents = self::select('parent.id', 'parent.name')
             ->distinct()
             ->from('categories as parent')
             ->join('categories as child', 'child.parent_id', '=', 'parent.id')
             ->whereNull('parent.deleted_at')
             ->whereIn('child.id', $relatedCategoriesIDs )
             ->get();
+
+        for($i=0;$i<count($parents);$i++){
+
+
+            $book = Book::query()
+                ->select('books.id', 'images.src', DB::raw('1 AS category_name'), DB::raw('1 AS category_id'))
+                ->join('book_category','book_category.book_id','=','books.id')
+                ->join('images','images.id','=','books.image_id')
+                ->whereIn('book_category.category_id',function ($query) use ($parents,$i){
+                    $query->select('child.id')
+                        ->from('categories as parent')
+                        ->join('categories as child', 'parent.id', '=', 'child.parent_id')
+                        ->where('parent.id', '=', $parents[$i]['id']);
+                })
+                ->whereNotIn('books.id',$valuesNotIn)
+                ->groupBy('books.id','images.src')
+                ->first();
+
+            $result = $book->toArray();
+            $result['category_name'] = $parents[$i]['name'];
+            $result['category_id'] = $parents[$i]['id'];
+            $valuesNotIn[] = $result['id'];
+            $resultsArray[] = $result;
+        }
+
+        return $resultsArray;
+
     }
 
     public static function getAllActiveParentCategories()
     {
-        return self::whereNull('parent_id')->get();
+
+        $valuesNotIn[] = 0;
+        $resultsArray = [];
+
+        $parents = Category::query()->whereNull('parent_id')->get();
+
+        for($i=0;$i<count($parents);$i++){
+
+
+            $book = Book::query()
+                ->select('books.id', 'images.src', DB::raw('1 AS category_name'), DB::raw('1 AS category_id'))
+                ->join('book_category','book_category.book_id','=','books.id')
+                ->join('images','images.id','=','books.image_id')
+                ->whereIn('book_category.category_id',function ($query) use ($parents,$i){
+                    $query->select('child.id')
+                        ->from('categories as parent')
+                        ->join('categories as child', 'parent.id', '=', 'child.parent_id')
+                        ->where('parent.id', '=', $parents[$i]['id']);
+                })
+                ->whereNotIn('books.id',$valuesNotIn)
+                ->groupBy('books.id','images.src')
+                ->first();
+
+            $result = $book->toArray();
+            $result['category_name'] = $parents[$i]['name'];
+            $result['category_id'] = $parents[$i]['id'];
+            $valuesNotIn[] = $result['id'];
+            $resultsArray[] = $result;
+        }
+
+        return $resultsArray;
     }
 
 

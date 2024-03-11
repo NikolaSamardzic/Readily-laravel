@@ -29,7 +29,7 @@ class HomeController extends StandardController
             $this->data['preferedCategoriesBooks'] = Book::relatedBooksToACategories($ids);
         }
 
-
+        //dd($this->data['categories']);
         return view('pages.home', ['data' => $this->data]);
     }
 }
