@@ -21,9 +21,11 @@ let cookie = document.cookie.split(';');
 for(let i=0; i<cookie.length;i++){
 
     let name = cookie[i].trim().split('=')[0];
+    let value = JSON.parse(decodeURIComponent(cookie[i].trim().split('=')[1])) ;
 
-    if(name === 'hasPreferedCategories'){
-        createAngleFunctionality('suggested-books','#suggested-books','sugested-books-articles-container','books');
+    if(name === 'hasPreferedCategories' && value.length > 0){
+        console.log(value)
+        createAngleFunctionality('suggested-books','#suggested-books','suggested-books-articles-container','books');
     }
 
 }
@@ -52,21 +54,22 @@ window.addEventListener("scroll",()=>{
 
         switch(name){
             case 'hasPreferedCategories':
-                hasPreferedCategories = value;
+                hasPreferedCategories = JSON.parse(value) ;
                 break;
             case 'isLoggedIn':
-                isLoggedIn = value;
+                isLoggedIn = parseInt(value) ;
                 break;
         }
     }
 
-    if(hasPreferedCategories || !isLoggedIn){
+    //console.log(hasPreferedCategories)
+    if(hasPreferedCategories.length > 0 || !isLoggedIn){
         return;
     }
 
 
     let exist = document.querySelector(".choosing-categories-section");
-    if(exist !== undefined){
+    if(exist != undefined){
         return;
     }
 
@@ -133,22 +136,22 @@ function sendSurvey(idForm){
 function displayChoosingCategories(element){
 
     $.ajax({
-        url: 'models/category/get-active-categories.php',
-        type: 'POST',
+        url: '/categories',
+        type: 'GET',
         dataType: 'json',
-        success:function(allCategories){
-            console.log(allCategories);
-            for(let i=0;i<allCategories.length;i++){
-                let article = categoryArticleGenerator(allCategories[i]);
+        success:function(result){
+            console.log(result.categories.length);
+            for(let i=0;i<result.categories.length;i++){
+                let article = categoryArticleGenerator(result.categories[i]);
 
                 let checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.name = "checkbox-prefered-categories[]"
-                checkbox.value = allCategories[i].category_id;
+                checkbox.value = result.categories[i].category_id;
                 checkbox.classList.add("category-checkbox-choose");
-                checkbox.setAttribute("id",`prefered-category-${allCategories[i].category_id}`)
+                checkbox.setAttribute("id",`prefered-category-${result.categories[i].category_id}`)
 
-                $(document).on("change",`#prefered-category-${allCategories[i].category_id}`,settingUserPreferedCategories);
+                $(document).on("change",`#prefered-category-${result.categories[i].category_id}`,settingUserPreferedCategories);
 
                 article.appendChild(checkbox);
                 element.appendChild(article);
@@ -203,13 +206,14 @@ function displaySuggestions(){
     let formData = new FormData(form);
 
     $.ajax({
-        url: 'models/book/get-suggested-books.php',
+        url: '/categories/preferred',
         type: 'POST',
         data: formData,
         contentType: false,
         processData: false,
-        success:function(books){
-            sectionGenerator("suggested-books","sugested-books-articles-container","Books Recommended For You",bookArticleGenerator,books,"books")
+        success:function(result){
+            console.log(result.books)
+            sectionGenerator("suggested-books","sugested-books-articles-container","Books Recommended For You",bookArticleGenerator,result.books,"books")
         },
         error: function(xhr, status, errorThrown) {
             let messages = JSON.parse(xhr.responseText);

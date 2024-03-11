@@ -140,6 +140,9 @@ class User extends Authenticatable
     }
 
 
+    public function categories(){
+        return $this->hasMany(UserCategory::class);
+    }
 
     public function biography() : HasOne
     {

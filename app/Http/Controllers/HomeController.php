@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Category;
 use Doctrine\DBAL\Schema\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends StandardController
 {
@@ -21,6 +22,13 @@ class HomeController extends StandardController
         foreach ($this->data['categories'] as $key => $category){
             $category['src'] =  $key + 1 . '.jpg';
         }
+
+        if(Auth::user() && count(Auth::user()->categories)){
+            $categories = Auth::user()->categories->toArray();
+            $ids = array_column($categories, 'id');
+            $this->data['preferedCategoriesBooks'] = Book::relatedBooksToACategories($ids);
+        }
+
 
         return view('pages.home', ['data' => $this->data]);
     }

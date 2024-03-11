@@ -10,6 +10,7 @@ use \App\Http\Controllers\CommentController;
 use \App\Http\Controllers\ReviewController;
 use \App\Http\Controllers\ShopController;
 use \App\Http\Controllers\MessageController;
+use \App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,10 +55,12 @@ Route::post('/comments',[CommentController::class,'store'])->name('comment.store
 Route::post("/reviews",[ReviewController::class,'store']);
 Route::put("/reviews/{review}",[ReviewController::class,'update']);
 
+Route::get('/categories',[CategoryController::class,'activeChildren'])->name('category.user.index');
+Route::post('/categories/preferred',[CategoryController::class,'preferred']);
 
 Route::get("/shop",[ShopController::class,'index'])->name('shop.index');
 
-Route::post('/messages',[\App\Http\Controllers\MessageController::class,'store']);
+Route::post('/messages',[MessageController::class,'store']);
 
 Route::get('/sitemap',function (){
     return redirect(asset('assets/sitemap.xml'));

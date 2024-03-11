@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,13 +44,26 @@ class LoginController extends StandardController
         foreach ($userCart as $item)
             $cartData[] = ['id'=>$item['id'], 'quantity' => $item['quantity']];
 
-        $cookie = cookie('cart', json_encode($cartData), 120,null,null,null,false,);
+        $preferedCategories = $user->categories;
+        $ids = [];
+        foreach ($preferedCategories as $category){
+            $ids[] = $category['category_id'];
+        }
 
-        return redirect()->route('home')->cookie($cookie);
+
+        $cart = cookie('cart', json_encode($cartData), 120,null,null,null,false,true);
+        $isLoggedIn = cookie('isLoggedIn', 1, 120,null,null,null,false,true);
+        $hasPreferedCategories = cookie('hasPreferedCategories', json_encode($ids), 120,null,null,null,false,true);
+
+        return redirect()->route('home')->cookie($cart)->cookie($isLoggedIn)->cookie($hasPreferedCategories);
     }
 
     public function logout(Request $request){
         Auth::logout();
+        \Illuminate\Support\Facades\Cookie::queue(\Illuminate\Support\Facades\Cookie::forget('isLoggedIn'));
+        \Illuminate\Support\Facades\Cookie::queue(\Illuminate\Support\Facades\Cookie::forget('hasPreferedCategories'));
+        \Illuminate\Support\Facades\Cookie::queue( \Illuminate\Support\Facades\Cookie::forget('cart'));
+
         return redirect()->route('home');
     }
 }

@@ -68,8 +68,11 @@
     classSection="wrapper"
     classContainer="article-book-container"
     >
-        @if(0)
+        @if(isset($data['preferedCategoriesBooks']))
         <x-slot name="heading">Books Recommended For You</x-slot>
+            @foreach($data['preferedCategoriesBooks'] as $book)
+                <x-slider.book-article :book="$book" />
+            @endforeach
         @endif
     </x-slider.slider>
 
