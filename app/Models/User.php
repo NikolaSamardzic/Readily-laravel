@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -78,6 +78,62 @@ class User extends Authenticatable
         } catch (\Exception $e) {
             throw $e;
         }
+    }
+
+    public static function getActiveUsers()
+    {
+        return self::query()->where('is_banned','=',0)->whereNotNull('email_verified_at')->get();
+    }
+
+    public static function getDeletedUsers()
+    {
+        return self::query()->whereNotNull('deleted_at')->whereNotNull('email_verified_at')->withTrashed()->get();
+    }
+
+    public static function getBannedUsers()
+    {
+        return self::query()->whereNull('deleted_at')->whereNotNull('email_verified_at')->where('is_banned','=',1)->get();
+    }
+
+    public static function getUser($id)
+    {
+        return self::query()->withTrashed()->find($id);
+    }
+
+    public static function deleteUser(mixed $id)
+    {
+        $user = self::find($id);
+
+        if ($user) {
+            $user->delete();
+            return $user;
+        }
+
+        throw new \Exception('User doesn\'t exists!',404);
+    }
+
+    public static function activateUser($id)
+    {
+        $user = self::query()->withTrashed()->find($id);
+        $user['deleted_at'] = null;
+        $user->save();
+        return $user;
+    }
+
+    public static function banUser($id)
+    {
+        $user = self::query()->withTrashed()->find($id);
+        $user['is_banned'] = 1;
+        $user->save();
+        return $user;
+    }
+
+    public static function unbanUser($id)
+    {
+        $user = self::query()->withTrashed()->find($id);
+        $user['is_banned'] = 0;
+        $user->save();
+        return $user;
     }
 
     public function userReview($bookId){

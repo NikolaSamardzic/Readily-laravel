@@ -77,7 +77,6 @@ class ShopController extends StandardController
         $this->data['query'] = $books;
         $this->data['parameters'] = $parameters;
 
-        //dd($this->data['query']);
 
         $this->data['sortOptions'] = Sort::all();
         $this->data['categories'] = Category::getAllActiveCategories();

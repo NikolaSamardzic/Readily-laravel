@@ -24,8 +24,9 @@ class BookController extends StandardController
     /**
      * Display a listing of the resource.
      */
-    public function index(User $user)
+    public function index($id)
     {
+        $user = User::getUser($id);
         $this->data['user'] = $user;
         $this->data['activeBooks'] = Book::activeBooks($user['id']);
         $this->data['deletedBooks'] = Book::deletedBooks($user['id']);

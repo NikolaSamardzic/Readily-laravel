@@ -107,6 +107,15 @@ class Book extends Model
         return self::whereIn('user_id',$id)->inRandomOrder()->limit(20)->get();
     }
 
+    public static function deleteUsersBooks(mixed $id)
+    {
+        $books = self::query()->where('user_id','=',$id)->get();
+
+        foreach ($books as $book){
+            $book->delete();
+        }
+    }
+
     public function reviewStars()
     {
         $review = Review::select(DB::raw('avg(stars) as stars'))->groupBy('book_id')->where('book_id','=',$this['id'])->first();

@@ -5,8 +5,8 @@
     <div class='article-books-text-container'>
         <div class='title-and-author'>
             <h3>{{$book['name']}}</h3>
+            <a class='author-link' href='{{route('user.writer',['user'=>$book['user']['id']])}}'>{{$book['user']['first_name']}} {{$book['user']['last_name']}}</a>
 
-            <a class='author-link' href='{{route('user.writer',['user'=>$book['user']])}}'>{{$book['user']['first_name']}} {{$book['user']['last_name']}}</a>
         </div>
         <div class='stars-and-cart-container'>
             <i onclick="addToCart(this)" data-id="{{$book['id']}}" class='fa-solid fa-cart-shopping shopping-cart' ></i>

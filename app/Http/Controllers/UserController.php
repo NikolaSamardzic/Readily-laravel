@@ -8,6 +8,7 @@ use App\Mail\SignUp;
 use App\Models\Address;
 use App\Models\Avatar;
 use App\Models\Biography;
+use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,13 +18,21 @@ use Illuminate\Support\Facades\Mail;
 use function PHPUnit\Framework\isNan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Link;
+
 class UserController extends StandardController
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->data['activeUsers'] = User::getActiveUsers();
+        $this->data['deletedUsers'] = User::getDeletedUsers();
+        $this->data['bannedUsers'] = User::getBannedUsers();
+
+
+        return view('pages.user.index',['data'=>$this->data]);
     }
 
     /**
@@ -91,10 +100,13 @@ class UserController extends StandardController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit($id)
     {
+        $user = User::getUser($id);
+
         $biography = "";
-        if(isset($user->biography)) $biography = $user->biography['text'];
+
+        if(isset($user->biography)) $biography = $user->biography['biography_text'];
         $this->data['biography'] = $biography;
 
         $addressName = "";
@@ -120,8 +132,9 @@ class UserController extends StandardController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, $id)
     {
+        $user = User::getUser($id);
         $userData = $request->only('first-name-input', 'last-name-input', 'username-input', 'email-input','phone-input',);
 
         try {
@@ -169,9 +182,23 @@ class UserController extends StandardController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $user,Request $request)
     {
-        $user->delete();
+        try {
+            DB::beginTransaction();
+
+            Book::deleteUsersBooks($user['id']);
+
+            $user = User::deleteUser($user['id']);
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+        }
+
+        if($request->ajax()){
+            return response()->json(['success' => true,'message' => 'User deleted successfully']);
+        }
+
         return redirect()->route('home');
     }
 
@@ -218,5 +245,47 @@ class UserController extends StandardController
 
 
         return view('pages.user.writer', ['data' => $this->data]);
+    }
+
+    public function activateUser($id){
+        try {
+            DB::beginTransaction();
+            $user = User::activateUser($id);
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            return response()->json(['success' => false, 'message' => $e->getMessage()], $e->getCode());
+        }
+
+        return response()->json(['success' => true,'message' => 'USer activated successfully','id' => $id]);
+    }
+
+    public function banUser($id){
+        try {
+            DB::beginTransaction();
+            $user = User::banUser($id);
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            return response()->json(['success' => false, 'message' => $e->getMessage()], $e->getCode());
+        }
+
+        return response()->json(['success' => true,'message' => 'USer banned successfully','id' => $id]);
+    }
+
+    public function unbanUser($id){
+        try {
+            DB::beginTransaction();
+            $user = User::unbanUser($id);
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            return response()->json(['success' => false, 'message' => $e->getMessage()], $e->getCode());
+        }
+
+        return response()->json(['success' => true,'message' => 'USer unbanned successfully','id' => $id]);
     }
 }

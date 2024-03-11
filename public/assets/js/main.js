@@ -8,7 +8,7 @@ const regExAndPage = [
     [/^\/users\/\d+\/edit$/, 'pages/user-edit.js'],
     [/^\/users\/create$/, 'pages/user-create.js'],
     [/^\/users\/\d+$/, 'pages/user-index.js'],
-    [/^\/admin\/users$/, 'pages/admin/users.js'],
+    [/^\/users$/, 'pages/admin/users.js'],
     [/^\/admin\/publishers$/, 'pages/admin/publishers.js'],
     [/^\/admin\/surveys$/, 'pages/admin/surveys.js'],
     [/^\/admin\/categories$/, 'pages/admin/categories.js'],
@@ -34,12 +34,16 @@ window.onload = function(){
 
         if(regEx.test(url)){
             loadScript(page);
+
+            if(!page.includes('admin')){
+                setThemeClass();
+                setHeader();
+            }
             break;
         }
     }
 
-    setThemeClass();
-    setHeader();
+
 }
 
 function loadScript(src){

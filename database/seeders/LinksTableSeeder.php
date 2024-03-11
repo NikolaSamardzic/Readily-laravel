@@ -12,7 +12,7 @@ class LinksTableSeeder extends Seeder
      * Run the database seeds.
      */
     private $links = [
-        ['name'=>'Admin', 'href'=>'home', 'appearance_order'=>1, 'link_target_id' =>1, 'link_type_id'=>1],
+        ['name'=>'Admin', 'href'=>'admin.index', 'appearance_order'=>1, 'link_target_id' =>1, 'link_type_id'=>1],
         ['name'=>'Shop', 'href'=>'shop.index', 'appearance_order'=>3, 'link_target_id' =>1, 'link_type_id'=>1],
         ['name'=>'Checkout', 'href'=>'cart.checkout', 'appearance_order'=>4, 'link_target_id' =>1, 'link_type_id'=>1],
         ['name'=>'Sign up', 'href'=>'users.create', 'appearance_order'=>5, 'link_target_id' =>1, 'link_type_id'=>1],

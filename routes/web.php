@@ -11,6 +11,7 @@ use \App\Http\Controllers\ReviewController;
 use \App\Http\Controllers\ShopController;
 use \App\Http\Controllers\MessageController;
 use \App\Http\Controllers\CategoryController;
+use \App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,8 @@ use \App\Http\Controllers\CategoryController;
 |
 */
 
+Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
+
 Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/login', [LoginController::class,'index'])->name('login.index');
 Route::get('/login/logout', [LoginController::class,'logout'])->name('login.logout');
@@ -31,10 +34,15 @@ Route::get('/users/create', [UserController::class,'create'])->name('users.creat
 Route::post('/users', [UserController::class,'store'])->name('users.store');
 Route::get('/users/{user}', [UserController::class,'show'])->name('users.show');
 Route::delete('/users/{user}', [UserController::class,'destroy'])->name('users.destroy');
-Route::get('/users/{user}/edit', [UserController::class,'edit'])->name('users.edit');
-Route::put('/users/{user}', [UserController::class,'update'])->name('users.update');
+Route::get('/users/{id}/edit', [UserController::class,'edit'])->name('users.edit');
+Route::put('/users/{id}', [UserController::class,'update'])->name('users.update');
+Route::get('/users',[UserController::class,'index'])->name('users.index');
+Route::put('/users/{id}/activate', [UserController::class,'activateUser'])->name('users.activate');
+Route::put('/users/{id}/ban', [UserController::class,'banUser'])->name('users.ban');
+Route::put('/users/{id}/unban', [UserController::class,'unbanUser'])->name('users.unban');
 
-Route::get('/writers/{user}/books', [BookController::class,'index'])->name('books.index');
+
+Route::get('/writers/{id}/books', [BookController::class,'index'])->name('books.index');
 Route::get('/writers/{user}/books/create', [BookController::class,'create'])->name('books.create');
 Route::get('/writers/{user}/books/{book}/edit', [BookController::class,'edit'])->name('books.edit');
 Route::post('/books', [BookController::class,'store'])->name('books.store');

@@ -13,7 +13,7 @@
 @section('mainContent')
 
 <section id="user-profile-section">
-    <form onsubmit="return saveUpdatedUserData()"  class="sign-up-container" id="update-user-form" enctype="multipart/form-data" name="signup-form" action="{{route('users.update',['user' => $data['user']])}}" method="post" >
+    <form onsubmit="return saveUpdatedUserData()"  class="sign-up-container" id="update-user-form" enctype="multipart/form-data" name="signup-form" action="{{route('users.update',['id' => $data['user']['id']])}}" method="post" >
     @csrf
     @method('PUT')
 
@@ -113,6 +113,7 @@
             <p id="role-title" class="input-title ">Role</p>
             <p id="role-input-js"  class="role-input user-information">{{ucfirst($data['user']->role['name'])}}</p>
 
+
             <x-form.text-area
                 for="biography-input"
                 idLabel="biography-title"
@@ -123,6 +124,7 @@
                 textAreaClass="biography-input"
                 idError="biography-error"
                 error="There must be at least 5 words."
+                :userID="$data['user']['id']"
                 textValue="{{old('biography-input') != null ? old('biography-input') : $data['biography']}}"
             />
         </div>

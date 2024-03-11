@@ -29,7 +29,14 @@ class HomeController extends StandardController
             $this->data['preferedCategoriesBooks'] = Book::relatedBooksToACategories($ids);
         }
 
-        //dd($this->data['categories']);
+//        $test = [];
+//        $test[] = $this->data['bestSellingBooks'][0]->toArray();
+//        $test[] = $this->data['preferedCategoriesBooks'][0]->toArray();
+//        dd($test);
+
+        //dd()
+
+
         return view('pages.home', ['data' => $this->data]);
     }
 }

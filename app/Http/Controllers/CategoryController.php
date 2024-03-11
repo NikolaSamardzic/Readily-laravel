@@ -14,6 +14,7 @@ class CategoryController extends Controller
 
     public function preferred(Request $request){
 
+
         foreach ($request->input('checkbox-prefered-categories') as $categoryId){
             UserCategory::create([
                 'category_id' => $categoryId,
