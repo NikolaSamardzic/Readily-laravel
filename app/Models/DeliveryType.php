@@ -47,7 +47,7 @@ class DeliveryType extends Model
 
     public static function getDeliveryTypeWithId(string $id)
     {
-        return self::query()->where('id','=',$id)->first();
+        return self::query()->where('id','=',$id)->withTrashed()->first();
     }
 
     public static function updateDelivery(string $id, mixed $input)
