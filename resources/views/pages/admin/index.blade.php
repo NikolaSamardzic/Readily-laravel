@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="admin-option">
-                <a href="#"></a>
+                <a href="{{route('publishers.index')}}"></a>
                 <div class="option-name-container">
                     <p>Publishers</p>
                 </div>

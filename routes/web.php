@@ -13,6 +13,7 @@ use \App\Http\Controllers\MessageController;
 use \App\Http\Controllers\CategoryController;
 use \App\Http\Controllers\AdminController;
 use \App\Http\Controllers\DeliveryController;
+use \App\Http\Controllers\PublisherController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +24,14 @@ use \App\Http\Controllers\DeliveryController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/admin/publishers',[PublisherController::class,'index'])->name('publishers.index');
+Route::delete('/publishers/{id}',[PublisherController::class,'destroy'])->name('publishers.destroy');
+Route::put('/publishers/{id}/activate',[PublisherController::class,'activate'])->name('publishers.activate');
+Route::get('/publishers/create',[PublisherController::class,'create'])->name('publishers.create');
+Route::post('/publishers',[PublisherController::class,'store'])->name('publishers.store');
+Route::get('/publishers/{id}',[PublisherController::class,'edit'])->name('publishers.edit');
+Route::put('/publishers/{id}',[PublisherController::class,'update'])->name('publishers.update');
 
 Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
 Route::get('/admin/deliveries',[DeliveryController::class,'index'])->name('delivery.index');
