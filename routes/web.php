@@ -12,6 +12,7 @@ use \App\Http\Controllers\ShopController;
 use \App\Http\Controllers\MessageController;
 use \App\Http\Controllers\CategoryController;
 use \App\Http\Controllers\AdminController;
+use \App\Http\Controllers\DeliveryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,13 @@ use \App\Http\Controllers\AdminController;
 */
 
 Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
+Route::get('/admin/deliveries',[DeliveryController::class,'index'])->name('delivery.index');
+Route::delete('/deliveries/{id}',[DeliveryController::class,'destroy'])->name('delivery.destroy');
+Route::put('/deliveries/{id}/activate',[DeliveryController::class,'activate'])->name('delivery.activate');
+Route::get('/deliveries/create',[DeliveryController::class,'create'])->name('delivery.create');
+Route::post('/deliveries',[DeliveryController::class,'store'])->name('delivery.store');
+Route::get('/deliveries/{id}',[DeliveryController::class,'edit'])->name('delivery.edit');
+Route::put('/deliveries/{id}',[DeliveryController::class,'update'])->name('delivery.update');
 
 Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/login', [LoginController::class,'index'])->name('login.index');

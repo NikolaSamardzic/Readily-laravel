@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="admin-option">
-                <a href="index.php?page=admin-publishers"></a>
+                <a href="#"></a>
                 <div class="option-name-container">
                     <p>Publishers</p>
                 </div>
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="admin-option">
-                <a href="index.php?page=admin-delivery-options"></a>
+                <a href="{{route('delivery.index')}}"></a>
                 <div class="option-name-container">
                     <p>Delivery Options</p>
                 </div>
