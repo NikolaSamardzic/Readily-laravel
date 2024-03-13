@@ -26,6 +26,7 @@
         </x-table.table>
 
         <div class="add-button-container add-buttons-container" >
+            <a class="safe-option" href="{{route('admin.index')}}">Return to Admin Panel</a>
             <a class="safe-option" href="{{route('categories.create')}}">Add Category</a>
 
         </div>

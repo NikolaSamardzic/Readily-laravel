@@ -10,6 +10,8 @@
 
 @section('mainContent')
 
+
+
     <section id="admin-users-section" class="wrapper">
 
         <x-table.table
@@ -30,5 +32,12 @@
 
             @endforeach
         </x-table.table>
+
+        <div class="add-button-container add-buttons-container" >
+            <a class="safe-option" href="{{route('admin.index')}}">Return to Admin Panel</a>
+        </div>
+
+    </section>
+
 
 @endsection

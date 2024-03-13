@@ -76,21 +76,6 @@
             </div>
         </div>
 
-        <h2 class="admin-option-title">Surveys</h2>
-        <div class="admin-option-container">
-
-            <div class="admin-option">
-                <a href="index.php?page=admin-survey"></a>
-                <div class="option-name-container">
-                    <p>Survey Result</p>
-                </div>
-                <div class="option-icon-container">
-                    <img src="{{asset('assets/images/admin')}}/survey.svg" alt="survey icon" />
-                </div>
-            </div>
-        </div>
-
-
         <h2 class="admin-option-title">Messages</h2>
         <div class="admin-option-container">
 

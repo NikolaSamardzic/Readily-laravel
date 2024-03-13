@@ -26,8 +26,8 @@
         </x-table.table>
 
         <div class="add-button-container add-buttons-container" >
+            <a class="safe-option" href="{{route('admin.index')}}">Return to Admin Panel</a>
             <a class="safe-option" href="{{route('publishers.create')}}">Add Publisher</a>
-
         </div>
 
 
@@ -43,4 +43,5 @@
                 />
             @endforeach
         </x-table.table>
+    </section>
 @endsection

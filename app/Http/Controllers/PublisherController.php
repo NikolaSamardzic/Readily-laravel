@@ -17,7 +17,7 @@ class PublisherController extends StandardController
         $this->data['activePublishers'] = Publisher::getAllActive();
         $this->data['deletedPublishers'] = Publisher::getAllDeleted();
 
-        return view('pages.admin.publisher',['data'=>$this->data]);
+        return view('pages.admin.publisher.index',['data'=>$this->data]);
     }
 
     /**

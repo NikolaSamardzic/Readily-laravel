@@ -27,7 +27,9 @@
                 />
             @endforeach
         </x-table.table>
-
+        <div class="add-button-container add-buttons-container" >
+            <a class="safe-option" href="{{route('admin.index')}}">Return to Admin Panel</a>
+        </div>
 
         <x-table.table
             tableTitle="Deleted Users"
