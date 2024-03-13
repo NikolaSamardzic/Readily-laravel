@@ -5,11 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $fillable=[
+        'name',
+        'parent_id'
+    ];
 
     public static function getAllActiveCategories()
     {
@@ -36,11 +42,7 @@ class Category extends Model
 
     public static function childrenIds($id){
         $children = self::query()->select('id')->where('parent_id','=',$id)->get();
-//
-//        $ids = [];
-//        foreach ($children as $child){
-//            $ids[] = $child['id'];
-//        }
+
 
         return $children->toArray();
     }
@@ -122,6 +124,63 @@ class Category extends Model
         return $resultsArray;
     }
 
+    public static function getAllActive()
+    {
+        return self::query()->whereNull('deleted_at')->get();
+    }
+
+    public static function getAllDeleted()
+    {
+        return self::query()->whereNotNull('deleted_at')->withTrashed()->get();
+    }
+
+    public static function deleteCategoryWithId(string $id)
+    {
+        $category = Category::query()->find($id);
+        $category->delete();
+    }
+
+    public static function activateCategoryWithId($id)
+    {
+        $category = Category::query()->where('id','=',$id)->withTrashed()->first();
+        $category['deleted_at'] = null;
+        $category->save();
+    }
+
+    public static function deleteChildrenWithParentId(string $id)
+    {
+        $children = Category::query()->where('parent_id','=',$id)->get();
+        foreach ($children as $child){
+            $child->delete();
+        }
+    }
+
+    public static function getParents()
+    {
+        return self::query()->whereNull('parent_id')->get();
+    }
+
+    public static function storeCategory($name, $parentId)
+    {
+        self::query()->create([
+           'name' => $name,
+           'parent_id' => ($parentId == 0 ? null : $parentId)
+        ])->save();
+    }
+
+    public static function getCategoryWithId(string $id)
+    {
+        return self::where('id','=',$id)->withTrashed()->first();
+    }
+
+    public static function updateCategory(string $id, mixed $name, $parentId)
+    {
+        $category = self::query()->where('id','=',$id)->withTrashed()->first();
+
+        $category['name'] = $name;
+        $category['parent_id'] = $parentId != 0 ? $parentId : null;
+        $category->save();
+    }
 
     public function books() : BelongsToMany
     {
@@ -130,7 +189,7 @@ class Category extends Model
 
     public function parent()
     {
-        return $this->belongsTo(Category::class, 'parent_id');
+        return $this->belongsTo(Category::class, 'parent_id')->withTrashed();
     }
 
     public function children()

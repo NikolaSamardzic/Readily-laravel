@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Book;
 use App\Models\BookCategory;
 use App\Models\Category;
@@ -12,9 +13,98 @@ use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
 
+    public function index()
+    {
+        $this->data['activeCategories'] = Category::getAllActive();
+        $this->data['deletedCategories'] = Category::getAllDeleted();
+
+
+        return view('pages.admin.category.index',['data'=>$this->data]);
+    }
+
+    public function create()
+    {
+        $this->data['parentCategories'] = Category::getParents();
+
+        return view('pages.admin.category.create',['data'=>$this->data]);
+    }
+
+    public function store(CategoryRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+            Category::storeCategory($request->input('category-name'),$request->input('select-category'));
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            return redirect()->back()->with('error','There is an error please try later.');
+        }
+
+        return redirect()->back()->with('success','You successfully added a new category!');
+    }
+
+    public function edit(string $id)
+    {
+        $this->data['parentCategories'] = Category::getParents();
+        $this->data['category'] = Category::getCategoryWithId($id);
+
+
+        return view ('pages.admin.category.edit',['data'=>$this->data]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(CategoryRequest $request, string $id)
+    {
+       // dd($request->input('select-category'));
+        try {
+            DB::beginTransaction();
+            Category::updateCategory($id,$request->input('category-name'),$request->input('select-category'));
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error','There is an error, please try later');
+        }
+
+        return redirect()->back()->with('success','Updated successfully!');
+    }
+
+    public function destroy(string $id)
+    {
+        try {
+            DB::beginTransaction();
+            Category::deleteCategoryWithId($id);
+            Category::deleteChildrenWithParentId($id);
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            return response()->json(['success' => false,'message' => $e],$e->getCode());
+        }
+
+        return response()->json(['success' => true,'message' => 'Category deleted successfully']);
+    }
+
+    public function activate($id)
+    {
+        try {
+            DB::beginTransaction();
+            Category::activateCategoryWithId($id);
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            return response()->json(['success' => false,'message' => $e],$e->getCode());
+        }
+
+        return response()->json(['success' => true,'message' => 'Category activated successfully']);
+    }
+
+
+
     public function preferred(Request $request){
-
-
         foreach ($request->input('checkbox-prefered-categories') as $categoryId){
             UserCategory::create([
                 'category_id' => $categoryId,

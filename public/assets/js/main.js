@@ -14,6 +14,8 @@ const regExAndPage = [
     [/^\/publishers\/\d+$/, 'pages/admin/publisher-create.js'],
     [/^\/admin\/surveys$/, 'pages/admin/surveys.js'],
     [/^\/admin\/categories$/, 'pages/admin/categories.js'],
+    [/^\/categories\/\d+$/, 'pages/admin/categories-create.js'],
+    [/^\/categories\/create$/, 'pages/admin/categories-create.js'],
     [/^\/admin\/messages$/, 'pages/admin/messages.js'],
     [/^\/admin\/orders$/, 'pages/admin/orders.js'],
     [/^\/admin\/deliveries$/, 'pages/admin/delivery-options.js'],

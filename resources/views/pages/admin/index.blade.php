@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="admin-option">
-                <a href="index.php?page=admin-categories"></a>
+                <a href="{{route('categories.index')}}"></a>
                 <div class="option-name-container">
                     <p>Categories</p>
                 </div>

@@ -25,6 +25,15 @@ use \App\Http\Controllers\PublisherController;
 |
 */
 
+Route::get('/admin/categories',[CategoryController::class,'index'])->name('categories.index');
+Route::delete('/categories/{id}',[CategoryController::class,'destroy'])->name('categories.destroy');
+Route::put('/categories/{id}/activate',[CategoryController::class,'activate'])->name('categories.activate');
+Route::get('/categories/create',[CategoryController::class,'create'])->name('categories.create');
+Route::post('/categories',[CategoryController::class,'store'])->name('categories.store');
+Route::get('/categories/{id}',[CategoryController::class,'edit'])->name('categories.edit');
+Route::put('/categories/{id}',[CategoryController::class,'update'])->name('categories.update');
+
+
 Route::get('/admin/publishers',[PublisherController::class,'index'])->name('publishers.index');
 Route::delete('/publishers/{id}',[PublisherController::class,'destroy'])->name('publishers.destroy');
 Route::put('/publishers/{id}/activate',[PublisherController::class,'activate'])->name('publishers.activate');
