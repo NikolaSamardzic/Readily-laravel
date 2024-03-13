@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ReviewController extends Controller
+class ReviewController extends StandardController
 {
     public function store(StoreReviewRequest $request){
 

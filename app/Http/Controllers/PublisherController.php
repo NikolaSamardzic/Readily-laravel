@@ -7,7 +7,7 @@ use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PublisherController extends Controller
+class PublisherController extends StandardController
 {
     /**
      * Display a listing of the resource.

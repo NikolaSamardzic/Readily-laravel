@@ -10,7 +10,7 @@ use App\Models\UserCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CategoryController extends Controller
+class CategoryController extends StandardController
 {
 
     public function index()

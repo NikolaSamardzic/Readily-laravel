@@ -13,7 +13,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\ImageManager;
 
-class CommentController extends Controller
+class CommentController extends StandardController
 {
     public function store(CommentRequest $request){
         try {
