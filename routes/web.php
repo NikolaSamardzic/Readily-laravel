@@ -14,6 +14,7 @@ use \App\Http\Controllers\CategoryController;
 use \App\Http\Controllers\AdminController;
 use \App\Http\Controllers\DeliveryController;
 use \App\Http\Controllers\PublisherController;
+use \App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,8 @@ use \App\Http\Controllers\PublisherController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/orders',[OrderController::class,'index'])->name('orders.index');
 
 Route::get('/admin/categories',[CategoryController::class,'index'])->name('categories.index');
 Route::delete('/categories/{id}',[CategoryController::class,'destroy'])->name('categories.destroy');

@@ -29,6 +29,11 @@ class Order extends Model
         ]);
     }
 
+    public static function allFinishedOrders()
+    {
+        return self::query()->whereNotNull('finished_at')->get();
+    }
+
     public function updateOrder($totalAmount,$addressId,$deliveryTypeId)
     {
         $now = now();
@@ -50,6 +55,10 @@ class Order extends Model
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function orderStatus(){
+        return $this->belongsTo(OrderStatus::class);
     }
 
     public function bookOrders() : HasMany

@@ -17,7 +17,6 @@ class DeliveryController extends StandardController
         $this->data['activeDeliveryOptions'] = DeliveryType::getAllActive();
         $this->data['deletedDeliveryOptions'] = DeliveryType::getAllDeleted();
 
-//        dd($this->data['deletedDeliveryOptions'][0]->orders);
         return view('pages.admin.delivery.index',['data'=>$this->data]);
     }
 

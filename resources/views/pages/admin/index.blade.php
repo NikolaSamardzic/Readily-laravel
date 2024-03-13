@@ -109,7 +109,7 @@
         <h2 class="admin-option-title">Statistics</h2>
         <div class="admin-option-container">
             <div class="admin-option">
-                <a href="index.php?page=admin-orders"></a>
+                <a href="{{route('orders.index')}}"></a>
                 <div class="option-name-container">
                     <p>Orders</p>
                 </div>
