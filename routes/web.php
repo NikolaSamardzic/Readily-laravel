@@ -15,6 +15,8 @@ use \App\Http\Controllers\AdminController;
 use \App\Http\Controllers\DeliveryController;
 use \App\Http\Controllers\PublisherController;
 use \App\Http\Controllers\OrderController;
+use \App\Models\LoggedUser;
+use \App\Http\Controllers\LoggedInUsers;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +27,7 @@ use \App\Http\Controllers\OrderController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/logged/users',[LoggedInUsers::class,'index'])->name('logged.users');
 Route::get('/orders',[OrderController::class,'index'])->name('orders.index');
 
 Route::get('/admin/categories',[CategoryController::class,'index'])->name('categories.index');

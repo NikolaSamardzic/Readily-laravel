@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\LoggedUser;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,6 +35,7 @@ class LoginController extends StandardController
         }
         Auth::login($user);
 
+        LoggedUser::logUser($user['id']);
 
         if(!$user->unfinishedOrder()){
             Order::createOrderForAUser($user);
@@ -49,7 +51,6 @@ class LoginController extends StandardController
         foreach ($preferedCategories as $category){
             $ids[] = $category['category_id'];
         }
-
 
         $cart = cookie('cart', json_encode($cartData), 120,null,null,null,false,true);
         $isLoggedIn = cookie('isLoggedIn', 1, 120,null,null,null,false,true);

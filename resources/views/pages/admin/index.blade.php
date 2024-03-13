@@ -129,7 +129,7 @@
             </div>
 
             <div class="admin-option">
-                <a href="index.php?page=admin-logged-id-users"></a>
+                <a href="{{route('logged.users')}}"></a>
                 <div class="option-name-container">
                     <p>Logged-in Users</p>
                 </div>
