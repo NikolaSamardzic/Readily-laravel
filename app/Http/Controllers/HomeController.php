@@ -33,4 +33,9 @@ class HomeController extends StandardController
 
         return view('pages.home', ['data' => $this->data]);
     }
+
+    public function author()
+    {
+        return view('pages.author');
+    }
 }

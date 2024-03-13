@@ -19,14 +19,14 @@ class LinksTableSeeder extends Seeder
         ['name'=>'Log in', 'href'=>'login.index', 'appearance_order'=>7, 'link_target_id' =>1, 'link_type_id'=>1],
         ['name'=>'Log out', 'href'=>'login.logout', 'appearance_order'=>6, 'link_target_id' =>1, 'link_type_id'=>1],
         ['name'=>'Home', 'href'=>'home', 'appearance_order'=>2, 'link_target_id' =>1, 'link_type_id'=>1],
-        ['name'=>'Author', 'href'=>'home', 'appearance_order'=>8, 'link_target_id' =>1, 'link_type_id'=>3],
+        ['name'=>'Author', 'href'=>'author', 'appearance_order'=>8, 'link_target_id' =>1, 'link_type_id'=>3],
         ['name'=>'Documentation', 'href'=>'documentation', 'appearance_order'=>9, 'link_target_id' =>2, 'link_type_id'=>3],
         ['name'=>'RSS', 'href'=>'rss', 'appearance_order'=>11, 'link_target_id' =>2, 'link_type_id'=>3],
         ['name'=>'Sitemap', 'href'=>'sitemap', 'appearance_order'=>12, 'link_target_id' =>2, 'link_type_id'=>3],
         ['name'=>'Facebook', 'href'=>'https://www.facebook.com/', 'appearance_order'=>13, 'link_target_id' =>2, 'link_type_id'=>2],
         ['name'=>'Instagram', 'href'=>'https://www.instagram.com/', 'appearance_order'=>14, 'link_target_id' =>2, 'link_type_id'=>2],
         ['name'=>'Twitter', 'href'=>'https://twitter.com/', 'appearance_order'=>15, 'link_target_id' =>2, 'link_type_id'=>2],
-        ['name'=>'Github', 'href'=>'https://github.com/NikolaSamardzic/Readilyph', 'appearance_order'=>10, 'link_target_id' =>2, 'link_type_id'=>3],
+        ['name'=>'Github', 'href'=>'https://github.com/NikolaSamardzic/Readily-laravel', 'appearance_order'=>10, 'link_target_id' =>2, 'link_type_id'=>3],
     ];
 
     public function run(): void

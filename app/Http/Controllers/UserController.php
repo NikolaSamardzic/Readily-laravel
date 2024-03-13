@@ -84,7 +84,7 @@ class UserController extends StandardController
         }
 
         $link = $user['token'];
-        Mail::to('pp5104133@gmail.com')->send(new SignUp($link));
+        Mail::to($user['email'])->send(new SignUp($link));
         return back()->with('success-msg', "Your account has been created successfully. Please check your email for activation instructions. Thank you!");
 
     }

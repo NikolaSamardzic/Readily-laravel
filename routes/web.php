@@ -115,6 +115,7 @@ Route::middleware(['notauth'])->group(function() {
     Route::post('/users', [UserController::class,'store'])->name('users.store');
 });
 
+Route::get('/author', [HomeController::class,'author'])->name('author');
 Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/writers/{user}', [UserController::class,'writer'])->name('user.writer');
 Route::get('/books/{book}', [BookController::class,'show'])->name('book.show');
