@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Mail;
 
 class MessageController extends StandardController
 {
+    public function index(){
+        $messages = Message::all();
+
+        return view('pages.admin.message.index',['messages'=>$messages]);
+    }
+
     public function store(Request $request){
 
 
@@ -30,4 +36,19 @@ class MessageController extends StandardController
 
         return response()->json(['success' => true,'message' => 'Thank you! Your message has been sent successfully!']);
     }
+
+    public function destroy($id){
+        try {
+            DB::beginTransaction();
+            $message = Message::query()->find($id);
+            $message->delete();
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+            return response()->json(['success' => false, 'message' => $e->getMessage()], $e->getCode());
+        }
+
+        return response()->json(['success' => true,'message' => 'Message deleted successfully!']);
+    }
+
 }

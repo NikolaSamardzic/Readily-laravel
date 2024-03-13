@@ -95,7 +95,7 @@
         <div class="admin-option-container">
 
             <div class="admin-option">
-                <a href="index.php?page=admin-messages"></a>
+                <a href="{{route('messages.index')}}"></a>
                 <div class="option-name-container">
                     <p>User Messages</p>
                 </div>

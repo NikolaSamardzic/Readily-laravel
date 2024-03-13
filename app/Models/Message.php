@@ -22,4 +22,8 @@ class Message extends Model
             'user_id' => $userId
         ]);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

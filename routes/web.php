@@ -95,6 +95,8 @@ Route::post('/categories/preferred',[CategoryController::class,'preferred']);
 Route::get("/shop",[ShopController::class,'index'])->name('shop.index');
 
 Route::post('/messages',[MessageController::class,'store']);
+Route::get('/messages',[MessageController::class,'index'])->name('messages.index');
+Route::delete('/messages/{id}',[MessageController::class,'destroy'])->name('messages.destroy');
 
 Route::get('/sitemap',function (){
     return redirect(asset('assets/sitemap.xml'));
