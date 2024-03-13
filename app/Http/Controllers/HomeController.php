@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Visit;
 use Doctrine\DBAL\Schema\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,7 @@ class HomeController extends StandardController
 
     public function index(Request $request)
     {
+        Visit::logPage('Home');
         $this->data['categories'] = Category::getAllActiveParentCategories();
         $this->data['bestSellingBooks'] = Book::getBestSellingBooks();
         foreach ($this->data['categories'] as $key => $category){
@@ -28,14 +30,6 @@ class HomeController extends StandardController
             $ids = array_column($categories, 'id');
             $this->data['preferedCategoriesBooks'] = Book::relatedBooksToACategories($ids);
         }
-
-//        $test = [];
-//        $test[] = $this->data['bestSellingBooks'][0]->toArray();
-//        $test[] = $this->data['preferedCategoriesBooks'][0]->toArray();
-//        dd($test);
-
-        //dd()
-
 
         return view('pages.home', ['data' => $this->data]);
     }

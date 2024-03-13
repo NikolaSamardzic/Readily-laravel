@@ -11,6 +11,7 @@ use App\Models\Biography;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -40,6 +41,7 @@ class UserController extends StandardController
      */
     public function create()
     {
+        Visit::logPage('Sign up');
         return view('pages.user.create');
     }
 
@@ -92,6 +94,7 @@ class UserController extends StandardController
      */
     public function show(User $user)
     {
+        Visit::logPage('Single User');
         $this->data['user'] = $user;
         return view('pages.user.show', ['data' => $this->data]);
 
@@ -102,6 +105,7 @@ class UserController extends StandardController
      */
     public function edit($id)
     {
+        Visit::logPage('Edit User');
         $user = User::getUser($id);
 
         $biography = "";
@@ -217,7 +221,7 @@ class UserController extends StandardController
     }
 
     public function writer(User $user){
-
+        Visit::logPage('Writer');
         $this->data['writer'] = $user;
 
         $words = explode(' ',$user->biography['biography_text']);

@@ -17,6 +17,7 @@ use \App\Http\Controllers\PublisherController;
 use \App\Http\Controllers\OrderController;
 use \App\Models\LoggedUser;
 use \App\Http\Controllers\LoggedInUsers;
+use \App\Http\Controllers\VisitController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +28,7 @@ use \App\Http\Controllers\LoggedInUsers;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/logged/visitors',[VisitController::class,'index'])->name('logged.visitors');
 Route::get('/logged/users',[LoggedInUsers::class,'index'])->name('logged.users');
 Route::get('/orders',[OrderController::class,'index'])->name('orders.index');
 

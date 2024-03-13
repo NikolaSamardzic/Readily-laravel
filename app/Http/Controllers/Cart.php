@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\BookOrder;
 use App\Models\DeliveryType;
 use App\Models\Order;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -65,6 +66,7 @@ class Cart extends StandardController
     }
 
     public function checkout(Request $request){
+        Visit::logPage('Checkout');
 
         $user = Auth::user();
         $this->data['cart'] = $user->unfinishedOrder();

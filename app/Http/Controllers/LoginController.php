@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\LoggedUser;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +18,7 @@ class LoginController extends StandardController
 {
 
     public function index(){
+        Visit::logPage('Log in');
         return view('pages.login');
     }
 

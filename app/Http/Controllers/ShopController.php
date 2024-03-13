@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Sort;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 
 class ShopController extends StandardController
 {
     public function index(Request $request){
+
         $decodedQueryString = urldecode($request->getQueryString());
 
         parse_str($decodedQueryString,$parameters);
@@ -74,6 +76,7 @@ class ShopController extends StandardController
             return response()->json($books);
         }
 
+        Visit::logPage('Shop');
         $this->data['query'] = $books;
         $this->data['parameters'] = $parameters;
 

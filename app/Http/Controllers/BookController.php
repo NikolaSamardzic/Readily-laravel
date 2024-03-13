@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Image;
 use App\Models\Publisher;
 use App\Models\Review;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -39,6 +40,7 @@ class BookController extends StandardController
      */
     public function create(User $user)
     {
+        Visit::logPage('Create Book');
         $this->data['user'] = $user;
         $this->data['publishers'] = Publisher::getAllActivePublishers();
         $this->data['categories'] = Category::getAllActiveCategories();
@@ -93,6 +95,7 @@ class BookController extends StandardController
      */
     public function show(Book $book)
     {
+        Visit::logPage('Single Book');
         $this->data['book'] = $book;
 
         $this->data['reviewId'] = 0;
@@ -122,6 +125,7 @@ class BookController extends StandardController
      */
     public function edit(User $user, $bookId)
     {
+        Visit::logPage('Edit Book');
         $this->data['user'] = $user;
         $this->data['book'] = Book::getBook($bookId);
         $this->data['publishers'] = Publisher::getAllActivePublishers();
@@ -139,6 +143,7 @@ class BookController extends StandardController
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
+        Visit::logPage('Update Book');
         $bookData = $request->only('writer-id','book-id', 'book-title-input', 'page-count-input', 'price-input', 'release-date-input','publisher-input','book-description-input',);
         $bookData['image_id'] = $book['image_id'];
         try {
