@@ -94,10 +94,13 @@ class UserController extends StandardController
      */
     public function show(User $user)
     {
+        if(Auth::user()['role_id']!=1 && Auth::user()->getAuthIdentifier() != $user['id']){
+            return redirect()->back();
+        }
+
         Visit::logPage('Single User');
         $this->data['user'] = $user;
         return view('pages.user.show', ['data' => $this->data]);
-
     }
 
     /**
