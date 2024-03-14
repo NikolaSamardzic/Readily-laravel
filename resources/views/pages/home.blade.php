@@ -58,7 +58,7 @@
         <div id="discover-container">
             <h2>Read anywhere. Anytime.</h2>
             <p>Discover the best reads on various topics of interest.</p>
-            <a href="{{route('home')}}">Explore titles</a>
+            <a href="{{route('shop.index')}}">Explore titles</a>
         </div>
     </section>
 
