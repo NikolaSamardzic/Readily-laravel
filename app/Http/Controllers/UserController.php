@@ -108,6 +108,11 @@ class UserController extends StandardController
      */
     public function edit($id)
     {
+        if(Auth::user()['role_id']!=1 && Auth::user()->getAuthIdentifier() != $id){
+            return redirect()->back();
+        }
+
+
         Visit::logPage('Edit User');
         $user = User::getUser($id);
 
