@@ -58,7 +58,7 @@ class Category extends Model
             ->from('categories as parent')
             ->join('categories as child', 'child.parent_id', '=', 'parent.id')
             ->whereNull('parent.deleted_at')
-            ->whereIn('child.id', $relatedCategoriesIDs )
+            ->whereIn('child.id', $relatedCategoriesIDs )->withTrashed()
             ->get();
 
         for($i=0;$i<count($parents);$i++){
