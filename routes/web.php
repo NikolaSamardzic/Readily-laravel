@@ -32,13 +32,13 @@ use \App\Http\Controllers\VisitController;
 Route::group(['prefix'=>'admin', 'middleware' =>['auth','admin']],function (){
     Route::get('/',[AdminController::class,'index'])->name('admin.index');
 
-    Route::resource('categories',CategoryController::class)->withTrashed();
+    Route::resource('categories',CategoryController::class)->except(['show'])->withTrashed();
     Route::put('/categories/{categories}/activate',[CategoryController::class,'activate'])->withTrashed()->name('categories.activate');
 
-    Route::resource('publishers',PublisherController::class)->withTrashed();
+    Route::resource('publishers',PublisherController::class)->except(['show'])->withTrashed();
     Route::put('/publishers/{publishers}/activate',[PublisherController::class,'activate'])->withTrashed()->name('publishers.activate');
 
-    Route::resource('deliveries',DeliveryController::class)->withTrashed();
+    Route::resource('deliveries',DeliveryController::class)->except(['show'])->withTrashed();
     Route::put('/deliveries/{deliveries}/activate',[DeliveryController::class,'activate'])->withTrashed()->name('delivery.activate');
 
     Route::resource('messages',MessageController::class)->only(['index','destroy']);
