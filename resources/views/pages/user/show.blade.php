@@ -83,7 +83,7 @@
                     <input type="submit" class="danger-option" id="delete-account-button" value="Delete">
                 </form>
 
-                <a href="{{route('users.edit',['id'=>$data['user']['id']])}}" id="update-account-button" class="safe-option">Update</a>
+                <a href="{{route('users.edit',['user'=>$data['user']])}}" id="update-account-button" class="safe-option">Update</a>
             </div>
         </div>
     </section>

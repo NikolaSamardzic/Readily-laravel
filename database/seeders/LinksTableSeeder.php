@@ -17,7 +17,7 @@ class LinksTableSeeder extends Seeder
         ['name'=>'Checkout', 'href'=>'cart.checkout', 'appearance_order'=>4, 'link_target_id' =>1, 'link_type_id'=>1],
         ['name'=>'Sign up', 'href'=>'users.create', 'appearance_order'=>5, 'link_target_id' =>1, 'link_type_id'=>1],
         ['name'=>'Log in', 'href'=>'login.index', 'appearance_order'=>7, 'link_target_id' =>1, 'link_type_id'=>1],
-        ['name'=>'Log out', 'href'=>'login.logout', 'appearance_order'=>6, 'link_target_id' =>1, 'link_type_id'=>1],
+        ['name'=>'Log out', 'href'=>'logout', 'appearance_order'=>6, 'link_target_id' =>1, 'link_type_id'=>1],
         ['name'=>'Home', 'href'=>'home', 'appearance_order'=>2, 'link_target_id' =>1, 'link_type_id'=>1],
         ['name'=>'Author', 'href'=>'author', 'appearance_order'=>8, 'link_target_id' =>1, 'link_type_id'=>3],
         ['name'=>'Documentation', 'href'=>'documentation', 'appearance_order'=>9, 'link_target_id' =>2, 'link_type_id'=>3],
