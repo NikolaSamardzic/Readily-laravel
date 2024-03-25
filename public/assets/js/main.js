@@ -4,34 +4,42 @@ console.log(url);
 loadScript('utilities/utilities.js');
 
 const regExAndPage = [
+    [/^\/$/, 'pages/home.js'],
+
+    [/^\/admin\/categories$/, 'pages/admin/categories.js'],
+    [/^\/admin\/categories\/create$/, 'pages/admin/categories-create.js'],
+    [/^\/admin\/categories\/\d+\/edit/, 'pages/admin/categories-create.js'],
+
+    [/^\/admin\/deliveries$/, 'pages/admin/delivery-options.js'],
+    [/^\/admin\/deliveries\/create$/, 'pages/admin/delivery-create.js'],
+    [/^\/admin\/deliveries\/\d+\/edit/, 'pages/admin/delivery-create.js'],
+
+    [/^\/admin\/logg\/orders$/, 'pages/admin/orders.js'],
+    [/^\/admin\/logg\/users$/, 'pages/admin/logged-in-users.js'],
+    [/^\/admin\/logg\/visitors$/, 'pages/admin/visitors.js'],
+
+    [/^\/admin\/messages$/, 'pages/admin/messages.js'],
+
+    [/^\/admin\/publishers$/, 'pages/admin/publishers.js'],
+    [/^\/admin\/publishers\/create$/, 'pages/admin/publisher-create.js'],
+    [/^\/admin\/publishers\/\d+\/edit$/, 'pages/admin/publisher-create.js'],
+
+    [/^\/admin\/users$/, 'pages/admin/users.js'],
+
+    [/^\/books\/\d+$/, 'pages/book.js'],
+    [/^\/books\/\d+\/edit$/, 'pages/books-edit.js'],
+
+    [/^\/cart\/checkout$/, 'pages/checkout.js'],
     [/^\/login$/, 'pages/login.js'],
-    [/^\/users\/\d+\/edit$/, 'pages/user-edit.js'],
+    [/^\/shop$/, 'pages/shop.js'],
+
     [/^\/users\/create$/, 'pages/user-create.js'],
     [/^\/users\/\d+$/, 'pages/user-index.js'],
-    [/^\/users$/, 'pages/admin/users.js'],
-    [/^\/admin\/publishers$/, 'pages/admin/publishers.js'],
-    [/^\/publishers\/create$/, 'pages/admin/publisher-create.js'],
-    [/^\/publishers\/\d+$/, 'pages/admin/publisher-create.js'],
-    [/^\/admin\/surveys$/, 'pages/admin/surveys.js'],
-    [/^\/admin\/categories$/, 'pages/admin/categories.js'],
-    [/^\/categories\/\d+$/, 'pages/admin/categories-create.js'],
-    [/^\/categories\/create$/, 'pages/admin/categories-create.js'],
-    [/^\/messages$/, 'pages/admin/messages.js'],
-    [/^\/messages\/\d+$/, 'pages/admin/messages.js'],
-    [/^\/admin\/orders$/, 'pages/admin/orders.js'],
-    [/^\/admin\/deliveries$/, 'pages/admin/delivery-options.js'],
-    [/^\/deliveries\/\d+$/, 'pages/admin/delivery-create.js'],
-    [/^\/deliveries\/create$/, 'pages/admin/delivery-create.js'],
+    [/^\/users\/\d+\/edit$/, 'pages/user-edit.js'],
+
+    [/^\/writers\/\d+$/, 'pages/writer.js'],
     [/^\/writers\/\d+\/books$/, 'pages/writer-books.js'],
     [/^\/writer\/\d+\/books\/create$/, 'pages/books-create.js'],
-    [/^\/writers\/\d+\/books\/\d+\/edit$/, 'pages/books-edit.js'],
-    [/^\/books\/\d+$/, 'pages/book.js'],
-    [/^\/$/, 'pages/home.js'],
-    [/^\/writers\/\d+$/, 'pages/writer.js'],
-    [/^\/shop$/, 'pages/shop.js'],
-    [/^\/checkout$/, 'pages/checkout.js'],
-    [/^\/admin\/logged-in-users$/, 'pages/admin/logged-in-users.js'],
-    [/^\/admin\/visitors$/, 'pages/admin/visitors.js']
 ]
 
 window.onload = function(){
