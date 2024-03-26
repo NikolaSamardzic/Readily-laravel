@@ -21,6 +21,8 @@ use App\Models\User\Services\GetDeletedUsers;
 use App\Models\User\Services\GetUserDataService;
 use App\Models\User\Services\GetUsersAdminPanelService;
 use App\Models\User\Services\StoreUserService;
+use App\Models\User\Services\UpdateUserLogicService;
+use App\Models\User\Services\UpdateUserService;
 use App\Models\User\User;
 use App\Models\Visit\Visit;
 use Illuminate\Http\Request;
@@ -109,41 +111,13 @@ class UserController extends StandardController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateUserRequest $request,User $user, UpdateUserLogicService $action)
     {
-        $user = User::getUser($id);
-        $userData = $request->only('first-name-input', 'last-name-input', 'username-input', 'email-input','phone-input',);
-
         try {
             DB::beginTransaction();
-
-            $address['id'] = null;
-            if(!is_null($request->post('address-line-input'))){
-                $address = Address::firstOrCreateAddress($request->post('address-line-input'), $request->post('number-input'), $request->post('city-input'), $request->post('state-input'), $request->post('zip-code-input'), $request->post('country-input'));
-            }
-
-            $user = User::updateUser($userData, $address['id'], $user);
-
-            if(!is_null($request->post('biography-input'))){
-                Biography::updateBiography($user,$request->post('biography-input'));
-            }
-
-            if(!is_null($request->file('user-avatar'))){
-                if(isset($user->avatar)){
-                    $oldAvatarName = $user->avatar['src'];
-                    $imageName = time() . '.' . $request->file('user-avatar')->extension();
-                    Avatar::updateAvatar($user,$imageName);
-                    $request->file('user-avatar')->move(public_path('assets/images/avatars'), $imageName);
-                    File::delete(public_path('/assets/images/avatars/' . $oldAvatarName));
-                }else{
-                    $imageName = time() . '.' . $request->file('user-avatar')->extension();
-                    Avatar::createAvatar($user['id'],$imageName);
-                    $request->file('user-avatar')->move(public_path('assets/images/avatars'), $imageName);
-                }
-            }
-
+            $action->execute($request, $user);
             DB::commit();
-        }catch (\Exception $e){
+        }catch (Exception $e){
             DB::rollBack();
 
             if(isset($imageName) && File::exists(public_path('/assets/images/avatars/' . $imageName))){

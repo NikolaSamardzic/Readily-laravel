@@ -9,8 +9,8 @@ class GetUsersAdminPanelService
 {
     public function __construct(
         protected GetActiveUsersService $activeUsersService,
-        protected GetDeletedUsers $deletedUsers,
-        protected GetBannedUsers $bannedUsers
+        protected GetDeletedUsersService $deletedUsers,
+        protected GetBannedUsersService $bannedUsers
     ){}
 
     public function execute()

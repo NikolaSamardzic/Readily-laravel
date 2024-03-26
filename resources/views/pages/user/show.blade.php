@@ -93,7 +93,7 @@
         <div id="writter-option-wrapper">
             <div class="admin-option-container">
                 <div class="admin-option">
-                    <a href="{{route('books.index',['id'=>$data['user']['id']])}}"></a>
+                    <a href="{{route('books.index',['user'=>$data['user']['id']])}}"></a>
                     <div class="option-name-container">
                         <p>Books</p>
                     </div>
