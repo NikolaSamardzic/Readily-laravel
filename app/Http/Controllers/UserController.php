@@ -42,6 +42,8 @@ class UserController extends StandardController
     {
         $this->data['users'] = $adminPanelService->execute();
 
+//        test
+
         return view('pages.user.index',['data'=>$this->data]);
     }
 
@@ -101,7 +103,7 @@ class UserController extends StandardController
 
 
         Visit::logPage('Edit User');
-        $user = User::getUser($id);
+        $user = User::getUser($user['id']);
 
         $biography = "";
 
