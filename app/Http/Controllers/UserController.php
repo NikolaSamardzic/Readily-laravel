@@ -13,10 +13,12 @@ use App\Models\Biography\Biography;
 use App\Models\Book\Book;
 use App\Models\Category\Category;
 use App\Models\User\DTO\CreateUserDTO;
+use App\Models\User\Resources\UserResource;
 use App\Models\User\Services\CreateUserService;
 use App\Models\User\Services\GetActiveUsersService;
 use App\Models\User\Services\GetBannedUsers;
 use App\Models\User\Services\GetDeletedUsers;
+use App\Models\User\Services\GetUsersAdminPanelService;
 use App\Models\User\Services\StoreUserService;
 use App\Models\User\User;
 use App\Models\Visit\Visit;
@@ -36,11 +38,9 @@ class UserController extends StandardController
     /**
      * Display a listing of the resource.
      */
-    public function index(GetActiveUsersService $activeUsers, GetBannedUsers $bannedUsers, GetDeletedUsers $deletedUsers)
+    public function index(GetUsersAdminPanelService $adminPanelService,GetActiveUsersService $activeUsers, GetBannedUsers $bannedUsers, GetDeletedUsers $deletedUsers)
     {
-        $this->data['activeUsers'] = $activeUsers->execute();
-        $this->data['deletedUsers'] = $bannedUsers->execute();
-        $this->data['bannedUsers'] = $deletedUsers->execute();
+        $this->data['users'] = $adminPanelService->execute();
 
         return view('pages.user.index',['data'=>$this->data]);
     }
@@ -93,9 +93,9 @@ class UserController extends StandardController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        if(Auth::user()['role_id']!=1 && Auth::user()->getAuthIdentifier() != $id){
+        if(Auth::user()['role_id']!=1 && Auth::user()->getAuthIdentifier() != $user['id']){
             return redirect()->back();
         }
 
