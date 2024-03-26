@@ -4,21 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\UpdateBookRequest;
-use App\Models\Book;
-use App\Models\BookCategory;
-use App\Models\Category;
-use App\Models\Image;
-use App\Models\Publisher;
-use App\Models\Review;
-use App\Models\Visit;
-use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Book\Book;
+use App\Models\Book\BookCategory;
+use App\Models\Category\Category;
+use App\Models\Image\Image;
+use App\Models\Publisher\Publisher;
+use App\Models\Review\Review;
+use App\Models\User\User;
+use App\Models\Visit\Visit;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Encoders\AutoEncoder;
+use Intervention\Image\ImageManager;
 
 class BookController extends StandardController
 {

@@ -1,23 +1,23 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\Cart;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoggedInUsers;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitController;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\HomeController;
-use \App\Http\Controllers\LoginController;
-use \App\Http\Controllers\UserController;
-use \App\Http\Controllers\Cart;
-use \App\Http\Controllers\CommentController;
-use \App\Http\Controllers\ReviewController;
-use \App\Http\Controllers\ShopController;
-use \App\Http\Controllers\MessageController;
-use \App\Http\Controllers\CategoryController;
-use \App\Http\Controllers\AdminController;
-use \App\Http\Controllers\DeliveryController;
-use \App\Http\Controllers\PublisherController;
-use \App\Http\Controllers\OrderController;
-use \App\Models\LoggedUser;
-use \App\Http\Controllers\LoggedInUsers;
-use \App\Http\Controllers\VisitController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

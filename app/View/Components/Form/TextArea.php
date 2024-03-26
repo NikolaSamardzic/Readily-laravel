@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Form;
 
-use App\Models\User;
+use App\Models\User\User;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;

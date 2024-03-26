@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-use App\Models\Category;
-use App\Models\Sort;
-use App\Models\Visit;
+use App\Models\Book\Book;
+use App\Models\Category\Category;
+use App\Models\Sort\Sort;
+use App\Models\Visit\Visit;
 use Illuminate\Http\Request;
 
 class ShopController extends StandardController

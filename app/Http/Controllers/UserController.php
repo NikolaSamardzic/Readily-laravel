@@ -5,20 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Mail\SignUp;
-use App\Models\Address;
-use App\Models\Avatar;
-use App\Models\Biography;
-use App\Models\Book;
-use App\Models\Category;
-use App\Models\User;
-use App\Models\Visit;
+use App\Models\Address\Address;
+use App\Models\Address\DTO\AddressDTO;
+use App\Models\Address\Services\CreateAddressService;
+use App\Models\Avatar\Avatar;
+use App\Models\Biography\Biography;
+use App\Models\Book\Book;
+use App\Models\Category\Category;
+use App\Models\User\DTO\CreateUserDTO;
+use App\Models\User\Services\CreateUserService;
+use App\Models\User\Services\GetActiveUsersService;
+use App\Models\User\Services\GetBannedUsers;
+use App\Models\User\Services\GetDeletedUsers;
+use App\Models\User\Services\StoreUserService;
+use App\Models\User\User;
+use App\Models\Visit\Visit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
-use function PHPUnit\Framework\isNan;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Link;
+use Mockery\Exception;
+
+//use App\Repositories\UserRepository;
+//use App\Repositories\UserRepositoryInterface;
 
 class UserController extends StandardController
 {
@@ -26,12 +36,11 @@ class UserController extends StandardController
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(GetActiveUsersService $activeUsers, GetBannedUsers $bannedUsers, GetDeletedUsers $deletedUsers)
     {
-        $this->data['activeUsers'] = User::getActiveUsers();
-        $this->data['deletedUsers'] = User::getDeletedUsers();
-        $this->data['bannedUsers'] = User::getBannedUsers();
-
+        $this->data['activeUsers'] = $activeUsers->execute();
+        $this->data['deletedUsers'] = $bannedUsers->execute();
+        $this->data['bannedUsers'] = $deletedUsers->execute();
 
         return view('pages.user.index',['data'=>$this->data]);
     }
@@ -48,32 +57,13 @@ class UserController extends StandardController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateUserRequest $request)
+    public function store(CreateUserRequest $request, StoreUserService $action)
     {
-        $userData = $request->only('first-name-input', 'last-name-input', 'username-input', 'password-input', 'email-input','phone-input','role-input');
-
-        try {
+        try{
             DB::beginTransaction();
-
-            $address['id'] = null;
-            if(!is_null($request->post('address-line-input'))){
-                $address = Address::insertAddress($request->post('address-line-input'), $request->post('number-input'), $request->post('city-input'), $request->post('state-input'), $request->post('zip-code-input'), $request->post('country-input'));
-            }
-
-            $user = User::createUser($userData, $address['id']);
-
-            if(!is_null($request->post('biography-input'))){
-                Biography::createBiography($user['id'],$request->post('biography-input'));
-            }
-
-            if(!is_null($request->file('user-avatar'))){
-                $imageName = time() . '.' . $request->file('user-avatar')->extension();
-                Avatar::createAvatar($user['id'],$imageName);
-                $request->file('user-avatar')->move(public_path('assets/images/avatars'), $imageName);
-            }
-
+            $action->execute($request);
             DB::commit();
-        }catch (\Exception $e){
+        }catch (Exception $e){
             DB::rollBack();
 
             if(isset($imageName) && File::exists(public_path('/assets/img/products/' . $imageName))){
@@ -83,10 +73,7 @@ class UserController extends StandardController
             return redirect()->back()->with('error-msg', 'An error has occurred, please try again later.');
         }
 
-        $link = $user['token'];
-        Mail::to($user['email'])->send(new SignUp($link));
         return back()->with('success-msg', "Your account has been created successfully. Please check your email for activation instructions. Thank you!");
-
     }
 
     /**

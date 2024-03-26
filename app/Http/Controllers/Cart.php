@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
-use App\Models\Address;
-use App\Models\Book;
-use App\Models\BookOrder;
-use App\Models\DeliveryType;
-use App\Models\Order;
-use App\Models\Visit;
+use App\Models\Address\Address;
+use App\Models\Book\Book;
+use App\Models\Book\BookOrder;
+use App\Models\Delivery\DeliveryType;
+use App\Models\Order\Order;
+use App\Models\Visit\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;

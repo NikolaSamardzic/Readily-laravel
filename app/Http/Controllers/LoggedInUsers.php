@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LoggedUser;
-use Illuminate\Http\Request;
+use App\Models\User\LoggedUser;
 
 class LoggedInUsers extends StandardController
 {

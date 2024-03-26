@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\DeliveryType;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Delivery\DeliveryType;
 use Illuminate\Database\Seeder;
 
 class DeliveryTypeSeeder extends Seeder

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-use App\Models\Category;
-use App\Models\Visit;
-use Doctrine\DBAL\Schema\View;
+use App\Models\Book\Book;
+use App\Models\Category\Category;
+use App\Models\Visit\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

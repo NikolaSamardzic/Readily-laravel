@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="admin-option">
-                <a href="{{route('delivery.index')}}"></a>
+                <a href="{{route('deliveries.index')}}"></a>
                 <div class="option-name-container">
                     <p>Delivery Options</p>
                 </div>
@@ -104,7 +104,7 @@
             </div>
 
             <div class="admin-option">
-                <a href="{{route('logged.visitors')}}"></a>
+                <a href="{{route('logg.visitors')}}"></a>
                 <div class="option-name-container">
                     <p>Visitors</p>
                 </div>
@@ -114,7 +114,7 @@
             </div>
 
             <div class="admin-option">
-                <a href="{{route('logged.users')}}"></a>
+                <a href="{{route('logg.users')}}"></a>
                 <div class="option-name-container">
                     <p>Logged-in Users</p>
                 </div>

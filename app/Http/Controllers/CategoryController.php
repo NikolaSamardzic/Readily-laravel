@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
-use App\Models\Book;
-use App\Models\BookCategory;
-use App\Models\Category;
-use App\Models\UserCategory;
+use App\Models\Book\Book;
+use App\Models\Category\Category;
+use App\Models\User\UserCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use App\Models\Order;
+use App\Models\Order\Order;
 
 class OrderController extends StandardController
 {

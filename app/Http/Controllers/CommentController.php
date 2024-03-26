@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
-use App\Models\Comment;
-use App\Models\CommentImage;
-use App\Models\Image;
-use Illuminate\Http\Request;
+use App\Models\Comment\Comment;
+use App\Models\Comment\CommentImage;
+use App\Models\Image\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Drivers\Gd\Driver;

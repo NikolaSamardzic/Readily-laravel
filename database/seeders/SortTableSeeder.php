@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Sort;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Sort\Sort;
 use Illuminate\Database\Seeder;
 
 class SortTableSeeder extends Seeder

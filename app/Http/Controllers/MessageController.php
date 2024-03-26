@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SendAdminMessage;
-use App\Models\Message;
-use App\Models\User;
+use App\Models\Message\Message;
+use App\Models\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;

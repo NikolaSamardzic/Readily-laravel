@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PublisherRequest;
-use App\Models\Publisher;
-use Illuminate\Http\Request;
+use App\Models\Publisher\Publisher;
 use Illuminate\Support\Facades\DB;
 
 class PublisherController extends StandardController

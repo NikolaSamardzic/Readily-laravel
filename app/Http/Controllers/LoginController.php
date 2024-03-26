@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\LoggedUser;
-use App\Models\Order;
-use App\Models\User;
-use App\Models\Visit;
+use App\Models\Order\Order;
+use App\Models\User\LoggedUser;
+use App\Models\User\User;
+use App\Models\Visit\Visit;
+//use App\Repositories\UserRepository;
+//use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Response;
-use Symfony\Component\HttpFoundation\Cookie;
-use function Symfony\Component\String\b;
 
 class LoginController extends StandardController
 {
+//    public function __construct(
+//        protected UserRepositoryInterface $repository
+//    ){
+//        parent::__construct();
+//    }
 
     public function index(){
+        //dd($this->repository);
         Visit::logPage('Log in');
         return view('pages.login');
     }

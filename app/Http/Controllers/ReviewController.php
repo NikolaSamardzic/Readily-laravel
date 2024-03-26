@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReviewRequest;
-use App\Http\Requests\UpdateBookRequest;
-use App\Models\Book;
-use App\Models\Review;
-use App\Models\User;
+use App\Models\Review\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

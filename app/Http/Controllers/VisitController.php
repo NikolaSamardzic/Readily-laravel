@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Visit;
-use Illuminate\Http\Request;
+use App\Models\Visit\Visit;
 
 class VisitController extends StandardController
 {
