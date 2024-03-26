@@ -4,7 +4,7 @@ namespace App\Models\User\Services;
 
 use App\Models\User\User;
 
-class GetBannedUsers
+class GetBannedUsersService
 {
     public function execute()
     {

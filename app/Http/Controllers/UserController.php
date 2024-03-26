@@ -18,6 +18,7 @@ use App\Models\User\Services\CreateUserService;
 use App\Models\User\Services\GetActiveUsersService;
 use App\Models\User\Services\GetBannedUsers;
 use App\Models\User\Services\GetDeletedUsers;
+use App\Models\User\Services\GetUserDataService;
 use App\Models\User\Services\GetUsersAdminPanelService;
 use App\Models\User\Services\StoreUserService;
 use App\Models\User\User;
@@ -38,11 +39,9 @@ class UserController extends StandardController
     /**
      * Display a listing of the resource.
      */
-    public function index(GetUsersAdminPanelService $adminPanelService)
+    public function index(GetUsersAdminPanelService $action)
     {
-        $this->data['users'] = $adminPanelService->execute();
-
-//        test
+        $this->data['users'] = $action->execute();
 
         return view('pages.user.index',['data'=>$this->data]);
     }
@@ -95,38 +94,15 @@ class UserController extends StandardController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $user, GetUserDataService $action)
     {
         if(Auth::user()['role_id']!=1 && Auth::user()->getAuthIdentifier() != $user['id']){
             return redirect()->back();
         }
 
-
         Visit::logPage('Edit User');
-        $user = User::getUser($user['id']);
+        $this->data['information'] = $action->execute($user);
 
-        $biography = "";
-
-        if(isset($user->biography)) $biography = $user->biography['biography_text'];
-        $this->data['biography'] = $biography;
-
-        $addressName = "";
-        $addressNumber = "";
-        $city = "";
-        $state = "";
-        $zipCode = "";
-        $country = "";
-        if(isset($user->address)){
-            $addressName = $user->address['address_name'];
-            $addressNumber = $user->address['address_number'];
-            $city = $user->address['city'];
-            $state = $user->address['state'];
-            $zipCode = $user->address['zip_code'];
-            $country = $user->address['country'];
-        }
-
-        $this->data['addressInformation'] = ['address_name' => $addressName, 'address_number' => $addressNumber, 'city' => $city, 'state' => $state, 'zip_code'=>$zipCode,'country'=>$country];
-        $this->data['user'] = $user;
         return view('pages.user.edit', ['data' => $this->data]);
     }
 
