@@ -21,7 +21,7 @@
             tableId="table-active-users"
             tableBodyId="active-users-body"
             :columnTitles="['Username', 'Email', 'Role', 'Created At', 'Update','Ban', 'Delete']" >
-            @foreach($data['activeUsers'] as $user)
+            @foreach($data['users']['active'] as $user)
                 <x-table.user-active-row
                     :user="$user"
                 />
@@ -37,7 +37,7 @@
             tableId="table-deleted-users"
             tableBodyId="deleted-users-body"
             :columnTitles="['Username', 'Email', 'Role', 'Created At', 'Update','Activate']" >
-            @foreach($data['deletedUsers'] as $user)
+            @foreach($data['users']['deleted'] as $user)
                 <x-table.user-deleted-row
                     :user="$user"
                 />
@@ -52,7 +52,7 @@
             tableId="table-banned-users"
             tableBodyId="banned-users-body"
             :columnTitles="['Username', 'Email', 'Role', 'Created At', 'Update','Unban']" >
-            @foreach($data['bannedUsers'] as $user)
+            @foreach($data['users']['banned'] as $user)
                 <x-table.user-banned-row
                     :user="$user"
                 />
