@@ -6,6 +6,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Book\Book;
 use App\Models\Category\Category;
+use App\Models\User\Services\ActivateUserService;
 use App\Models\User\Services\DeleteUserService;
 use App\Models\User\Services\GetUserDataService;
 use App\Models\User\Services\GetUsersAdminPanelService;
@@ -134,11 +135,11 @@ class UserController extends StandardController
         return redirect()->route('home');
     }
 
-    public function activate(string $token){
+    public function activate(string $token, ActivateUserService $action){
 
         try {
             DB::beginTransaction();
-            User::activate($token);
+            $action->execute($token);
             DB::commit();
             return redirect()->route('login.index');
         }catch (\Exception $e){
