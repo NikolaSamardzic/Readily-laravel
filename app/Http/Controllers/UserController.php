@@ -4,36 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Mail\SignUp;
-use App\Models\Address\Address;
-use App\Models\Address\DTO\AddressDTO;
-use App\Models\Address\Services\CreateAddressService;
-use App\Models\Avatar\Avatar;
-use App\Models\Biography\Biography;
 use App\Models\Book\Book;
 use App\Models\Category\Category;
-use App\Models\User\DTO\CreateUserDTO;
-use App\Models\User\Resources\UserResource;
-use App\Models\User\Services\CreateUserService;
-use App\Models\User\Services\GetActiveUsersService;
-use App\Models\User\Services\GetBannedUsers;
-use App\Models\User\Services\GetDeletedUsers;
+use App\Models\User\Services\DeleteUserService;
 use App\Models\User\Services\GetUserDataService;
 use App\Models\User\Services\GetUsersAdminPanelService;
 use App\Models\User\Services\StoreUserService;
 use App\Models\User\Services\UpdateUserLogicService;
-use App\Models\User\Services\UpdateUserService;
 use App\Models\User\User;
 use App\Models\Visit\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Mail;
 use Mockery\Exception;
-
-//use App\Repositories\UserRepository;
-//use App\Repositories\UserRepositoryInterface;
 
 class UserController extends StandardController
 {
@@ -133,14 +117,11 @@ class UserController extends StandardController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user,Request $request)
+    public function destroy(User $user,Request $request, DeleteUserService $action)
     {
-        try {
+        try{
             DB::beginTransaction();
-
-            Book::deleteUsersBooks($user['id']);
-
-            $user = User::deleteUser($user['id']);
+            $action->execute($user);
             DB::commit();
         }catch (\Exception $e){
             DB::rollBack();
