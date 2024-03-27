@@ -10,6 +10,7 @@ use App\Models\User\Services\ActivateUserService;
 use App\Models\User\Services\DeleteUserService;
 use App\Models\User\Services\GetUserDataService;
 use App\Models\User\Services\GetUsersAdminPanelService;
+use App\Models\User\Services\ReActivateUserService;
 use App\Models\User\Services\StoreUserService;
 use App\Models\User\Services\UpdateUserLogicService;
 use App\Models\User\User;
@@ -180,10 +181,10 @@ class UserController extends StandardController
         return view('pages.user.writer', ['data' => $this->data]);
     }
 
-    public function activateUser($id){
+    public function activateUser(User $user, ReActivateUserService $action){
         try {
             DB::beginTransaction();
-            $user = User::activateUser($id);
+            $action->execute($user);
             DB::commit();
         }catch (\Exception $e){
             DB::rollBack();
@@ -191,7 +192,7 @@ class UserController extends StandardController
             return response()->json(['success' => false, 'message' => $e->getMessage()], $e->getCode());
         }
 
-        return response()->json(['success' => true,'message' => 'USer activated successfully','id' => $id]);
+        return response()->json(['success' => true,'message' => 'USer activated successfully','id' => $user['id']]);
     }
 
     public function banUser($id){
